@@ -4,15 +4,17 @@ import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class test {
-    public static void main(String [] args) throws FileNotFoundException {
+    public static void main(String [] args) throws IOException {
         PdfWriter writer = new  PdfWriter("test.pdf");
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf);
         document.add(new Paragraph("Hello World!"));
         document.close();
         PDFTest test = new PDFTest("test" , "Spencer" , "Curley" , "thisIsAFake@email.com" , "Why am I blue").start();
+        test.rickRoll();
     }
 
 }

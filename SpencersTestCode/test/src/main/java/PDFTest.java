@@ -1,12 +1,18 @@
+import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.kernel.color.Color;
+import com.itextpdf.kernel.font.PdfFont;
+import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.List;
+import com.itextpdf.layout.element.ListItem;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
 import com.itextpdf.layout.property.TextAlignment;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class PDFTest {
     private String fileName;
@@ -45,4 +51,28 @@ public class PDFTest {
         return this;
     }
 
+    public void rickRoll() throws IOException {
+        // below is one of th provided examples that the documentation give for creating lists in itext 7
+        PdfWriter writer = new PdfWriter("rick.pdf");
+        PdfDocument pdf = new PdfDocument(writer);
+        Document document = new Document(pdf);
+        PdfFont font = PdfFontFactory.createFont(FontConstants.TIMES_ROMAN);
+
+        document.add(new Paragraph("iText is:").setFont(font));
+
+        List list = new List()
+                .setSymbolIndent(12)
+                .setListSymbol("\u2022")
+                .setFont(font);
+        // is is not an instance of the list interface but of the PDF list included in itext 7
+        list.add(new ListItem("Never gonna give you up"))
+                .add(new ListItem("Never gonna let you down"))
+                .add(new ListItem("Never gonna run around and desert you"))
+                .add(new ListItem("Never gonna make you cry"))
+                .add(new ListItem("Never gonna say goodbye"))
+                .add(new ListItem("Never gonna tell a lie and hurt you"));
+
+        document.add(list);
+        document.close();
+    }
 }
