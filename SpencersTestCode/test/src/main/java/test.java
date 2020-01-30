@@ -12,6 +12,7 @@ public class test {
         Document document = new Document(pdf);
         document.add(new Paragraph("Hello World!"));
         document.close();
+        PDFTest test = new PDFTest("test" , "Spencer" , "Curley" , "thisIsAFake@email.com" , "Why am I blue").start();
     }
 
 }
