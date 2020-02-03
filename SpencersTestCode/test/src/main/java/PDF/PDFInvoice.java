@@ -36,6 +36,26 @@ public class PDFInvoice {
         this.parts = parts;
         this.notes = notes;
     }
+
+    /**
+     * Used only in junit code
+     * @return this object
+     * @throws FileNotFoundException
+     */
+    public PDFInvoice testStart() throws FileNotFoundException {
+        // only to be called in the test files
+        PdfWriter writer = new  PdfWriter(fileName + ".pdf");
+        PdfDocument pdf = new PdfDocument(writer);
+        theDocument = new Document(pdf);
+        return this;
+    }
+
+    /**
+     * used for creating production pdfs
+     * @return this object
+     * @throws FileNotFoundException
+     */
+
     public PDFInvoice start() throws FileNotFoundException {
         // this is of type PDFTest so if someone wants to create this class and
         // create a pdf at the same time it can be done with object chaining
@@ -55,22 +75,51 @@ public class PDFInvoice {
 
         return this;
     }
+
+    /**
+     * used for junit
+     * @return fileName
+     */
     public String getFileName(){
         return this.fileName;
     }
+
+    /**
+     * used for junit
+     * @return returns incoiveNum
+     */
     public int getInvoiceNum(){
         return this.invoiceNum;
     }
+
+    /**
+     * used for junit
+     * @return returns the parts
+     */
     public Part[] getParts(){
         return this.parts;
     }
+
+    /**
+     * closes and creates the pdf
+     */
     private void done(){
         theDocument.close();
     }
+
+    /**
+     * used for juint
+     * @return return the notes
+     */
     public String getNotes(){
         return this.notes;
     }
-    public void createHeader(){
+
+    /**
+     * creates the header
+     * @return return is for junit
+     */
+    public Document createHeader(){
         Table table = new Table(3);
         theDocument.setProperty(Property.LEADING, new Leading(Leading.MULTIPLIED, .8f));
         table.setFontSize(8);
@@ -94,8 +143,14 @@ public class PDFInvoice {
         theDocument.add(new Paragraph(starLine));
         theDocument.add(table);
         theDocument.add(new Paragraph(starLine));
+        return theDocument;
     }
-    public void createCustInfoHeader(){
+
+    /**
+     * creates the customerinfo name address and vehicle info etc....
+     * @return is for junit only
+     */
+    public Document createCustInfoHeader(){
         Table table = new Table(3);
         table.setFontSize(8);
         Cell nameAddrCell = new Cell(1,1)
@@ -114,8 +169,14 @@ public class PDFInvoice {
         table.addCell(PhoneCell);
         table.addCell(VehicleInfo);
         theDocument.add(table);
+        return theDocument;
     }
-    public void createPartsAndPriceHeader(){
+
+    /**
+     * creates part that ays partNum Description and price infro
+     * @return is for junit
+     */
+    public Document createPartsAndPriceHeader(){
         Table bTable = new Table(1);
         Table table = new Table((UnitValue.createPercentArray(new float[] {2,16,1,1,1,1})));
         table.setFontSize(8);
@@ -151,9 +212,15 @@ public class PDFInvoice {
         table.addCell(totalCell);
         theDocument.add(table);
         theDocument.add(bTable);
+        return theDocument;
 
     }
-    public void addNotesHeader(){
+
+    /**
+     * adds the notes header
+     * @return for junit only
+     */
+    public Document addNotesHeader(){
         Table bTable = new Table(1);
         Cell topCell = new Cell(1,1)
                 .setBorder(new SolidBorder(1f))
@@ -163,12 +230,25 @@ public class PDFInvoice {
         bTable.addCell(topCell);
         theDocument.add(new Paragraph("Notes").setFontSize(8));
         theDocument.add(bTable);
-    }
-    public void addNotes(String theNotes){
-        theDocument.add(new Paragraph(theNotes + "\n this not written by me").setFontSize(6));
+        return theDocument;
     }
 
-    public void addPart(Part toAdd){
+    /**
+     * adds the param to the notes 
+     * @param theNotes
+     * @return
+     */
+    public Document addNotes(String theNotes){
+        theDocument.add(new Paragraph(theNotes + "\n this not written by me").setFontSize(6));
+        return theDocument;
+    }
+
+    /**
+     * adds the part to the description part in the pdf
+     * @param toAdd
+     * @return the document for unit testing purposes
+     */
+    public Document addPart(Part toAdd){
         Table table = new Table((UnitValue.createPercentArray(new float[] {2,16,1,1,1,1})));
         table.setFontSize(6);
         Cell [] cells = toAdd.createInvoiceFormatCells();
@@ -176,6 +256,7 @@ public class PDFInvoice {
             table.addCell(cells[i]);
         }
         theDocument.add(table);
+        return theDocument;
     }
 
 
