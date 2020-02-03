@@ -1,7 +1,6 @@
-import com.itextpdf.io.font.FontConstants;
-import com.itextpdf.kernel.color.Color;
-import com.itextpdf.kernel.font.PdfFont;
-import com.itextpdf.kernel.font.PdfFontFactory;
+package PDF;
+
+import PDFParts.Part;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
@@ -14,54 +13,79 @@ import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.UnitValue;
 
 import java.io.FileNotFoundException;
-import java.io.IOException;
-
-public class PDFTest {
+import java.util.Calendar;
+/**
+ * @author Spencer Curley
+ *
+ * */
+public class PDFInvoice {
     private String fileName;
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String garbageSentance;
     private Document theDocument;
-
-    public PDFTest(String fileName , String firstName , String lastName ,  String email, String garbageSentance ){
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.garbageSentance = garbageSentance;
+    private int invoiceNum;
+    private Part[] parts;
+    private String notes;
+    public PDFInvoice(String fileName , int invoiceNum , Part[]parts  , String notes){
+        if(fileName == null || parts == null || notes == null){
+            throw new IllegalArgumentException("value of params cannot be null");
+        }
+        if(invoiceNum < 0 ){
+            throw new IllegalArgumentException("invoiceNum cannot be below 0");
+        }
         this.fileName = fileName;
+        this.invoiceNum = invoiceNum;
+        this.parts = parts;
+        this.notes = notes;
     }
-    public PDFTest start() throws FileNotFoundException {
+    public PDFInvoice start() throws FileNotFoundException {
         // this is of type PDFTest so if someone wants to create this class and
         // create a pdf at the same time it can be done with object chaining
         PdfWriter writer = new  PdfWriter(fileName + ".pdf");
         PdfDocument pdf = new PdfDocument(writer);
         theDocument = new Document(pdf);
+        // all of the below function calls should return stuff so that the adding to the pdf is done here to make it easy to unit test
         createHeader();
         createCustInfoHeader();
-        createPartsAndPrice();
+        createPartsAndPriceHeader();
+        for(int i = 0 ; i < parts.length ; i++){
+            addPart(parts[i]);
+        }
+        addNotesHeader();
+        addNotes(notes);
         done();
 
         return this;
     }
+    public String getFileName(){
+        return this.fileName;
+    }
+    public int getInvoiceNum(){
+        return this.invoiceNum;
+    }
+    public Part[] getParts(){
+        return this.parts;
+    }
     private void done(){
         theDocument.close();
     }
-    private void createHeader(){
+    public String getNotes(){
+        return this.notes;
+    }
+    public void createHeader(){
         Table table = new Table(3);
         theDocument.setProperty(Property.LEADING, new Leading(Leading.MULTIPLIED, .8f));
         table.setFontSize(8);
         Cell invoiceNumberCell = new Cell(1,1)
                  .setTextAlignment(TextAlignment.LEFT)
-                .add(new Paragraph("Invoice # \n the number goes here"))
+                .add(new Paragraph("Invoice # \n" + invoiceNum))
                 .setBorder(Border.NO_BORDER);
         Cell whoWeAreCell = new Cell(1,1)
                 .setTextAlignment(TextAlignment.CENTER)
                 .add(new Paragraph("NORTHWEST AUTOMOTIVE CENTERS \n 324 north pines \n Spokane, WA 99216 \n 509-922-2006"))
                 .setBorder(Border.NO_BORDER);
+        Calendar rightNow = Calendar.getInstance();
         Cell dateCell = new Cell(1,1)
                 .setTextAlignment(TextAlignment.RIGHT)
-                .add(new Paragraph("the date will go here "))
+                .add(new Paragraph(rightNow.get(Calendar.YEAR)+ "/" +  rightNow.get(Calendar.MONTH) +1 + "/" + rightNow.get(Calendar.DAY_OF_MONTH)))
                 .setBorder(Border.NO_BORDER);
         table.addCell(invoiceNumberCell);
         table.addCell(whoWeAreCell);
@@ -71,7 +95,7 @@ public class PDFTest {
         theDocument.add(table);
         theDocument.add(new Paragraph(starLine));
     }
-    private void createCustInfoHeader(){
+    public void createCustInfoHeader(){
         Table table = new Table(3);
         table.setFontSize(8);
         Cell nameAddrCell = new Cell(1,1)
@@ -91,10 +115,10 @@ public class PDFTest {
         table.addCell(VehicleInfo);
         theDocument.add(table);
     }
-    private void createPartsAndPrice(){
+    public void createPartsAndPriceHeader(){
         Table bTable = new Table(1);
         Table table = new Table((UnitValue.createPercentArray(new float[] {2,16,1,1,1,1})));
-        table.setFontSize(6);
+        table.setFontSize(8);
         Cell topCell = new Cell(1,1)
                 .setBorder(new SolidBorder(1f))
                 .setBorderBottom(Border.NO_BORDER)
@@ -129,4 +153,30 @@ public class PDFTest {
         theDocument.add(bTable);
 
     }
+    public void addNotesHeader(){
+        Table bTable = new Table(1);
+        Cell topCell = new Cell(1,1)
+                .setBorder(new SolidBorder(1f))
+                .setBorderBottom(Border.NO_BORDER)
+                .setBorderLeft(Border.NO_BORDER)
+                .setBorderRight(Border.NO_BORDER);
+        bTable.addCell(topCell);
+        theDocument.add(new Paragraph("Notes").setFontSize(8));
+        theDocument.add(bTable);
+    }
+    public void addNotes(String theNotes){
+        theDocument.add(new Paragraph(theNotes + "\n this not written by me").setFontSize(6));
+    }
+
+    public void addPart(Part toAdd){
+        Table table = new Table((UnitValue.createPercentArray(new float[] {2,16,1,1,1,1})));
+        table.setFontSize(6);
+        Cell [] cells = toAdd.createInvoiceFormatCells();
+        for(int i = 0 ; i < cells.length ; i++){
+            table.addCell(cells[i]);
+        }
+        theDocument.add(table);
+    }
+
+
 }
