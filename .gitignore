@@ -1,0 +1,10 @@
+# Compiled excludes
+target/
+bin/
+tmp/
+*.class
+
+# IDE excludes
+.vscode/
+.launch
+.settings/
