@@ -1,0 +1,52 @@
+{
+    "id": 3148785,
+    "fname": "John",
+    "lname": "Doe",
+    "email": "john@doe.com",
+    "address": "1234 Sesame St.",
+    "phones": [
+        {
+            "name": "home",
+            "num": "509-123-4567"
+        }
+    ],
+    "history": [
+        {
+            "invoiceNum": "1312412",
+            "date": "03-02-2020",
+            "customer": "3148785",
+            "vehicle": {
+                "make": "Cheverolet",
+                "model": "Suburban",
+                "year": "2000",
+                "plate": "NULL",
+                "mileage": "333333333",
+                "motor": "hemi",
+                "vin": "3GCEK23359G131595",
+                "comments": "This vehicle SUCKS!!!"
+            },
+            "parts": [
+                {
+                    "partNum": "134423",
+                    "vendor": "Nappa",
+                    "onHand": 15,
+                    "price": "3.50"
+                }
+            ],
+            "pubNotes": "A very public note",
+            "privNotes": "A super secret note"
+        }
+    ],
+    "vehicles": [
+        {
+            "make": "Cheverolet",
+            "model": "Suburban",
+            "year": "2000",
+            "plate": "NULL",
+            "mileage": "333333333",
+            "motor": "hemi",
+            "vin": "3GCEK23359G131595",
+            "comments": "This vehicle SUCKS!!!"
+        }
+    ]
+}
