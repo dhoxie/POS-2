@@ -9,14 +9,14 @@ public class Vehicle {
     private String plate;
     private String mileage;
     private String motor;
-    private String vin;
+    private String vin; // Identifying value
     private String comments;
-
 
     public Vehicle() {
     }
 
-    public Vehicle(String make, String model, String year, String plate, String mileage, String motor, String vin, String comments) {
+    public Vehicle(String make, String model, String year, String plate, String mileage, String motor, String vin,
+            String comments) {
         this.make = make;
         this.model = model;
         this.year = year;
@@ -139,7 +139,10 @@ public class Vehicle {
             return false;
         }
         Vehicle vehicle = (Vehicle) o;
-        return Objects.equals(make, vehicle.make) && Objects.equals(model, vehicle.model) && Objects.equals(year, vehicle.year) && Objects.equals(plate, vehicle.plate) && Objects.equals(mileage, vehicle.mileage) && Objects.equals(motor, vehicle.motor) && Objects.equals(vin, vehicle.vin) && Objects.equals(comments, vehicle.comments);
+        return Objects.equals(make, vehicle.make) && Objects.equals(model, vehicle.model)
+                && Objects.equals(year, vehicle.year) && Objects.equals(plate, vehicle.plate)
+                && Objects.equals(mileage, vehicle.mileage) && Objects.equals(motor, vehicle.motor)
+                && Objects.equals(vin, vehicle.vin) && Objects.equals(comments, vehicle.comments);
     }
 
     @Override
@@ -149,16 +152,9 @@ public class Vehicle {
 
     @Override
     public String toString() {
-        return "{" +
-            " make='" + getMake() + "'" +
-            ", model='" + getModel() + "'" +
-            ", year='" + getYear() + "'" +
-            ", plate='" + getPlate() + "'" +
-            ", mileage='" + getMileage() + "'" +
-            ", motor='" + getMotor() + "'" +
-            ", vin='" + getVin() + "'" +
-            ", comments='" + getComments() + "'" +
-            "}";
+        return "{" + " make='" + getMake() + "'" + ", model='" + getModel() + "'" + ", year='" + getYear() + "'"
+                + ", plate='" + getPlate() + "'" + ", mileage='" + getMileage() + "'" + ", motor='" + getMotor() + "'"
+                + ", vin='" + getVin() + "'" + ", comments='" + getComments() + "'" + "}";
     }
 
 }

@@ -3,20 +3,20 @@ package com.scottsdaleair.data;
 import java.util.Objects;
 
 public class Invoice {
-    private String invoiceID;
+    private String id;
     private String date;
     // private Customer customer;
     private String customerID;
-    private Vehicle vehicle;
-    private Part[] parts;
+    private String vehicleVin;
+    private String[] parts;
     private String pubNotes;
     private String privNotes;
 
-    public Invoice(String invoiceNum, String date, String customer, Vehicle vehicle, Part[] parts, String pubNotes, String privNotes) {
-        this.invoiceID = invoiceNum;
+    public Invoice(String invoiceNum, String date, String customer, String vehicle, String[] parts, String pubNotes, String privNotes) {
+        this.id = invoiceNum;
         this.date = date;
         this.customerID = customer;
-        this.vehicle = vehicle;
+        this.vehicleVin = vehicle;
         this.parts = parts;
         this.pubNotes = pubNotes;
         this.privNotes = privNotes;
@@ -38,7 +38,7 @@ public class Invoice {
     public Invoice() {
     }
 
-    // public Invoice(String invoiceNum, String date, Customer customer, Vehicle vehicle, Part[] parts, String pubNotes, String privNotes) {
+    // public Invoice(String invoiceNum, String date, Customer customer, Vehicle vehicle, String[] parts, String pubNotes, String privNotes) {
     //     this.invoiceNum = invoiceNum;
     //     this.date = date;
     //     this.customer = customer;
@@ -49,11 +49,11 @@ public class Invoice {
     // }
 
     public String getInvoiceNum() {
-        return this.invoiceID;
+        return this.id;
     }
 
     public void setInvoiceNum(String invoiceNum) {
-        this.invoiceID = invoiceNum;
+        this.id = invoiceNum;
     }
 
     public String getDate() {
@@ -72,19 +72,19 @@ public class Invoice {
     //     this.customer = customer;
     // }
 
-    public Vehicle getVehicle() {
-        return this.vehicle;
+    public String getVehicle() {
+        return this.vehicleVin;
     }
 
-    public void setVehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
+    public void setVehicle(String vehicle) {
+        this.vehicleVin = vehicle;
     }
 
-    public Part[] getParts() {
+    public String[] getParts() {
         return this.parts;
     }
 
-    public void setParts(Part[] parts) {
+    public void setParts(String[] parts) {
         this.parts = parts;
     }
 
@@ -105,7 +105,7 @@ public class Invoice {
     }
 
     public Invoice invoiceNum(String invoiceNum) {
-        this.invoiceID = invoiceNum;
+        this.id = invoiceNum;
         return this;
     }
 
@@ -119,12 +119,12 @@ public class Invoice {
     //     return this;
     // }
 
-    public Invoice vehicle(Vehicle vehicle) {
-        this.vehicle = vehicle;
+    public Invoice vehicle(String vehicle) {
+        this.vehicleVin = vehicle;
         return this;
     }
 
-    public Invoice parts(Part[] parts) {
+    public Invoice parts(String[] parts) {
         this.parts = parts;
         return this;
     }
@@ -147,12 +147,12 @@ public class Invoice {
             return false;
         }
         Invoice invoice = (Invoice) o;
-        return Objects.equals(invoiceID, invoice.invoiceID) && Objects.equals(date, invoice.date) && Objects.equals(customerID, invoice.customerID) && Objects.equals(vehicle, invoice.vehicle) && Objects.equals(parts, invoice.parts) && Objects.equals(pubNotes, invoice.pubNotes) && Objects.equals(privNotes, invoice.privNotes);
+        return Objects.equals(id, invoice.id) && Objects.equals(date, invoice.date) && Objects.equals(customerID, invoice.customerID) && Objects.equals(vehicleVin, invoice.vehicleVin) && Objects.equals(parts, invoice.parts) && Objects.equals(pubNotes, invoice.pubNotes) && Objects.equals(privNotes, invoice.privNotes);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(invoiceID, date, customerID, vehicle, parts, pubNotes, privNotes);
+        return Objects.hash(id, date, customerID, vehicleVin, parts, pubNotes, privNotes);
     }
 
     @Override

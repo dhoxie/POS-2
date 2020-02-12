@@ -10,7 +10,7 @@ public class Customer {
     private String address;
     private PhoneNumber[] phones;
 
-    private String histID;
+    private String[] history; // Contains an array of invoice ID's
     private String[] vehicleVINs;
     // private Invoice[] history;
     // private Vehicle[] vehicles;
@@ -19,23 +19,23 @@ public class Customer {
     }
 
     public Customer(int id, String fname, String lname, String email, String address, PhoneNumber[] phones,
-            String histID, String[] vehicleVIN) {
+            String[] history, String[] vehicleVIN) {
         this.id = id;
         this.fname = fname;
         this.lname = lname;
         this.email = email;
         this.address = address;
         this.phones = phones;
-        this.histID = histID;
+        this.history = history;
         this.vehicleVINs = vehicleVIN;
     }
 
-    public String getHistID() {
-        return this.histID;
+    public String[] getHistID() {
+        return this.history;
     }
 
-    public void setHistID(String histID) {
-        this.histID = histID;
+    public void setHistID(String[] history) {
+        this.history = history;
     }
 
     public String[] getVehicleVIN() {
@@ -46,8 +46,8 @@ public class Customer {
         this.vehicleVINs = vehicleVIN;
     }
 
-    public Customer histID(String histID) {
-        this.histID = histID;
+    public Customer histID(String[] histID) {
+        this.history = histID;
         return this;
     }
 
@@ -173,11 +173,11 @@ public class Customer {
         return this;
     }
 
-    // public void addHistory(Invoice invoice) {
-    // Invoice[] newInvoice = new Invoice[this.history.length+1];
-    // newInvoice[this.history.length] = invoice;
-    // this.history = newInvoice;
-    // }
+    public void addHistory(Invoice invoice) {
+    String[] newInvoiceArr = new String[this.history.length+1];
+    newInvoiceArr[this.history.length] = invoice.getInvoiceNum();
+    this.history = newInvoiceArr;
+    }
 
     @Override
     public boolean equals(Object o) {
