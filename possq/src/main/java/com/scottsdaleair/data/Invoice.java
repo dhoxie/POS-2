@@ -3,170 +3,199 @@ package com.scottsdaleair.data;
 import java.util.Objects;
 
 public class Invoice {
-    private String id;
-    private String date;
-    // private Customer customer;
-    private String customerID;
-    private String vehicleVin;
-    private String[] parts;
-    private String pubNotes;
-    private String privNotes;
+  private String id;
+  private String date;
+  private String customerID;
+  private String vehicleVin;
+  private String[] parts;
+  private String[] services;
+  private String[] kits;
+  private String pubNotes;
+  private String privNotes;
 
-    public Invoice(String invoiceNum, String date, String customer, String vehicle, String[] parts, String pubNotes, String privNotes) {
-        this.id = invoiceNum;
-        this.date = date;
-        this.customerID = customer;
-        this.vehicleVin = vehicle;
-        this.parts = parts;
-        this.pubNotes = pubNotes;
-        this.privNotes = privNotes;
-    }
 
-    public String getCustomer() {
-        return this.customerID;
-    }
+  public Invoice() {
+  }
 
-    public void setCustomer(String customer) {
-        this.customerID = customer;
-    }
+  /**
+   * This class represents an Inovice.
+   * 
+   * @param id          The invoice ID
+   * @param date        The date the invoice was created
+   * @param customerID  The Customer ID for the transacted customer
+   * @param vehicleVin  The VIN of the vehicle worked on
+   * @param parts       The array of part ID's used
+   * @param pubNotes    Notes included in customer invoice
+   * @param privNotes   Notes seen only by staff
+   */
+  public Invoice(String id, String date, String customerID, String vehicleVin,
+          String[] parts, String[] services, String[] kits, String pubNotes, String privNotes) {
+    this.id = id;
+    this.date = date;
+    this.customerID = customerID;
+    this.vehicleVin = vehicleVin;
+    this.parts = parts;
+    this.services = services;
+    this.kits = kits;
+    this.pubNotes = pubNotes;
+    this.privNotes = privNotes;
+  }
 
-    public Invoice customer(String customer) {
-        this.customerID = customer;
-        return this;
-    }
+  public String getId() {
+    return this.id;
+  }
 
-    public Invoice() {
-    }
+  public void setId(String id) {
+    this.id = id;
+  }
 
-    // public Invoice(String invoiceNum, String date, Customer customer, Vehicle vehicle, String[] parts, String pubNotes, String privNotes) {
-    //     this.invoiceNum = invoiceNum;
-    //     this.date = date;
-    //     this.customer = customer;
-    //     this.vehicle = vehicle;
-    //     this.parts = parts;
-    //     this.pubNotes = pubNotes;
-    //     this.privNotes = privNotes;
-    // }
+  public String getDate() {
+    return this.date;
+  }
 
-    public String getInvoiceNum() {
-        return this.id;
-    }
+  public void setDate(String date) {
+    this.date = date;
+  }
 
-    public void setInvoiceNum(String invoiceNum) {
-        this.id = invoiceNum;
-    }
+  public String getCustomerID() {
+    return this.customerID;
+  }
 
-    public String getDate() {
-        return this.date;
-    }
+  public void setCustomerID(String customerID) {
+    this.customerID = customerID;
+  }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+  public String getVehicleVin() {
+    return this.vehicleVin;
+  }
 
-    // public Customer getCustomer() {
-    //     return this.customer;
-    // }
+  public void setVehicleVin(String vehicleVin) {
+    this.vehicleVin = vehicleVin;
+  }
 
-    // public void setCustomer(Customer customer) {
-    //     this.customer = customer;
-    // }
+  public String[] getParts() {
+    return this.parts;
+  }
 
-    public String getVehicle() {
-        return this.vehicleVin;
-    }
+  public void setParts(String[] parts) {
+    this.parts = parts;
+  }
 
-    public void setVehicle(String vehicle) {
-        this.vehicleVin = vehicle;
-    }
+  public String[] getServices() {
+    return this.services;
+  }
 
-    public String[] getParts() {
-        return this.parts;
-    }
+  public void setServices(String[] services) {
+    this.services = services;
+  }
 
-    public void setParts(String[] parts) {
-        this.parts = parts;
-    }
+  public String[] getKits() {
+    return this.kits;
+  }
 
-    public String getPubNotes() {
-        return this.pubNotes;
-    }
+  public void setKits(String[] kits) {
+    this.kits = kits;
+  }
 
-    public void setPubNotes(String pubNotes) {
-        this.pubNotes = pubNotes;
-    }
+  public String getPubNotes() {
+    return this.pubNotes;
+  }
 
-    public String getPrivNotes() {
-        return this.privNotes;
-    }
+  public void setPubNotes(String pubNotes) {
+    this.pubNotes = pubNotes;
+  }
 
-    public void setPrivNotes(String privNotes) {
-        this.privNotes = privNotes;
-    }
+  public String getPrivNotes() {
+    return this.privNotes;
+  }
 
-    public Invoice invoiceNum(String invoiceNum) {
-        this.id = invoiceNum;
-        return this;
-    }
+  public void setPrivNotes(String privNotes) {
+    this.privNotes = privNotes;
+  }
 
-    public Invoice date(String date) {
-        this.date = date;
-        return this;
-    }
+  public Invoice id(String id) {
+    this.id = id;
+    return this;
+  }
 
-    // public Invoice customer(Customer customer) {
-    //     this.customer = customer;
-    //     return this;
-    // }
+  public Invoice date(String date) {
+    this.date = date;
+    return this;
+  }
 
-    public Invoice vehicle(String vehicle) {
-        this.vehicleVin = vehicle;
-        return this;
-    }
+  public Invoice customerID(String customerID) {
+    this.customerID = customerID;
+    return this;
+  }
 
-    public Invoice parts(String[] parts) {
-        this.parts = parts;
-        return this;
-    }
+  public Invoice vehicleVin(String vehicleVin) {
+    this.vehicleVin = vehicleVin;
+    return this;
+  }
 
-    public Invoice pubNotes(String pubNotes) {
-        this.pubNotes = pubNotes;
-        return this;
-    }
+  public Invoice parts(String[] parts) {
+    this.parts = parts;
+    return this;
+  }
 
-    public Invoice privNotes(String privNotes) {
-        this.privNotes = privNotes;
-        return this;
-    }
+  public Invoice services(String[] services) {
+    this.services = services;
+    return this;
+  }
 
-    @Override
+  public Invoice kits(String[] kits) {
+    this.kits = kits;
+    return this;
+  }
+
+  public Invoice pubNotes(String pubNotes) {
+    this.pubNotes = pubNotes;
+    return this;
+  }
+
+  public Invoice privNotes(String privNotes) {
+    this.privNotes = privNotes;
+    return this;
+  }
+
+  @Override
     public boolean equals(Object o) {
-        if (o == this)
-            return true;
-        if (!(o instanceof Invoice)) {
-            return false;
-        }
-        Invoice invoice = (Invoice) o;
-        return Objects.equals(id, invoice.id) && Objects.equals(date, invoice.date) && Objects.equals(customerID, invoice.customerID) && Objects.equals(vehicleVin, invoice.vehicleVin) && Objects.equals(parts, invoice.parts) && Objects.equals(pubNotes, invoice.pubNotes) && Objects.equals(privNotes, invoice.privNotes);
+    if (o == this) {
+      return true;
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, date, customerID, vehicleVin, parts, pubNotes, privNotes);
+    if (!(o instanceof Invoice)) {
+      return false;
     }
+    Invoice invoice = (Invoice) o;
+    return Objects.equals(id, invoice.id)
+        && Objects.equals(date, invoice.date)
+        && Objects.equals(customerID, invoice.customerID)
+        && Objects.equals(vehicleVin, invoice.vehicleVin)
+        && Objects.equals(parts, invoice.parts)
+        && Objects.equals(services, invoice.services)
+        && Objects.equals(kits, invoice.kits)
+        && Objects.equals(pubNotes, invoice.pubNotes)
+        && Objects.equals(privNotes, invoice.privNotes);
+  }
 
-    @Override
-    public String toString() {
-        return "{" +
-            " invoiceNum='" + getInvoiceNum() + "'" +
-            ", date='" + getDate() + "'" +
-            ", customer='" + getCustomer() + "'" +
-            ", vehicle='" + getVehicle() + "'" +
-            ", parts='" + getParts() + "'" +
-            ", pubNotes='" + getPubNotes() + "'" +
-            ", privNotes='" + getPrivNotes() + "'" +
-            "}";
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, date, customerID, vehicleVin,
+          parts, services, kits, pubNotes, privNotes);
+  }
 
-    
+  @Override
+  public String toString() {
+    return "{" + " id='" + getId()
+      + "'" + ", date='" + getDate()
+      + "'" + ", customerID='" + getCustomerID()
+      + "'" + ", vehicleVin='" + getVehicleVin()
+      + "'" + ", parts='" + getParts()
+      + "'" + ", services='" + getServices()
+      + "'" + ", kits='" + getKits()
+      + "'" + ", pubNotes='" + getPubNotes()
+      + "'" + ", privNotes='" + getPrivNotes()
+      + "'" + "}";
+  }
+
 }
