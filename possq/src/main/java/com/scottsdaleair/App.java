@@ -68,7 +68,7 @@ public class App {
       Customer cust1 = createTestCustomer(customerID, history, vehicleVins);
 
       addObjToCollection(customersCol, cust1);
-      mongoClient.close();
+      // mongoClient.close();
     }
   }
 
