@@ -6,7 +6,7 @@ PoS^2 is a point-of-sale system for car garages.
 | ------------- |
 | Kayla Lambert |
 | Daylyn Hoxie  |
-| Spencer Curly |
+| Spencer Curley|
 | Luke Mattfeld |
 
 ---
