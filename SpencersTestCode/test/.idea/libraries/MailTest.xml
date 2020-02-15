@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="MailTest">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../MailTest/out/artifacts/MailTest_jar/MailTest.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
