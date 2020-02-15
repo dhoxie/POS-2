@@ -1,9 +1,9 @@
 package com.scottsdaleair.data.generators;
 
-import java.util.Random;
-
 import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.PhoneNumber;
+
+import java.util.Random;
 
 public class CustomerGeneratorUtils {
 
@@ -100,6 +100,10 @@ public class CustomerGeneratorUtils {
     "readerooks",
     "astati",
     "mjas",
+    "mr.mister",
+    "dollface",
+    "atragent",
+    "relaissareh"
   };
 
   private static final String[] phoneNumNames = {
@@ -136,17 +140,87 @@ public class CustomerGeneratorUtils {
     "Dr."
   };
 
-  public static final String[] cities = {
-    "Spokane",
-    "Seattle",
-    "Portland",
-    "Scottsdale"
+  public static final String[] streetDirs = {
+    "N",
+    "S",
+    "E",
+    "W",
+    "NE",
+    "NW",
+    "SE",
+    "SW"
+  };
+
+  public static final String[][] cities = {
+    {
+      // Washington Cities
+      "Seattle",
+      "Vancouver",
+      "Spokane",
+      "Tacoma",
+      "Bellvue",
+      "Olympia",
+      "Everett",
+      "Bellingham",
+      "Yakima",
+      "Redmond",
+      "Puyallup",
+      "Renton",
+      "Kennewick",
+      "Richland",
+      "Auburn",
+      "Wenatchee",
+      "Tri-Cities",
+      "Mead",
+      "Cheney",
+      "Spokane Valley",
+      "Millwood",
+      "Liberty Lake",
+      "Spokane Valley",
+      "Four Lakes"
+    },
+    {
+      // Idaho cities
+      "Boise",
+      "Idaho Falls",
+      "Coeur d'Alene",
+      "Twin Falls",
+      "Nampa",
+      "Meridian",
+      "Lewiston",
+      "Moscow",
+      "Sandpoint"
+    },
+    {
+      // Montana Cities
+      "Billings",
+      "Bozeman",
+      "Missoula",
+      "Great Falls",
+      "Kalispell",
+      "Butte",
+      "Whitefish"
+    },
+    {
+      // Oregon Cities
+      "Portland",
+      "Salem",
+      "Eugene",
+      "Bend",
+      "Medford",
+      "Beaverton",
+      "Corvallis",
+      "Hillsboro",
+      "Albany",
+      "Ashland"
+    }
   };
 
   public static final String[] states = {
     "WA",
     "ID",
-    "CA"
+    "MT",
+    "OR"
   };
 
 
@@ -183,14 +257,18 @@ public class CustomerGeneratorUtils {
   private static String generateEmail(final String firstname, final String lastname) {
     Random rand = new Random();
     final int randEmailHost = rand.nextInt(emailHosts.length);
+    final boolean beginningNums = rand.nextInt(10) < 3;
     final boolean useFname = rand.nextInt(2) < 1;
     final boolean useLname = rand.nextInt(10) < 2;
-    final boolean addNums = rand.nextInt(5) < 3;
+    final boolean addNums = rand.nextInt(10) < 7;
 
     String email = "";
 
+    if (beginningNums) {
+      email += rand.nextInt(100) + "";
+    }
     if (useFname) {
-      boolean firstLetter = rand.nextInt(2) < 1;
+      boolean firstLetter = rand.nextInt(3) < 2;
       if (firstLetter) {
         email += firstname.toLowerCase().charAt(0) + "";
       } else {
@@ -199,6 +277,10 @@ public class CustomerGeneratorUtils {
     } else {
       int randUname = rand.nextInt(unames.length);
       email += unames[randUname];
+      if (rand.nextInt(3) < 1) {
+        int randUname2 = rand.nextInt(unames.length);
+        email += unames[randUname2];
+      }
     }
     if (useLname) {
       final boolean addPeriod = rand.nextInt(3) < 2;
@@ -206,7 +288,8 @@ public class CustomerGeneratorUtils {
         email += ".";
       }
       email += lastname.toLowerCase();
-    } else if (addNums) {
+    }
+    if (addNums) {
       final int randNum = rand.nextInt(420);
       email += randNum + "";
     }
@@ -249,10 +332,19 @@ public class CustomerGeneratorUtils {
     int randPostCode = rand.nextInt(90000) + 10000;
     int randStreet = rand.nextInt(streetNames.length);
     int randStreetType = rand.nextInt(streetTypes.length);
-    int randCity = rand.nextInt(cities.length);
     int randState = rand.nextInt(states.length);
-    addr = addrNum + " " + streetNames[randStreet] + " " + streetTypes[randStreetType]
-        + " " + cities[randCity] + ", " + states[randState] + " " + randPostCode;
+    int randCity = rand.nextInt(cities[randState].length);
+    addr = addrNum + "";
+
+    boolean streeHasDir = rand.nextInt(10) < 4;
+    if (streeHasDir) {
+      addr += " " + streetDirs[rand.nextInt(streetDirs.length)];
+    }
+    addr += " " + streetNames[randStreet]
+        + " " + streetTypes[randStreetType]
+        + " " + cities[randState][randCity]
+        + ", " + states[randState]
+        + " " + randPostCode;
     return addr;
   }
 }

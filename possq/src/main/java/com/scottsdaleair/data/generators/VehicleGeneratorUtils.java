@@ -6,8 +6,19 @@ import java.util.Random;
 
 public class VehicleGeneratorUtils {
 
-  static final String[] makes = { "Cheverolet", "Honda", "Toyota",
-      "Ford", "BMW", "Volkswagen", "GMC", "Hyundai", "Suzuki", "Nissan", "Tesla"};
+  static final String[] makes = {
+    "Cheverolet",
+    "Honda",
+    "Toyota",
+    "Ford",
+    "BMW",
+    "Volkswagen",
+    "GMC",
+    "Hyundai",
+    "Suzuki",
+    "Nissan",
+    "Tesla"
+  };
 
   static final String[][] models = {
     {
@@ -166,7 +177,12 @@ public class VehicleGeneratorUtils {
     final String year = (new Random().nextInt(100) + 1920) + "";
     final String plate = LicensePlate.generateLicensePlate();
     final String mileage = (new Random().nextInt(400000) + 1000) + "";
-    final String motor = generateMotor();
+    String motor = "";
+    if (make == "Tesla") {
+      motor = "Tesla Dual 438 kW electric";
+    } else {
+      motor = generateMotor();
+    }
     final String vin = VinGeneratorUtils.getRandomVin();
     final String comments = "Vehicular commentary";
 
