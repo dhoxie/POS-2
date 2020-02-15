@@ -1,0 +1,27 @@
+{
+    "personal": {
+        "id":"1234",
+        "fname":"Luke",
+        "lname":"Mattfeld",
+        "email":"lmattfeld@eagles.ewu.edu",
+        "address": "1234 Sesame St.",
+        "phoneNum":[
+            {
+                "name":"home",
+                "num":"509-999-5555"
+            },
+            {
+                "name":"work",
+                "num":"509-123-4567"
+            }
+        ]
+    },
+    "history":[
+        "historyItem"
+    ],
+    "vehicles":[
+        
+    ],
+    "pubnotes":"",
+    "privnotes":""
+}

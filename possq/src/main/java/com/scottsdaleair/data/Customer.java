@@ -1,0 +1,202 @@
+package com.scottsdaleair.data;
+
+import java.util.Objects;
+
+/**
+ * This class represents a customer. Private field {@link Customer#id}
+ */
+public class Customer {
+  private int id;
+
+  private String fname;
+  private String lname;
+  private String email;
+  private String address;
+  private PhoneNumber[] phones;
+  private String[] history;
+  private String[] vehicleVins;
+
+  public Customer() {
+  }
+
+  /**
+   * Class representing a customer.
+   * @param id          Unique ID of this customer
+   * @param fname       First name of this customer
+   * @param lname       Last name of this customer
+   * @param email       Email address associated with this customer
+   * @param address     Physical address associated with this customer
+   * @param phones      An array of phone numbers associated with this customer
+   * @param history     An array of {@code Invoice} id's associated with this customer 
+   * @param vehicleVins  An array of VIN numbers for {@code Vehicle}s associated with this customer
+   */
+  public Customer(final int id, final String fname, final String lname,
+      final String email, final String address,
+      final PhoneNumber[] phones, final String[] history,
+      final String[] vehicleVins) {
+    this.id = id;
+    this.fname = fname;
+    this.lname = lname;
+    this.email = email;
+    this.address = address;
+    this.phones = phones;
+    this.history = history;
+    this.vehicleVins = vehicleVins;
+  }
+
+  public String[] getHistID() {
+    return this.history;
+  }
+
+  public void setHistID(final String[] history) {
+    this.history = history;
+  }
+
+  public String[] getVehicleVins() {
+    return this.vehicleVins;
+  }
+
+  public void setVehicleVins(final String[] vehicleVins) {
+    this.vehicleVins = vehicleVins;
+  }
+
+  public Customer histID(final String[] histID) {
+    this.history = histID;
+    return this;
+  }
+
+  public Customer vehicleVins(final String[] vehicleVins) {
+    this.vehicleVins = vehicleVins;
+    return this;
+  }
+
+  public PhoneNumber[] getPhones() {
+    return this.phones;
+  }
+
+  public void setPhones(final PhoneNumber[] phones) {
+    this.phones = phones;
+  }
+
+  public Customer phones(final PhoneNumber[] phones) {
+    this.phones = phones;
+    return this;
+  }
+
+  public int getId() {
+    return this.id;
+  }
+
+  public void setId(final int id) {
+    this.id = id;
+  }
+
+  public String getFname() {
+    return this.fname;
+  }
+
+  public void setFname(final String fname) {
+    this.fname = fname;
+  }
+
+  public String getLname() {
+    return this.lname;
+  }
+
+  public void setLname(final String lname) {
+    this.lname = lname;
+  }
+
+  public String getEmail() {
+    return this.email;
+  }
+
+  public void setEmail(final String email) {
+    this.email = email;
+  }
+
+  public String getAddress() {
+    return this.address;
+  }
+
+  public void setAddress(final String address) {
+    this.address = address;
+  }
+
+  public PhoneNumber[] getPhone() {
+    return this.phones;
+  }
+
+  public void setPhone(final PhoneNumber[] phone) {
+    this.phones = phone;
+  }
+
+  public Customer id(final int id) {
+    this.id = id;
+    return this;
+  }
+
+  public Customer fname(final String fname) {
+    this.fname = fname;
+    return this;
+  }
+
+  public Customer lname(final String lname) {
+    this.lname = lname;
+    return this;
+  }
+
+  public Customer email(final String email) {
+    this.email = email;
+    return this;
+  }
+
+  public Customer address(final String address) {
+    this.address = address;
+    return this;
+  }
+
+  public Customer phone(final PhoneNumber[] phone) {
+    this.phones = phone;
+    return this;
+  }
+
+  // public void addHistory(final Invoice invoice) {
+  //   final String[] newInvoiceArr = new String[this.history.length + 1];
+  //   newInvoiceArr[this.history.length] = invoice.getInvoiceNum();
+  //   this.history = newInvoiceArr;
+  // }
+
+  @Override
+  public boolean equals(final Object o) {
+    if (o == this) {
+      return true;
+    }
+    if (!(o instanceof Customer)) {
+      return false;
+    }
+    final Customer customer = (Customer) o;
+    return id == customer.id
+        && Objects.equals(fname, customer.fname)
+        && Objects.equals(lname, customer.lname)
+        && Objects.equals(email, customer.email)
+        && Objects.equals(address, customer.address)
+        && Objects.equals(phones, customer.phones);
+  }
+
+  @Override
+  public final int hashCode() {
+    return Objects.hash(id, fname, lname, email, address, phones);
+  }
+
+  @Override
+  public final String toString() {
+    return "{" + " id='" + getId()
+        + "'" + ", fname='" + getFname()
+        + "'" + ", lname='" + getLname()
+        + "'" + ", email='" + getEmail()
+        + "'" + ", address='" + getAddress()
+        + "'" + ", phone='" + getPhone()
+        + "'" + "}";
+  }
+}

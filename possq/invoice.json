@@ -1,0 +1,11 @@
+{
+    "invoiceNum":"332",
+    "date":"03-02-2020",
+    "customer": "{{ #CUST }}",
+    "vehicle": "{{ #VEHICLE }}",
+    "parts": [
+
+    ],
+    "pubNotes":"",
+    "privNotes":""
+}

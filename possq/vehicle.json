@@ -1,0 +1,10 @@
+{
+    "make": "Cheverolet",
+    "model": "Suburban",
+    "Year": "2000",
+    "plate": "TESTERPLT",
+    "mileage": "299933",
+    "motor": "303",
+    "vin": "3N1CE2CP1EL405882",
+    "comments": "//This is a comment"
+}
