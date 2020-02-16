@@ -1,0 +1,21 @@
+<component name="libraryTable">
+  <library name="apiguardian-api-1.1.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../../../../jar_files/apiguardian-api-1.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../jar_files/assertj-core-3.14.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../jar_files/assertj-db-1.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../jar_files/assertj-guava-3.3.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../jar_files/byte-buddy-1.9.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../jar_files/byte-buddy-agent-1.9.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../jar_files/common-1.26.125.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../jar_files/junit-jupiter-api-5.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../jar_files/junit-platform-commons-1.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../jar_files/mockito-core-2.28.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../jar_files/mockito-kotlin-1.6.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../jar_files/objenesis-2.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../../../../jar_files/opentest4j-1.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
