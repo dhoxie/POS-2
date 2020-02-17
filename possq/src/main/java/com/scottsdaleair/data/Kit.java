@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Kit {
   // private String[] parts;
+  private String id;
   private String[] services;
   private String description;
   private String price;

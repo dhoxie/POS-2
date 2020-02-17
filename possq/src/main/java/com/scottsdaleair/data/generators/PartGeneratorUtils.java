@@ -46,7 +46,7 @@ public class PartGeneratorUtils {
    * @param p The part to add
    */
   public static void savePart(Part p) {
-    DatabaseUtils.addObjToCollection("userdat", "parts", p);
+    DatabaseUtils.addObjToCollection("parts", p);
 
   }
 }

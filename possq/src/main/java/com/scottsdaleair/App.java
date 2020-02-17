@@ -26,24 +26,24 @@ public class App {
    * @param args  Currently unused list of args
    */
   public static void main(String[] args) {
-    MongoClient mongoClient = new MongoClient();
+    // MongoClient mongoClient = new MongoClient();
 
-    MongoDatabase database = mongoClient.getDatabase("userdat");
-    MongoCollection<Document> customersCol = database.getCollection("customers");
-    MongoCollection<Document> vehicleCol = database.getCollection("vehicles");
-    MongoCollection<Document> invoiceCol = database.getCollection("invoices");
+    // MongoDatabase database = mongoClient.getDatabase("userdat");
+    // MongoCollection<Document> customersCol = database.getCollection("customers");
+    // MongoCollection<Document> vehicleCol = database.getCollection("vehicles");
+    // MongoCollection<Document> invoiceCol = database.getCollection("invoices");
 
-    int customerCount = new Random().nextInt(100);
+    int customerCount = 50/*new Random().nextInt(100)*/;
     for (int i = 0; i < customerCount; i++) {
 
-      int customerID = new Random().nextInt(10000);
+      String customerID = new Random().nextInt(10000) + "";
 
       int vehicleCount = new Random().nextInt(3) + 1;
 
       Vehicle[] vehicles = new Vehicle[vehicleCount];
       for (int x = 0; x < vehicleCount; x++) {
         vehicles[x] = VehicleGeneratorUtils.createTestVehicle();
-        DatabaseUtils.addObjToCollection(vehicleCol, vehicles[x]);
+        DatabaseUtils.addObjToCollection("vehicles", vehicles[x]);
       }
 
       int invoiceCount = new Random().nextInt(10);
@@ -51,7 +51,7 @@ public class App {
       for (int x = 0; x < invoiceCount; x++) {
         invoices[x] = InvoiceGeneratorUtils.createTestInvoice(customerID + "",
             vehicles[new Random().nextInt(vehicleCount)].getVin());
-        DatabaseUtils.addObjToCollection(invoiceCol, invoices[x]);
+        DatabaseUtils.addObjToCollection("invoices", invoices[x]);
       }
 
       String[] history = new String[invoiceCount];
@@ -64,7 +64,12 @@ public class App {
       }
       Customer cust1 = CustomerGeneratorUtils.createTestCustomer(customerID, history, vehicleVins);
 
-      DatabaseUtils.addObjToCollection(customersCol, cust1);
+      DatabaseUtils.addObjToCollection("customers", cust1);
+      if (i == 1) {
+        Customer custBack = Customer.getFromDb(cust1.getId() + "");
+        System.out.println("Found Customer: " + cust1.getId());
+        System.out.println(custBack);
+      }
       // mongoClient.close();
     }
   }
