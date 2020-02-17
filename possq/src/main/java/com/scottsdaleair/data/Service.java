@@ -77,6 +77,18 @@ public class Service {
     return this;
   }
 
+  /**
+   * Get the service object from db by id.
+   * @param serviceId id of the service
+   * @return
+   */
+  public static Service getFromDb(String serviceId) {
+    // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
+    Object[] users = DatabaseUtils.getFromCollection("services", "id", serviceId,
+        Service.class);
+    return (Service)users[0];
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this) {

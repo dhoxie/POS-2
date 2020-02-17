@@ -77,6 +77,18 @@ public class Part {
     return this;
   }
 
+  /**
+   * Get the part object from db by id.
+   * @param partId  id of the part
+   * @return
+   */
+  public static Part getFromDb(String partId) {
+    // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
+    Object[] invoices = DatabaseUtils.getFromCollection("parts", "partID", partId,
+        Part.class);
+    return (Part)invoices[0];
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this) {

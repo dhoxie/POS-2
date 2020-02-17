@@ -1,9 +1,7 @@
 package com.scottsdaleair;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 
 import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.DatabaseUtils;
@@ -69,6 +67,9 @@ public class App {
         Customer custBack = Customer.getFromDb(cust1.getId() + "");
         System.out.println("Found Customer: " + cust1.getId());
         System.out.println(custBack);
+        Invoice invoiceBack = Invoice.getFromDb(cust1.getHistID()[0]);
+        System.out.println("Found Invoice from customer: " + invoiceBack.getId());
+        System.out.println(invoiceBack);
       }
       // mongoClient.close();
     }

@@ -163,13 +163,12 @@ public class Customer {
     return this;
   }
 
-  // public void addHistory(final Invoice invoice) {
-  //   final String[] newInvoiceArr = new String[this.history.length + 1];
-  //   newInvoiceArr[this.history.length] = invoice.getInvoiceNum();
-  //   this.history = newInvoiceArr;
-  // }
-
-  public  static Customer getFromDb(String customerId) {
+  /**
+   * Get the customer object from db by id.
+   * @param customerId  id of the customer
+   * @return
+   */
+  public static Customer getFromDb(String customerId) {
     // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
     Object[] users = DatabaseUtils.getFromCollection("customers", "id", customerId,
         Customer.class);

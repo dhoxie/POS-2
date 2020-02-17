@@ -143,6 +143,18 @@ public class Vehicle {
     return this;
   }
 
+  /**
+   * Get the vehicle object from db by vin.
+   * @param vin vin of the vehicle
+   * @return
+   */
+  public static Vehicle getFromDb(String vin) {
+    // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
+    Object[] invoices = DatabaseUtils.getFromCollection("vehicles", "vin", vin,
+        Vehicle.class);
+    return (Vehicle)invoices[0];
+  }
+
   @Override
   public boolean equals(Object o) {
     if (o == this) {

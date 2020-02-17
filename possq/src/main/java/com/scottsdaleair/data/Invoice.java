@@ -158,6 +158,18 @@ public class Invoice {
     return this;
   }
 
+  /**
+   * Get the invoice object from db by id.
+   * @param invoiceId id of the invoice
+   * @return
+   */
+  public static Invoice getFromDb(String invoiceId) {
+    // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
+    Object[] invoices = DatabaseUtils.getFromCollection("invoices", "id", invoiceId,
+        Invoice.class);
+    return (Invoice)invoices[0];
+  }
+
   @Override
     public boolean equals(Object o) {
     if (o == this) {
