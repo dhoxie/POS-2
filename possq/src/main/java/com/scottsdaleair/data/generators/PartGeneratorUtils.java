@@ -27,7 +27,7 @@ public class PartGeneratorUtils {
    * @return  A {@code Part}
    */
   public static Part createTestPart() {
-    String partNum = new Random().nextInt(10000) + "";
+    String partNum = new Random().nextInt(1000000000) + "";
     String vendor = generateVendorID();
     int onHand = new Random().nextInt(50);
     String price = "$" + new Random().nextInt(100) + "." + new Random().nextInt(99);

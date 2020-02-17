@@ -14,7 +14,7 @@ public class InvoiceGeneratorUtils {
    * @return
    */
   public static Invoice createTestInvoice(String customerID, String vin) {
-    String invoiceNum = new Random().nextInt(10000) + "";
+    String invoiceNum = new Random().nextInt(1000000000) + "";
     String date = generateDate();
     int partCount = new Random().nextInt(10);
     String[] parts = new String[partCount];
