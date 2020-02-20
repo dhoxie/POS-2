@@ -1,5 +1,7 @@
 package com.scottsdaleair.data;
 
+import com.scottsdaleair.utils.DatabaseUtils;
+
 import java.util.Objects;
 
 public class Service {

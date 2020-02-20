@@ -1,4 +1,4 @@
-package com.scottsdaleair.data;
+package com.scottsdaleair.utils;
 
 import com.google.gson.Gson;
 

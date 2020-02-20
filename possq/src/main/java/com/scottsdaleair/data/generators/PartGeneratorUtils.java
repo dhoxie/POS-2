@@ -1,6 +1,6 @@
 package com.scottsdaleair.data.generators;
 
-import com.scottsdaleair.data.DatabaseUtils;
+import com.scottsdaleair.utils.DatabaseUtils;
 import com.scottsdaleair.data.Part;
 
 import java.util.Random;

@@ -4,7 +4,7 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 
 import com.scottsdaleair.data.Customer;
-import com.scottsdaleair.data.DatabaseUtils;
+import com.scottsdaleair.utils.DatabaseUtils;
 import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.data.Vehicle;
 import com.scottsdaleair.data.generators.CustomerGeneratorUtils;
