@@ -20,18 +20,11 @@ import org.bson.Document;
 public class DatabaseFiller {
 
   /**
-   * Test mainster.
-   * @param args  Currently unused list of args
+   * Fills the database with data fitting a given number of customers
+   * @param customerCount  Number of customers to add
    */
   public static void fillDb(int customerCount) {
-    // MongoClient mongoClient = new MongoClient();
 
-    // MongoDatabase database = mongoClient.getDatabase("userdat");
-    // MongoCollection<Document> customersCol = database.getCollection("customers");
-    // MongoCollection<Document> vehicleCol = database.getCollection("vehicles");
-    // MongoCollection<Document> invoiceCol = database.getCollection("invoices");
-
-    // int customerCount = 50000/*new Random().nextInt(100)*/;
     for (int i = 0; i < customerCount; i++) {
 
       String customerID = new Random().nextInt(1000000000) + "";
@@ -56,27 +49,15 @@ public class DatabaseFiller {
       for (int x = 0; x < invoiceCount; x++) {
         history[x] = invoices[x].getId();
       }
+
       String[] vehicleVins = new String[vehicleCount];
       for (int x = 0; x < vehicleCount; x++) {
         vehicleVins[x] = vehicles[x].getVin();
       }
+
       Customer cust1 = CustomerGeneratorUtils.createTestCustomer(customerID, history, vehicleVins);
 
       DatabaseUtils.addObjToCollection("customers", cust1);
-      if (i == -1) {
-        Customer custBack = Customer.getFromDb(cust1.getId() + "");
-        System.out.println("Found Customer: " + cust1.getId());
-        System.out.println(custBack);
-
-        Invoice invoiceBack = Invoice.getFromDb(cust1.getHistID()[0]);
-        System.out.println("Found Invoice from customer: " + invoiceBack.getId());
-        System.out.println(invoiceBack);
-
-        Vehicle vehicleBack = Vehicle.getFromDb(cust1.getVehicleVins()[0]);
-        System.out.println("Found Vehicle from customer: " + vehicleBack.getVin());
-        System.out.println(vehicleBack);
-      }
-      // mongoClient.close();
     }
   }
 
