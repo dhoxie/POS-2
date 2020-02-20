@@ -23,7 +23,7 @@ public class DatabaseFiller {
    * Test mainster.
    * @param args  Currently unused list of args
    */
-  public static void main(String[] args) {
+  public static void fillDb(int customerCount) {
     // MongoClient mongoClient = new MongoClient();
 
     // MongoDatabase database = mongoClient.getDatabase("userdat");
@@ -31,7 +31,7 @@ public class DatabaseFiller {
     // MongoCollection<Document> vehicleCol = database.getCollection("vehicles");
     // MongoCollection<Document> invoiceCol = database.getCollection("invoices");
 
-    int customerCount = 50000/*new Random().nextInt(100)*/;
+    // int customerCount = 50000/*new Random().nextInt(100)*/;
     for (int i = 0; i < customerCount; i++) {
 
       String customerID = new Random().nextInt(1000000000) + "";
