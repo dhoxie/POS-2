@@ -74,6 +74,16 @@ public class DatabaseUtils {
     return retListAr.toArray();
   }
 
+  private static Object[] retrieveCollection(MongoCollection<Document> collection, Type t) {
+    Gson gson = new Gson();
+    FindIterable<Document> results = collection.find();
+    ArrayList<Object> retListAr = new ArrayList<>();
+    for (Document d: results) {
+      retListAr.add(gson.fromJson(d.toJson(), t));
+    }
+    return retListAr.toArray();
+  }
+
   /**
    * Returns an object array of results.
    * @param collectionName  Name of searched collection
@@ -87,6 +97,17 @@ public class DatabaseUtils {
       String key, String value, Type t) {
     
     return getFromDb(DatabaseUtils.dbName, collectionName, key, value, t);
+  }
+
+  /**
+   * Get every object in the given collection of the given type
+   * @param collectionName
+   * @param t
+   * @return
+   */
+  public static Object[] getEntireCollection(String collectionName, Type t) {
+    MongoCollection<Document> collection = DatabaseUtils.client.getDatabase(DatabaseUtils.dbName).getCollection(collectionName);
+    return retrieveCollection(collection, t);
   }
 
   private static Object[] getFromDb(String dbname, String collectionName,
