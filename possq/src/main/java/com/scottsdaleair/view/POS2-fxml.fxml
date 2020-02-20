@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+            <children>
+                <AnchorPane layoutX="-1.0" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="266.0" style="-fx-background-color: #1E703A;">
+                    <children>
+                        <Button layoutX="-1.0" layoutY="226.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Point of Sale" textFill="WHITE">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="-1.0" layoutY="285.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Customers" textFill="WHITE">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="-1.0" layoutY="342.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Inventory" textFill="WHITE">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="-1.0" layoutY="400.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Calendar" textFill="WHITE">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="-1.0" layoutY="460.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                        </Button>
+                        <Button layoutX="1.0" layoutY="725.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Settings" textFill="WHITE">
+                            <font>
+                                <Font size="20.0" />
+                            </font>
+                        </Button>
+                        <ImageView fitHeight="79.0" fitWidth="247.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@./imgs/1.PNG" />
+                            </image>
+                        </ImageView>
+                    </children>
+                </AnchorPane>
+                <AnchorPane fx:id="pane_Customers" layoutX="266.0" prefHeight="800.0" prefWidth="1015.0" style="-fx-background-color: white;">
+                    <children>
+                        <Label layoutX="33.0" layoutY="28.0" prefHeight="63.0" prefWidth="354.0" text="Customers" textAlignment="CENTER" textFill="#1e703a">
+                            <font>
+                                <Font name="System Bold" size="31.0" />
+                            </font>
+                        </Label>
+                        <AnchorPane layoutX="34.0" layoutY="92.0" prefHeight="682.0" prefWidth="949.0" style="-fx-border-radius: 100px;">
+                            <children>
+                                <TextField fx:id="txt_FirstNameSearch" layoutX="13.0" layoutY="39.0" prefHeight="26.0" prefWidth="185.0" />
+                                <TextField fx:id="txt_LastNameSearch" layoutX="212.0" layoutY="39.0" prefHeight="26.0" prefWidth="185.0" />
+                                <Label layoutX="15.0" layoutY="13.0" prefHeight="26.0" prefWidth="176.0" text="First Name">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <Label layoutX="212.0" layoutY="13.0" prefHeight="26.0" prefWidth="176.0" text="Last Name">
+                                    <font>
+                                        <Font size="14.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="btn_SearchCustomers" layoutX="414.0" layoutY="38.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: #1E703A;" text="Search" textFill="WHITE">
+                                    <font>
+                                        <Font name="System Bold" size="12.0" />
+                                    </font>
+                                </Button>
+                                <TableView fx:id="tbl_CustomerResults" layoutX="3.0" layoutY="74.0" prefHeight="606.0" prefWidth="943.0">
+                                    <columns>
+                                        <TableColumn prefWidth="153.06658935546875" text="First Name" />
+                                        <TableColumn prefWidth="212.8001708984375" text="Last Name" />
+                                        <TableColumn prefWidth="403.19989013671875" text="Address" />
+                                        <TableColumn minWidth="0.0" prefWidth="173.86676025390625" text="Contact" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </AnchorPane>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>
