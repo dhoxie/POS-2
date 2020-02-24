@@ -90,7 +90,7 @@ public class Customer {
     return this.id;
   }
 
-  public void setId(final String id) {
+  void setId(final String id) {
     this.id = id;
   }
 
