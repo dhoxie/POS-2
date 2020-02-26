@@ -231,9 +231,9 @@ public class CustomerGeneratorUtils {
    * @param vehicles    The list of vehicles owned by this customer
    * @return
    */
-  public static Customer createTestCustomer(final int customerID, final String[] invoices,
+  public static Customer createTestCustomer(final String customerID, final String[] invoices,
       final String[] vehicles) {
-    final int id = customerID;
+    final String id = customerID;
     final String fname = generateFirstName();
     final String lname = generateLastName();
     final String email = generateEmail(fname, lname);

@@ -4,8 +4,6 @@ import java.util.Objects;
 
 public class PhoneNumber {
   private String name;
-  // private String countryCode;
-  // private String areaCode;
   private String num;
 
   public PhoneNumber() {

@@ -1,5 +1,7 @@
 package com.scottsdaleair.data;
 
+import com.scottsdaleair.utils.DatabaseUtils;
+
 import java.util.Objects;
 
 public class Vehicle {
@@ -141,6 +143,18 @@ public class Vehicle {
   public Vehicle comments(String comments) {
     this.comments = comments;
     return this;
+  }
+
+  /**
+   * Get the vehicle object from db by vin.
+   * @param vin vin of the vehicle
+   * @return
+   */
+  public static Vehicle getFromDb(String vin) {
+    // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
+    Object[] invoices = DatabaseUtils.getFromCollection("vehicles", "vin", vin,
+        Vehicle.class);
+    return (Vehicle)invoices[0];
   }
 
   @Override

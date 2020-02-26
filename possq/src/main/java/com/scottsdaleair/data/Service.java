@@ -1,5 +1,7 @@
 package com.scottsdaleair.data;
 
+import com.scottsdaleair.utils.DatabaseUtils;
+
 import java.util.Objects;
 
 public class Service {
@@ -75,6 +77,18 @@ public class Service {
   public Service price(String price) {
     this.price = price;
     return this;
+  }
+
+  /**
+   * Get the service object from db by id.
+   * @param serviceId id of the service
+   * @return
+   */
+  public static Service getFromDb(String serviceId) {
+    // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
+    Object[] users = DatabaseUtils.getFromCollection("services", "id", serviceId,
+        Service.class);
+    return (Service)users[0];
   }
 
   @Override
