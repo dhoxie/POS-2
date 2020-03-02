@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scottsdaleair.controller.POS2controller">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+        <AnchorPane layoutX="-1.0" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="266.0" style="-fx-background-color: #1E703A;">
+            <Button fx:id="btn_POS_NAV" layoutX="1.0" layoutY="226.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: #F1F0F2;" text="Point of Sale" textFill="#1e703a">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Button>
+            <Button fx:id="btn_Customers_NAV" layoutX="1.0" layoutY="285.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Customers" textFill="WHITE">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Button>
+            <Button fx:id="btn_Inventory_NAV" layoutX="1.0" layoutY="342.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Inventory" textFill="WHITE">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Button>
+            <Button fx:id="btn_Calendar_NAV" layoutX="1.0" layoutY="400.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Calendar" textFill="WHITE">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Button>
+            <Button fx:id="btn_Reports_NAV" layoutX="1.0" layoutY="460.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Button>
+            <Button layoutX="1.0" layoutY="725.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Settings" textFill="WHITE">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </Button>
+            <ImageView fitHeight="79.0" fitWidth="247.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@./imgs/1.PNG" />
+                </image>
+            </ImageView>
+        </AnchorPane>
+        <AnchorPane fx:id="pane_POS" layoutX="266.0" prefHeight="800.0" prefWidth="1015.0" style="-fx-background-color: #F1F0F2;">
+            <Label layoutX="33.0" layoutY="28.0" prefHeight="63.0" prefWidth="354.0" text="Point of Sale" textAlignment="CENTER" textFill="#1e703a">
+                <font>
+                    <Font name="System Bold" size="31.0" />
+                </font>
+            </Label>
+            <AnchorPane layoutX="34.0" layoutY="92.0" prefHeight="682.0" prefWidth="949.0" style="-fx-background-radius: 12; -fx-background-color: white;">
+                <Label layoutX="213.0" layoutY="13.0" prefHeight="26.0" prefWidth="127.0" text="First Name" textFill="#1e703a">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="14.0" layoutY="13.0" prefHeight="26.0" prefWidth="186.0" text="Last Name" textFill="#1e703a">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            <Label layoutX="14.0" layoutY="66.0" prefHeight="26.0" prefWidth="327.0" text="Address" textFill="#1e703a">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="117.0" prefHeight="26.0" prefWidth="149.0" text="City" textFill="#1e703a">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="180.0" layoutY="117.0" prefHeight="26.0" prefWidth="47.0" text="State" textFill="#1e703a">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="242.0" layoutY="117.0" prefHeight="26.0" prefWidth="100.0" text="Zip" textFill="#1e703a">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="169.0" prefHeight="26.0" prefWidth="266.0" text="Email" textFill="#1e703a">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="15.0" layoutY="221.0" prefHeight="26.0" prefWidth="327.0" text="Customer Notes" textFill="#1e703a">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+                <TextField fx:id="txt_LNameSearch" layoutX="14.0" layoutY="40.0" prefHeight="26.0" prefWidth="185.0">
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                     <color>
+                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                     </color>
+                  </InnerShadow>
+               </effect></TextField>
+                <TextField fx:id="txt_FNameSearch" layoutX="213.0" layoutY="40.0" prefHeight="26.0" prefWidth="127.0">
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                     <color>
+                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                     </color>
+                  </InnerShadow>
+               </effect></TextField>
+            <TextField fx:id="txt_AddressSearch" layoutX="15.0" layoutY="91.0" prefHeight="26.0" prefWidth="327.0">
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                     <color>
+                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                     </color>
+                  </InnerShadow>
+               </effect></TextField>
+            <TextField fx:id="txt_CitySearch" layoutX="15.0" layoutY="143.0">
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                     <color>
+                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                     </color>
+                  </InnerShadow>
+               </effect></TextField>
+            <TextField fx:id="txt_StateSearch" layoutX="180.0" layoutY="143.0" prefHeight="26.0" prefWidth="47.0">
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                     <color>
+                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                     </color>
+                  </InnerShadow>
+               </effect></TextField>
+            <TextField fx:id="txt_ZipSearch" layoutX="242.0" layoutY="143.0" prefHeight="26.0" prefWidth="100.0">
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                     <color>
+                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                     </color>
+                  </InnerShadow>
+               </effect></TextField>
+            <TextField fx:id="txt_EmailSearch" layoutX="15.0" layoutY="195.0" prefHeight="26.0" prefWidth="266.0">
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                     <color>
+                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                     </color>
+                  </InnerShadow>
+               </effect></TextField>
+            <TextArea fx:id="txt_CustomerNotes" layoutX="15.0" layoutY="247.0" prefHeight="77.0" prefWidth="327.0">
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                     <color>
+                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                     </color>
+                  </InnerShadow>
+               </effect></TextArea>
+            <Label layoutX="402.0" layoutY="13.0" prefHeight="26.0" prefWidth="149.0" text="Home Phone" textFill="#1e703a">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txt_HomeSearch" layoutX="402.0" layoutY="40.0" prefHeight="26.0" prefWidth="150.0">
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                     <color>
+                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </TextField>
+            <TextField fx:id="txt_CellSearch" layoutX="402.0" layoutY="91.0" prefHeight="26.0" prefWidth="150.0">
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                     <color>
+                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </TextField>
+            <Label layoutX="402.0" layoutY="66.0" prefHeight="26.0" prefWidth="149.0" text="Cell Phone" textFill="#1e703a">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txt_WorkSearch" layoutX="402.0" layoutY="142.0" prefHeight="26.0" prefWidth="150.0">
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                     <color>
+                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </TextField>
+            <Label layoutX="402.0" layoutY="117.0" prefHeight="26.0" prefWidth="149.0" text="Work Phone" textFill="#1e703a">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="402.0" layoutY="221.0" prefHeight="26.0" prefWidth="150.0" text="Private Customer Notes" textFill="#1e703a">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextArea fx:id="txt_PrivateNotes" layoutX="402.0" layoutY="247.0" prefHeight="77.0" prefWidth="327.0">
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                     <color>
+                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                     </color>
+                  </InnerShadow>
+               </effect>
+            </TextArea>
+            </AnchorPane>
+        </AnchorPane>
+    </AnchorPane>
+</VBox>
