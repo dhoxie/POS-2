@@ -23,7 +23,6 @@ public class App extends Application {
     primaryStage.setScene(home);
     primaryStage.show();
 
-    System.out.println("hello world again!");
   }
 
   public static void main(String[] args) {
