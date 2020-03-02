@@ -1,12 +1,15 @@
 package com.scottsdaleair.data;
 
+import com.scottsdaleair.data.PhoneNumber;
+import com.scottsdaleair.utils.DatabaseUtils;
+
 import java.util.Objects;
 
 /**
  * This class represents a customer. Private field {@link Customer#id}
  */
 public class Customer {
-  private int id;
+  private String id;
 
   private String fname;
   private String lname;
@@ -30,7 +33,7 @@ public class Customer {
    * @param history     An array of {@code Invoice} id's associated with this customer 
    * @param vehicleVins  An array of VIN numbers for {@code Vehicle}s associated with this customer
    */
-  public Customer(final int id, final String fname, final String lname,
+  public Customer(final String id, final String fname, final String lname,
       final String email, final String address,
       final PhoneNumber[] phones, final String[] history,
       final String[] vehicleVins) {
@@ -83,11 +86,11 @@ public class Customer {
     return this;
   }
 
-  public int getId() {
+  public String getId() {
     return this.id;
   }
 
-  public void setId(final int id) {
+  void setId(final String id) {
     this.id = id;
   }
 
@@ -131,7 +134,7 @@ public class Customer {
     this.phones = phone;
   }
 
-  public Customer id(final int id) {
+  public Customer id(final String id) {
     this.id = id;
     return this;
   }
@@ -161,11 +164,17 @@ public class Customer {
     return this;
   }
 
-  // public void addHistory(final Invoice invoice) {
-  //   final String[] newInvoiceArr = new String[this.history.length + 1];
-  //   newInvoiceArr[this.history.length] = invoice.getInvoiceNum();
-  //   this.history = newInvoiceArr;
-  // }
+  /**
+   * Get the customer object from db by id.
+   * @param customerId  id of the customer
+   * @return
+   */
+  public static Customer getFromDb(String customerId) {
+    // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
+    Object[] users = DatabaseUtils.getFromCollection("customers", "id", customerId,
+        Customer.class);
+    return (Customer)users[0];
+  }
 
   @Override
   public boolean equals(final Object o) {

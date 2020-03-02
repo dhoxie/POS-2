@@ -1,5 +1,7 @@
 package com.scottsdaleair.data;
 
+import com.scottsdaleair.utils.DatabaseUtils;
+
 import java.util.Objects;
 
 public class Invoice {
@@ -156,6 +158,18 @@ public class Invoice {
   public Invoice privNotes(String privNotes) {
     this.privNotes = privNotes;
     return this;
+  }
+
+  /**
+   * Get the invoice object from db by id.
+   * @param invoiceId id of the invoice
+   * @return
+   */
+  public static Invoice getFromDb(String invoiceId) {
+    // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
+    Object[] invoices = DatabaseUtils.getFromCollection("invoices", "id", invoiceId,
+        Invoice.class);
+    return (Invoice)invoices[0];
   }
 
   @Override
