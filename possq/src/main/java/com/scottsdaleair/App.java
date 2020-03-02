@@ -1,35 +1,26 @@
 package com.scottsdaleair;
+import com.scottsdaleair.controller.DatabaseGetter;
+import com.scottsdaleair.pdfGenerator.PDFInvoice;
+import com.scottsdaleair.data.Invoice;
+public class App {
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
-import java.io.File;
-import java.net.URL;
-
-
-public class App extends Application {
-
-  @Override
-  public void start(Stage primaryStage) throws Exception{
-    FXMLLoader fxmlLoader = new FXMLLoader();
-    URL url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI().toURL();
-    Parent root = fxmlLoader.load(url);
-
-    primaryStage.setTitle("POS2 - Scottsdale Airport");
-    Scene home = new Scene(root, 1280, 800);
-    //home.getStylesheets().add("./css/default.css");
-    primaryStage.setScene(home);
-    primaryStage.show();
-
+  /**
+   * Test mainster.
+   * 
+   * @param args Currently unused list of args
+   */
+  public static void main(String[] args)throws Throwable {
+  	Invoice [] large = DatabaseGetter.getAllInvoices();
+  	int count = 0;
+  	for(Invoice tmp  :  large){
+  		count++;
+  		new PDFInvoice(tmp).start();
+  		if(count >= 100){
+  			break;
+  		}
+  	}
+  	
+  	//new PDFInvoice(Invoice.getFromDb("79136944")).start();
   }
-
-  public static void main(String[] args) {
-    launch(args);
-  }
-
-  // ============================  M E T H O D S  =========================================
-
 
 }

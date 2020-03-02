@@ -1,6 +1,12 @@
-package PDF;
+package com.scottsdaleair.pdfGenerator;
 
-import PDFParts.Part;
+import com.scottsdaleair.data.Invoice;
+import com.scottsdaleair.data.Part;
+import com.scottsdaleair.data.Service;
+import com.scottsdaleair.data.Kit;
+import com.scottsdaleair.data.Customer;
+import com.scottsdaleair.data.Vehicle;
+import com.scottsdaleair.data.PhoneNumber;
 import com.itextpdf.kernel.color.Color;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -19,49 +25,15 @@ import java.util.Calendar;
  *
  * */
 public class PDFInvoice {
-    private String fileName;
-    private Document theDocument;
-    private int invoiceNum;
-    private Part[] parts;
-    private String notes;
-    private double partsTotal;
-    private double laborTotal;
-    private double subtotal;
-    private double shopFee;
-    private double tax;
-    private double finalTotal;
-    private String paymentMethod;
-    public PDFInvoice(String fileName , int invoiceNum , Part[]parts  , String notes , double partsTotal , double laborTotal , double subtotal , double shopFee , double tax , double finalTotal , String paymentMethod){
-        if(fileName == null || parts == null || notes == null){
-            throw new IllegalArgumentException("value of params cannot be null");
-        }
-        if(invoiceNum < 0 ){
-            throw new IllegalArgumentException("invoiceNum cannot be below 0");
-        }
-        this.fileName = fileName;
-        this.invoiceNum = invoiceNum;
-        this.parts = parts;
-        this.notes = notes;
-        this.partsTotal =partsTotal;
-        this.laborTotal = laborTotal;
-        this.subtotal = subtotal;
-        this.shopFee = shopFee;
-        this.tax = tax;
-        this.finalTotal = finalTotal;
-        this.paymentMethod = paymentMethod;
-    }
-
-    /**
-     * Used only in junit code
-     * @return this object
-     * @throws FileNotFoundException
-     */
-    public PDFInvoice testStart() throws FileNotFoundException {
-        // only to be called in the test files
-        PdfWriter writer = new  PdfWriter(fileName + ".pdf");
-        PdfDocument pdf = new PdfDocument(writer);
-        theDocument = new Document(pdf);
-        return this;
+    private Invoice theInvoice;
+    private Customer theCust; 
+    private Vehicle theVehicle;
+    private  Document theDocument;
+    private PdfDocument pdf;
+    public PDFInvoice(Invoice theInvoice){
+        this.theInvoice = theInvoice;
+        theCust = Customer.getFromDb(theInvoice.getCustomerID());
+        theVehicle = Vehicle.getFromDb(theInvoice.getVehicleVin());
     }
 
     /**
@@ -73,20 +45,22 @@ public class PDFInvoice {
     public PDFInvoice start() throws FileNotFoundException {
         // this is of type PDFTest so if someone wants to create this class and
         // create a pdf at the same time it can be done with object chaining
-        PdfWriter writer = new  PdfWriter(fileName + ".pdf");
-        PdfDocument pdf = new PdfDocument(writer);
+        PdfWriter writer = new  PdfWriter(theInvoice.getId() + theCust.getFname()+ theCust.getLname() + ".pdf");
+        pdf = new PdfDocument(writer);
         theDocument = new Document(pdf);
         // all of the below function calls should return stuff so that the adding to the pdf is done here to make it easy to unit test
         createHeader();
         createCustInfoHeader();
         createPartsAndPriceHeader();
-        for(int i = 0 ; i < parts.length ; i++){
-            addPart(parts[i]);
+        String [] theParts = theInvoice.getParts();
+        for(int i = 0 ; i < theInvoice.getParts().length ; i++){
+            addPart(Part.getFromDb(theParts[i]));
+            // need a way to get parts , service , Vehicle not just the primary keys of the data 
         }
-
+        
         addNotesHeader();
-        addNotes(notes);
-        addTotalSection(pdf);
+        addNotes();
+        addTotalSection();
         done();
 
         return this;
@@ -110,7 +84,7 @@ public class PDFInvoice {
         table.setFontSize(8);
         Cell invoiceNumberCell = new Cell(1,1)
                  .setTextAlignment(TextAlignment.LEFT)
-                .add(new Paragraph("Invoice # \n" + invoiceNum))
+                .add(new Paragraph("Invoice # \n" + theInvoice.getId()))
                 .setBorder(Border.NO_BORDER);
         Cell whoWeAreCell = new Cell(1,1)
                 .setTextAlignment(TextAlignment.CENTER)
@@ -119,7 +93,7 @@ public class PDFInvoice {
         Calendar rightNow = Calendar.getInstance();
         Cell dateCell = new Cell(1,1)
                 .setTextAlignment(TextAlignment.RIGHT)
-                .add(new Paragraph(rightNow.get(Calendar.YEAR)+ "/" +  rightNow.get(Calendar.MONTH) +1 + "/" + rightNow.get(Calendar.DAY_OF_MONTH)))
+                .add(new Paragraph(theInvoice.getDate()))
                 .setBorder(Border.NO_BORDER);
         table.addCell(invoiceNumberCell);
         table.addCell(whoWeAreCell);
@@ -154,7 +128,7 @@ public class PDFInvoice {
         Cell lastNameCellData = new Cell(1,1)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph("Last name"));
+                .add(new Paragraph(theCust.getLname()));
         Cell firstNameCellText = new Cell(1,1)
                 .setTextAlignment(TextAlignment.RIGHT)
                 .setBorder(Border.NO_BORDER)
@@ -162,7 +136,7 @@ public class PDFInvoice {
         Cell firstCellData = new Cell(1,1)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph("First name"));
+                .add(new Paragraph(theCust.getFname()));
         Cell addressCellText = new Cell(1,1)
                 .setTextAlignment(TextAlignment.RIGHT)
                 .setBorder(Border.NO_BORDER)
@@ -170,7 +144,7 @@ public class PDFInvoice {
         Cell addressCellData = new Cell(1,1)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph("The Address"));
+                .add(new Paragraph(theCust.getAddress()));
         Cell cityStateCellText = new Cell(1,1)
                 .setTextAlignment(TextAlignment.RIGHT)
                 .setBorder(Border.NO_BORDER)
@@ -247,7 +221,7 @@ public class PDFInvoice {
         Cell phoneCellData = new Cell()
                 .setTextAlignment(TextAlignment.LEFT)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph("number here"));
+                .add(new Paragraph(theCust.getPhones()[0].getNum()));
         Cell wPhoneCellText = new Cell(1,1)
                 .setTextAlignment(TextAlignment.RIGHT)
                 .setBorder(Border.NO_BORDER)
@@ -255,7 +229,7 @@ public class PDFInvoice {
         Cell wPhoneCellData = new Cell()
                 .setTextAlignment(TextAlignment.LEFT)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph("number here"));
+                .add(new Paragraph(theCust.getPhones()[0].getNum()));
         Cell zipCellText = new Cell(1,1)
                 .setTextAlignment(TextAlignment.RIGHT)
                 .setBorder(Border.NO_BORDER)
@@ -271,7 +245,7 @@ public class PDFInvoice {
         Cell manufactorCellData = new Cell()
                 .setTextAlignment(TextAlignment.LEFT)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph("Car type"));
+                .add(new Paragraph(theVehicle.getMake()));
         innerTable.addCell(phoneCellText);
         innerTable.addCell(new Cell(1,1)
                 .setTextAlignment(TextAlignment.CENTER)
@@ -297,12 +271,6 @@ public class PDFInvoice {
                 .setBorder(Border.NO_BORDER)
                 .setHorizontalAlignment(HorizontalAlignment.CENTER)
                 .add(innerTable);
-/*
-                .setTextAlignment(TextAlignment.CENTER)
-                .add(new Paragraph("HPHONE: home number \nWPHONE: work phone \nzip: zip code\nPO number: po box\nMANUF: car"))
-                .setBorder(Border.NO_BORDER);
-
-*/
         Cell tagCellText = new Cell(1,1)
                 .setTextAlignment(TextAlignment.RIGHT)
                 .setBorder(Border.NO_BORDER)
@@ -310,7 +278,7 @@ public class PDFInvoice {
         Cell tagCellData = new Cell(1,1)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph("Plate num here"));
+                .add(new Paragraph(theVehicle.getPlate()));
         Cell yearCellText = new Cell(1,1)
                 .setTextAlignment(TextAlignment.RIGHT)
                 .setBorder(Border.NO_BORDER)
@@ -318,7 +286,7 @@ public class PDFInvoice {
         Cell yearCellData = new Cell(1,1)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph("Year Here"));
+                .add(new Paragraph(theVehicle.getYear()));
         Cell makeCellText = new Cell(1,1)
                 .setTextAlignment(TextAlignment.RIGHT)
                 .setBorder(Border.NO_BORDER)
@@ -326,7 +294,7 @@ public class PDFInvoice {
         Cell makeCellData = new Cell(1,1)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph("Make Here"));
+                .add(new Paragraph(theVehicle.getMake()));
 
         Cell modelCellText = new Cell(1,1)
                 .setTextAlignment(TextAlignment.RIGHT)
@@ -335,7 +303,7 @@ public class PDFInvoice {
         Cell modelCellData = new Cell(1,1)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph("Model Here"));
+                .add(new Paragraph(theVehicle.getModel()));
         Cell mileageCellText = new Cell(1,1)
                 .setTextAlignment(TextAlignment.RIGHT)
                 .setBorder(Border.NO_BORDER)
@@ -343,7 +311,7 @@ public class PDFInvoice {
         Cell mileageCellData = new Cell(1,1)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph("Mileage Here"));
+                .add(new Paragraph(theVehicle.getMileage()));
         Cell vinCellText = new Cell(1,1)
                 .setTextAlignment(TextAlignment.RIGHT)
                 .setBorder(Border.NO_BORDER)
@@ -351,7 +319,7 @@ public class PDFInvoice {
         Cell vinCellData = new Cell(1,1)
                 .setTextAlignment(TextAlignment.LEFT)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph("Vin Here"));
+                .add(new Paragraph(theVehicle.getVin()));
         innerTableLast.addCell(tagCellText);
         innerTableLast.addCell(new Cell(1,1)
                 .setTextAlignment(TextAlignment.CENTER)
@@ -485,8 +453,8 @@ public class PDFInvoice {
      * @param theNotes
      * @return
      */
-    public Document addNotes(String theNotes){
-        theDocument.add(new Paragraph(theNotes + "\n this not written by me").setFontSize(8).setBorder(new SolidBorder(1f)).setPadding(1));
+    public Document addNotes(){
+        theDocument.add(new Paragraph(theInvoice.getPubNotes() + "\n this not written by me").setFontSize(8).setBorder(new SolidBorder(1f)).setPadding(1));
         return theDocument;
     }
 
@@ -498,14 +466,18 @@ public class PDFInvoice {
     public Document addPart(Part toAdd){
         Table table = new Table((UnitValue.createPercentArray(new float[] {2,16,1,1,1,1})));
         table.setFontSize(6);
-        Cell [] cells = toAdd.createInvoiceFormatCells();
-        for(int i = 0 ; i < cells.length ; i++){
-            table.addCell(cells[i]);
-        }
+        
+        
+        table.addCell(new Cell(1,1).add(new Paragraph(toAdd.getPartNum())));
+        table.addCell(new Cell(1,1).add(new Paragraph(toAdd.getVendor())));
+        table.addCell(new Cell(1,1).add(new Paragraph("inc")));
+        table.addCell(new Cell(1,1).add(new Paragraph(toAdd.getPrice())));
+        table.addCell(new Cell(1,1).add(new Paragraph("disco")));
+        table.addCell(new Cell(1,1).add(new Paragraph("total")));
         theDocument.add(table);
         return theDocument;
     }
-    public void addTotalSection(PdfDocument pdf){
+    public void addTotalSection(){
         Table table = new Table(2);
         PageSize ps = pdf.getDefaultPageSize();
         Cell partsCellText = new Cell(1,1)
@@ -513,37 +485,37 @@ public class PDFInvoice {
                 .add(new Paragraph("Parts"));
         Cell partsCellValue = new Cell(1,1)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(partsTotal +""));
+                .add(new Paragraph( "calculated "));
         Cell laborCellText = new Cell(1,1)
                 .setBorder(Border.NO_BORDER)
                 .add(new Paragraph("Labor" ));
         Cell laborCellValue = new Cell(1,1)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(laborTotal+""));
+                .add(new Paragraph("calculated"));
         Cell subtotalCellText = new Cell(1,1)
                 .setBorder(Border.NO_BORDER)
                 .add(new Paragraph("subtotal"));
         Cell subtotalCellValue = new Cell(1,1)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(subtotal + ""));
+                .add(new Paragraph( "calculated"));
         Cell shopFeeCellText = new Cell(1,1)
                 .setBorder(Border.NO_BORDER)
                 .add(new Paragraph("Shop Fee"));
         Cell shopFeeCellValue = new Cell(1,1)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(shopFee + ""));
+                .add(new Paragraph("calculated"));
         Cell totalCellText = new Cell(1,1)
                 .setBorder(Border.NO_BORDER)
                 .add(new Paragraph("Total"));
         Cell totalCellValue = new Cell(1,1)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(finalTotal + ""));
+                .add(new Paragraph( "calculated"));
         Cell paidCellText = new Cell(1,1)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(paymentMethod)); // ???? what is this
+                .add(new Paragraph("paymentmethod")); // ???? what is this
         Cell paidCellValue = new Cell(1,1)
                 .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(finalTotal+""));
+                .add(new Paragraph("finaltotal"));
         Cell lineCell = new Cell(1,2)
                 .setBorder(Border.NO_BORDER)
                 .add(new Paragraph("----------------------"));
