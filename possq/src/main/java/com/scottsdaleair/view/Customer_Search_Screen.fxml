@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scottsdaleair.controller.POS2controller">
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+        <AnchorPane layoutX="-1.0" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="266.0" style="-fx-background-color: #1E703A;">
+            <Button fx:id="btn_POS_NAV" layoutX="-1.0" layoutY="226.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" onAction="#changeScene" style="-fx-background-color: none;" text="Point of Sale" textFill="WHITE">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Button>
+            <Button fx:id="btn_Customers_NAV" layoutX="1.0" layoutY="285.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" onAction="#changeScene" style="-fx-background-color: #F1F0F2;" text="Customers" textFill="#1e703a">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Button>
+            <Button fx:id="btn_Inventory_NAV" layoutX="1.0" layoutY="342.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Inventory" textFill="WHITE">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Button>
+            <Button fx:id="btn_Calendar_NAV" layoutX="1.0" layoutY="400.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Calendar" textFill="WHITE">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Button>
+            <Button fx:id="btn_Reports_NAV" layoutX="1.0" layoutY="460.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE">
+                <font>
+                    <Font size="24.0" />
+                </font>
+            </Button>
+            <Button fx:id="btn_Settings_NAV" layoutX="1.0" layoutY="725.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Settings" textFill="WHITE">
+                <font>
+                    <Font size="20.0" />
+                </font>
+            </Button>
+            <ImageView fitHeight="79.0" fitWidth="247.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@./imgs/1.PNG" />
+                </image>
+            </ImageView>
+        </AnchorPane>
+        <AnchorPane fx:id="pane_Customers" layoutX="266.0" prefHeight="800.0" prefWidth="1015.0" style="-fx-background-color: #F1F0F2;">
+            <Label layoutX="33.0" layoutY="28.0" prefHeight="63.0" prefWidth="354.0" text="Customers" textAlignment="CENTER" textFill="#1e703a">
+                <font>
+                    <Font name="System Bold" size="31.0" />
+                </font>
+            </Label>
+            <AnchorPane layoutX="34.0" layoutY="92.0" prefHeight="682.0" prefWidth="949.0" style="-fx-background-radius: 12; -fx-background-color: white;">
+                <TextField fx:id="txt_FirstNameSearch" layoutX="31.0" layoutY="38.0" prefHeight="26.0" prefWidth="185.0" />
+                <TextField fx:id="txt_LastNameSearch" layoutX="235.0" layoutY="38.0" prefHeight="26.0" prefWidth="185.0" />
+                <Label layoutX="31.0" layoutY="11.0" prefHeight="26.0" prefWidth="186.0" text="First Name">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Label layoutX="235.0" layoutY="11.0" prefHeight="26.0" prefWidth="186.0" text="Last Name">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+                <Button fx:id="btn_SearchCustomers" layoutX="433.0" layoutY="38.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="82.0" style="-fx-background-color: #1E703A;" text="Search" textFill="WHITE">
+                    <font>
+                        <Font name="System Bold" size="12.0" />
+                    </font>
+                </Button>
+                <TableView fx:id="tbl_CustomerResults" layoutX="30.0" layoutY="74.0" prefHeight="584.0" prefWidth="882.0">
+                    <columns>
+                        <TableColumn prefWidth="153.06658935546875" text="First Name" />
+                        <TableColumn prefWidth="212.8001708984375" text="Last Name" />
+                        <TableColumn prefWidth="338.2000732421875" text="Address" />
+                        <TableColumn maxWidth="4969.0" minWidth="0.0" prefWidth="176.0" text="Contact" />
+                    </columns>
+                </TableView>
+            </AnchorPane>
+        </AnchorPane>
+    </AnchorPane>
+</VBox>
