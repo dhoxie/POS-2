@@ -317,7 +317,7 @@ public class CustomerGeneratorUtils {
   }
 
   private static PhoneNumber[] generatePhoneNumbers() {
-    int numberCount = new Random().nextInt(4);
+    int numberCount = new Random().nextInt(3) + 1;
     PhoneNumber[] nums = new PhoneNumber[numberCount];
     for (int i = 0; i < numberCount; i++) {
       nums[i] = generatePhoneNumber();
