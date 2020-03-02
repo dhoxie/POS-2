@@ -14,7 +14,7 @@ public class App extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception{
     FXMLLoader fxmlLoader = new FXMLLoader();
-    URL url = new File("src/main/java/com/scottsdaleair/view/POS2fxml.fxml").toURI().toURL();
+    URL url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI().toURL();
     Parent root = fxmlLoader.load(url);
 
     primaryStage.setTitle("POS2 - Scottsdale Airport");
