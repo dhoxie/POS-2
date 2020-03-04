@@ -15,9 +15,11 @@ public class App {
   	for(Invoice tmp  :  large){
   		count++;
   		new PDFInvoice(tmp).start();
-  		if(count >= 100){
+  		/*if(count  >= 2 ){
   			break;
   		}
+  		*/
+
   	}
   	
   	//new PDFInvoice(Invoice.getFromDb("79136944")).start();

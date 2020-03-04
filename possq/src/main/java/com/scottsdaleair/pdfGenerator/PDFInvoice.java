@@ -30,6 +30,7 @@ public class PDFInvoice {
     private Vehicle theVehicle;
     private  Document theDocument;
     private PdfDocument pdf;
+    private Table pTable;
     public PDFInvoice(Invoice theInvoice){
         this.theInvoice = theInvoice;
         theCust = Customer.getFromDb(theInvoice.getCustomerID());
@@ -53,10 +54,13 @@ public class PDFInvoice {
         createCustInfoHeader();
         createPartsAndPriceHeader();
         String [] theParts = theInvoice.getParts();
+        pTable = new Table((UnitValue.createPercentArray(new float[] {2,16,1,1,1,1})));
+        pTable.setWidthPercent(100);
         for(int i = 0 ; i < theInvoice.getParts().length ; i++){
             addPart(Part.getFromDb(theParts[i]));
             // need a way to get parts , service , Vehicle not just the primary keys of the data 
         }
+        theDocument.add(pTable);
         
         addNotesHeader();
         addNotes();
@@ -394,7 +398,9 @@ public class PDFInvoice {
     public Document createPartsAndPriceHeader(){
         Table bTable = new Table(1);
         Table table = new Table((UnitValue.createPercentArray(new float[] {2,16,1,1,1,1})));
+        //table.setWidthPercent(100);
         table.setFontSize(8);
+
         Cell topCell = new Cell(1,1)
                 .setBorder(new SolidBorder(1f))
                 .setBorderBottom(Border.NO_BORDER)
@@ -427,6 +433,7 @@ public class PDFInvoice {
         table.addCell(totalCell);
         theDocument.add(table);
         theDocument.add(bTable);
+        table.setWidthPercent(100);
         return theDocument;
 
     }
@@ -464,17 +471,18 @@ public class PDFInvoice {
      * @return the document for unit testing purposes
      */
     public Document addPart(Part toAdd){
-        Table table = new Table((UnitValue.createPercentArray(new float[] {2,16,1,1,1,1})));
-        table.setFontSize(6);
+        
+        //
+        pTable.setFontSize(8);
         
         
-        table.addCell(new Cell(1,1).add(new Paragraph(toAdd.getPartNum())));
-        table.addCell(new Cell(1,1).add(new Paragraph(toAdd.getVendor())));
-        table.addCell(new Cell(1,1).add(new Paragraph("inc")));
-        table.addCell(new Cell(1,1).add(new Paragraph(toAdd.getPrice())));
-        table.addCell(new Cell(1,1).add(new Paragraph("disco")));
-        table.addCell(new Cell(1,1).add(new Paragraph("total")));
-        theDocument.add(table);
+        pTable.addCell(new Cell(1,1).add(new Paragraph(toAdd.getPartNum())));
+        pTable.addCell(new Cell(1,1).add(new Paragraph(toAdd.getVendor())));
+        pTable.addCell(new Cell(1,1).add(new Paragraph("inc")));
+        pTable.addCell(new Cell(1,1).add(new Paragraph(toAdd.getPrice())));
+        pTable.addCell(new Cell(1,1).add(new Paragraph("disco")));
+        pTable.addCell(new Cell(1,1).add(new Paragraph("total")));
+
         return theDocument;
     }
     public void addTotalSection(){
