@@ -1,5 +1,6 @@
 package com.scottsdaleair.controller;
 
+import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.pdfGenerator.PDFInvoice;
 import javafx.event.*;
@@ -11,6 +12,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.net.URL;
+import java.awt.Desktop;
 
 public class POS2controller {
 
@@ -71,6 +73,8 @@ public class POS2controller {
     @FXML
     private TextArea txt_PrivateNotes;
     @FXML
+    private TextField txt_InvoiceNum;
+    @FXML
     private Button btn_GenPDF;
 
 
@@ -109,8 +113,29 @@ public class POS2controller {
 
     @FXML
     private void genPDF(ActionEvent event) throws Exception{
-        //79136944
-        new PDFInvoice(Invoice.getFromDb("43618446")).start();
+        //43618446
+        String invoiceNum = txt_InvoiceNum.getText();
+        Invoice invoice = Invoice.getFromDb(invoiceNum);
+        Customer cust = Customer.getFromDb(invoice.getCustomerID());
+        try {
+            //
+            if (invoiceNum != null) {
+                new PDFInvoice(invoice).start();
+                File inv = new File(invoice.getId() + cust.getFname() + cust.getLname() + ".pdf");
+                if (inv.exists()) {
+                    if (Desktop.isDesktopSupported()) {
+                        Desktop.getDesktop().open(inv);
+                    } else {
+                        System.out.println("Desktop not supported");
+                    }
+                }
+            } else {
+                System.out.println("No Invoice Num");
+            }
+        }
+        catch(Throwable e) {
+            System.out.println("Caught");
+        }
 
     }
 
