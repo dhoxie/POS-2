@@ -10,4 +10,5 @@ tmp/
 .launch
 .settings/
 .idea/
-.project
+.project/
+.DS_Store

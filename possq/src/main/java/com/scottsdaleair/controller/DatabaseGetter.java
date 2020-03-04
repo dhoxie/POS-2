@@ -10,7 +10,14 @@ public class DatabaseGetter {
     }
 
     public static Invoice[] getAllInvoices() {
-        return (Invoice[])DatabaseUtils.getEntireCollection("invoices", Invoice.class);
+        Object [] tmp = DatabaseUtils.getEntireCollection("invoices", Invoice.class);
+        Invoice [] rv = new Invoice[tmp.length]; 
+        int i = 0;
+        for(Object tmp2 : tmp ){
+            rv[i] = (Invoice) tmp2;
+            i++;
+        }
+        return rv;
     }
 
     public Customer[] queryCustomers(String key, String value) {

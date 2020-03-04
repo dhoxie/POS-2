@@ -14,7 +14,7 @@ import org.bson.Document;
 
 public class DatabaseUtils {
 
-  private static final String dbAddr = "localhost";
+  private static final String dbAddr = "73.42.132.222";
   private static final int dbPort = 27017;
   public static final String dbName = "userdat";
 
