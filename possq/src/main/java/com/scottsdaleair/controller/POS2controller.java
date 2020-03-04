@@ -1,5 +1,7 @@
 package com.scottsdaleair.controller;
 
+import com.scottsdaleair.data.Invoice;
+import com.scottsdaleair.pdfGenerator.PDFInvoice;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
@@ -108,7 +110,7 @@ public class POS2controller {
     @FXML
     private void genPDF(ActionEvent event) throws Exception{
         //79136944
-        //new PDFInvoice("79136944").start();
+        new PDFInvoice(Invoice.getFromDb("79136944")).start();
 
     }
 
