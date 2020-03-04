@@ -68,6 +68,8 @@ public class POS2controller {
     private TextField txt_WorkSearch;
     @FXML
     private TextArea txt_PrivateNotes;
+    @FXML
+    private Button btn_GenPDF;
 
 
 
@@ -98,6 +100,16 @@ public class POS2controller {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+
+
+
+    @FXML
+    private void genPDF(ActionEvent event) throws Exception{
+        //79136944
+        //new PDFInvoice("79136944").start();
+
     }
 
 
