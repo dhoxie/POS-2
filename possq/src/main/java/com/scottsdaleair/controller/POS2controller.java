@@ -110,7 +110,7 @@ public class POS2controller {
     @FXML
     private void genPDF(ActionEvent event) throws Exception{
         //79136944
-        new PDFInvoice(Invoice.getFromDb("79136944")).start();
+        new PDFInvoice(Invoice.getFromDb("43618446")).start();
 
     }
 

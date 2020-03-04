@@ -7,35 +7,32 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
+<?import java.net.URL?>
 <VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scottsdaleair.controller.POS2controller">
+    <stylesheets>
+        <URL value="@css/default.css" />
+    </stylesheets>
+
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
-        <AnchorPane layoutX="-1.0" minHeight="0.0" minWidth="0.0" prefHeight="800.0" prefWidth="266.0" style="-fx-background-color: #1E703A;">
-            <Button fx:id="btn_POS_NAV" layoutX="1.0" layoutY="226.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: #F1F0F2;" text="Point of Sale" textFill="#1e703a">
+        <AnchorPane fx:id="pane_Nav" layoutX="-1.0" minHeight="0.0" minWidth="0.0">
+            <Button styleClass="navButton" fx:id="btn_POS_NAV" layoutX="1.0" layoutY="226.0" mnemonicParsing="false" onAction="#changeScene" text="Point of Sale"/>
+            <Button styleClass="navButton" fx:id="btn_Customers_NAV" layoutX="1.0" layoutY="285.0" mnemonicParsing="false" onAction="#changeScene" text="Customers"/>
+            <Button styleClass="navButton" fx:id="btn_Inventory_NAV" layoutX="1.0" layoutY="342.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Inventory" textFill="WHITE">
                 <font>
                     <Font size="24.0" />
                 </font>
             </Button>
-            <Button fx:id="btn_Customers_NAV" layoutX="1.0" layoutY="285.0" mnemonicParsing="false" onAction="#changeScene" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Customers" textFill="WHITE">
+            <Button styleClass="navButton" fx:id="btn_Calendar_NAV" layoutX="1.0" layoutY="400.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Calendar" textFill="WHITE">
                 <font>
                     <Font size="24.0" />
                 </font>
             </Button>
-            <Button fx:id="btn_Inventory_NAV" layoutX="1.0" layoutY="342.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Inventory" textFill="WHITE">
+            <Button styleClass="navButton" fx:id="btn_Reports_NAV" layoutX="1.0" layoutY="460.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE">
                 <font>
                     <Font size="24.0" />
                 </font>
             </Button>
-            <Button fx:id="btn_Calendar_NAV" layoutX="1.0" layoutY="400.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Calendar" textFill="WHITE">
-                <font>
-                    <Font size="24.0" />
-                </font>
-            </Button>
-            <Button fx:id="btn_Reports_NAV" layoutX="1.0" layoutY="460.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Reports" textFill="WHITE">
-                <font>
-                    <Font size="24.0" />
-                </font>
-            </Button>
-            <Button layoutX="1.0" layoutY="725.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Settings" textFill="WHITE">
+            <Button styleClass="navButton" fx:id="btn_Settings_NAV" layoutX="1.0" layoutY="725.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" text="Settings" textFill="WHITE">
                 <font>
                     <Font size="20.0" />
                 </font>

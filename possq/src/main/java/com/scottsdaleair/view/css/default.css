@@ -1,0 +1,33 @@
+:root {
+	-fx-color-green: #1E703A;
+	-fx-color-gray: #F1F0F2;
+	-color-dark: #000000;
+	-fx-color-light: #FFFFFF;
+	-font-primary: "PT Sans";
+	-font-secondary: "Lato";
+}
+
+
+
+
+/* ----------------- N A V ----------------- */
+#pane_Nav {
+    -fx-prefHeight: 800;
+    -fx-prefWidth: 266;
+    -fx-background-color: #1E703A;
+    -fx-font-size: 24;
+}
+
+.navButton {
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: none;
+    -fx-prefWidth: 266;
+    -fx-prefHeight: 51;
+}
+
+.navButton:hover,
+.navButton:active,
+.navButton:focus {
+    -fx-text-fill: #1E703A;
+    -fx-background-color: #F1F0F2;
+}
