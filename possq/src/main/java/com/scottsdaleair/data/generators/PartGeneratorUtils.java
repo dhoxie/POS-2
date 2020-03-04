@@ -2,26 +2,11 @@ package com.scottsdaleair.data.generators;
 
 import com.scottsdaleair.utils.DatabaseUtils;
 import com.scottsdaleair.data.Part;
+import static com.scottsdaleair.data.generators.GeneratorData.*;
 
 import java.util.Random;
 
 public class PartGeneratorUtils {
-
-  private static final String[] partVendors = {
-    "Visteon",
-    "Tenneco",
-    "Lear",
-    "BorgWarner",
-    "Goodyear",
-    "Honeywell",
-    "Champion",
-    "Autolite",
-    "Dura",
-    "Tenneco",
-    "Hurst",
-    "GM"
-  };
-
   /**
    * Creates a randomly generated part.
    * @return  A {@code Part}
@@ -35,10 +20,10 @@ public class PartGeneratorUtils {
     savePart(partRet);
     return partRet;
   }
-  
+
   private static String generateVendorID() {
-    int vendorID = new Random().nextInt(partVendors.length);
-    return partVendors[vendorID];
+    int vendorID = new Random().nextInt(PART_VENDORS.length);
+    return PART_VENDORS[vendorID];
   }
 
   /**

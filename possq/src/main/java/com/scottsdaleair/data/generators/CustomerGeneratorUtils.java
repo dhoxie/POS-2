@@ -2,292 +2,11 @@ package com.scottsdaleair.data.generators;
 
 import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.PhoneNumber;
+import static com.scottsdaleair.data.generators.GeneratorData.*;
 
 import java.util.Random;
 
 public class CustomerGeneratorUtils {
-
-  static final String[] firstNames = {
-    "James",
-    "John",
-    "Robert",
-    "Michael",
-    "William",
-    "David",
-    "Richard",
-    "Joseph",
-    "Thomas",
-    "Charles",
-    "Christopher",
-    "Daniel",
-    "Matthew",
-    "Anthony",
-    "Donald",
-    "Spencer",
-    "Luke",
-    "Tom",
-    "Stu",
-    "Stuart",
-    "Brian",
-    "Bojin",
-    "Mary",
-    "Patricia",
-    "Jennifer",
-    "Linda",
-    "Elizabeth",
-    "Barbara",
-    "Susan",
-    "Jessica",
-    "Sarah",
-    "Karen",
-    "Nancy",
-    "Margaret",
-    "Lisa",
-    "Betty",
-    "Dorothy",
-    "Daylyn",
-    "Kayla",
-    "Carol",
-    "Chris",
-    "Bernie",
-    "Kevin",
-    "Tony",
-    "The Donald",
-    "Sherlock",
-    "Watson",
-    "Grace",
-    "Ada",
-    "Alan",
-    "Adam",
-    "Miranda",
-    "Jim",
-    "Shannon",
-    "Paige",
-    "Isadora",
-    "Tyler",
-    "Gavin",
-    "Julie",
-    "Darrin",
-    "Paul",
-    "Kelci",
-    "Erik",
-    "Shellie",
-    "Kiara",
-    "Steve",
-    "Bjarne",
-    "Linus",
-    "Elon",
-    "Tony",
-    "Bruce",
-    "Nikola",
-    "Isaac",
-    "Edsger"
-  };
-
-  static final String[] lastaNames = {
-    "Smith",
-    "Johnson",
-    "Williams",
-    "Jones",
-    "Brown",
-    "Davis",
-    "Miller",
-    "Wilson",
-    "Moore",
-    "Taylor",
-    "Anderson",
-    "Hall",
-    "Allen",
-    "Young",
-    "Hernandez",
-    "King",
-    "Wright",
-    "Lopez",
-    "Hill",
-    "Scott",
-    "Green",
-    "Adams",
-    "Lambert",
-    "Hoxie",
-    "Curley",
-    "Mattfeld",
-    "Steiner",
-    "Capaul",
-    "Kamp",
-    "Xu",
-    "Taylor",
-    "Peters",
-    "Trump",
-    "Sanders",
-    "Mullins",
-    "Tian",
-    "Holmes",
-    "Watson",
-    "Hopper",
-    "Lovelace",
-    "Turing",
-    "Jobs",
-    "Stroustrup",
-    "Torvalds",
-    "Schimpf",
-    "Musk",
-    "Stark",
-    "Banner",
-    "Tesla",
-    "Newton",
-    "Dijkstra",
-  };
-
-  private static final String[] emailHosts = {
-    "gmail.com",
-    "yahoo.com",
-    "comcast.net",
-    "msn.com",
-    "att.net",
-    "me.com",
-    "mac.com",
-    "verizon.net",
-    "live.com",
-    "hotmail.com",
-    "outlook.com",
-    "aol.com",
-    "icloud.com",
-    "yahoo.ca"
-  };
-
-  private static final String[] unames = {
-    "2freeny",
-    "insterts",
-    "jeansom",
-    "midnighttrust",
-    "proudmusic",
-    "termergy",
-    "readerooks",
-    "astati",
-    "mjas",
-    "mr.mister",
-    "dollface",
-    "atragent",
-    "relaissareh"
-  };
-
-  private static final String[] phoneNumNames = {
-    "home",
-    "cel",
-    "work"
-  };
-
-  public static final String[] streetNames = {
-    "Dogwood",
-    "Airport",
-    "Park",
-    "Maple",
-    "Aspen",
-    "Hickory",
-    "Washington",
-    "Country Line",
-    "Walnut",
-    "Kansas",
-    "Sunset",
-    "Spruce",
-    "Highland",
-    "Pleasent",
-    "Hillside",
-    "Country Homes"
-  };
-
-  public static final String[] streetTypes = {
-    "Ave.",
-    "St.",
-    "Blvd.",
-    "Ln.",
-    "Ct.",
-    "Dr."
-  };
-
-  public static final String[] streetDirs = {
-    "N",
-    "S",
-    "E",
-    "W",
-    "NE",
-    "NW",
-    "SE",
-    "SW"
-  };
-
-  public static final String[][] cities = {
-    {
-      // Washington Cities
-      "Seattle",
-      "Vancouver",
-      "Spokane",
-      "Tacoma",
-      "Bellvue",
-      "Olympia",
-      "Everett",
-      "Bellingham",
-      "Yakima",
-      "Redmond",
-      "Puyallup",
-      "Renton",
-      "Kennewick",
-      "Richland",
-      "Auburn",
-      "Wenatchee",
-      "Tri-Cities",
-      "Mead",
-      "Cheney",
-      "Spokane Valley",
-      "Millwood",
-      "Liberty Lake",
-      "Spokane Valley",
-      "Four Lakes"
-    },
-    {
-      // Idaho cities
-      "Boise",
-      "Idaho Falls",
-      "Coeur d'Alene",
-      "Twin Falls",
-      "Nampa",
-      "Meridian",
-      "Lewiston",
-      "Moscow",
-      "Sandpoint"
-    },
-    {
-      // Montana Cities
-      "Billings",
-      "Bozeman",
-      "Missoula",
-      "Great Falls",
-      "Kalispell",
-      "Butte",
-      "Whitefish"
-    },
-    {
-      // Oregon Cities
-      "Portland",
-      "Salem",
-      "Eugene",
-      "Bend",
-      "Medford",
-      "Beaverton",
-      "Corvallis",
-      "Hillsboro",
-      "Albany",
-      "Ashland"
-    }
-  };
-
-  public static final String[] states = {
-    "WA",
-    "ID",
-    "MT",
-    "OR"
-  };
-
 
   /**
    * Creates a randomly generated customer.
@@ -310,18 +29,18 @@ public class CustomerGeneratorUtils {
   }
 
   private static String generateFirstName() {
-    final int randFirstName = new Random().nextInt(firstNames.length);
-    return firstNames[randFirstName];
+    final int randFirstName = new Random().nextInt(FIRST_NAMES.length);
+    return FIRST_NAMES[randFirstName];
   }
 
   private static String generateLastName() {
-    final int randLastName = new Random().nextInt(lastaNames.length);
-    return lastaNames[randLastName];
+    final int randLastName = new Random().nextInt(LAST_NAMES.length);
+    return LAST_NAMES[randLastName];
   }
 
   private static String generateEmail(final String firstname, final String lastname) {
     Random rand = new Random();
-    final int randEmailHost = rand.nextInt(emailHosts.length);
+    final int randEmailHost = rand.nextInt(EMAIL_HOSTS.length);
     final boolean beginningNums = rand.nextInt(10) < 3;
     final boolean useFname = rand.nextInt(2) < 1;
     final boolean useLname = rand.nextInt(10) < 2;
@@ -340,11 +59,11 @@ public class CustomerGeneratorUtils {
         email += firstname.toLowerCase();
       }
     } else {
-      int randUname = rand.nextInt(unames.length);
-      email += unames[randUname];
+      int randUname = rand.nextInt(UNAMES.length);
+      email += UNAMES[randUname];
       if (rand.nextInt(3) < 1) {
-        int randUname2 = rand.nextInt(unames.length);
-        email += unames[randUname2];
+        int randUname2 = rand.nextInt(UNAMES.length);
+        email += UNAMES[randUname2];
       }
     }
     if (useLname) {
@@ -360,7 +79,7 @@ public class CustomerGeneratorUtils {
     }
 
 
-    email += "@" + emailHosts[randEmailHost];
+    email += "@" + EMAIL_HOSTS[randEmailHost];
     return email;
   }
 
@@ -377,7 +96,7 @@ public class CustomerGeneratorUtils {
     }
     num = "(" + areaCode + ")";
     num += " " + preNum + "-" + postNum;
-    String name = phoneNumNames[rand.nextInt(phoneNumNames.length)];
+    String name = PHONE_NAMES[rand.nextInt(PHONE_NAMES.length)];
     return new PhoneNumber(name, num);
   }
 
@@ -395,20 +114,20 @@ public class CustomerGeneratorUtils {
     String addr = "";
     int addrNum = rand.nextInt(100000);
     int randPostCode = rand.nextInt(90000) + 10000;
-    int randStreet = rand.nextInt(streetNames.length);
-    int randStreetType = rand.nextInt(streetTypes.length);
-    int randState = rand.nextInt(states.length);
-    int randCity = rand.nextInt(cities[randState].length);
+    int randStreet = rand.nextInt(STREET_NAMES.length);
+    int randStreetType = rand.nextInt(STREET_TYPES.length);
+    int randState = rand.nextInt(STATES.length);
+    int randCity = rand.nextInt(CITIES[randState].length);
     addr = addrNum + "";
 
     boolean streeHasDir = rand.nextInt(10) < 4;
     if (streeHasDir) {
-      addr += " " + streetDirs[rand.nextInt(streetDirs.length)];
+      addr += " " + STREET_DIRS[rand.nextInt(STREET_DIRS.length)];
     }
-    addr += " " + streetNames[randStreet]
-        + " " + streetTypes[randStreetType]
-        + " " + cities[randState][randCity]
-        + ", " + states[randState]
+    addr += " " + STREET_NAMES[randStreet]
+        + " " + STREET_TYPES[randStreetType]
+        + " " + CITIES[randState][randCity]
+        + ", " + STATES[randState]
         + " " + randPostCode;
     return addr;
   }
