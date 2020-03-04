@@ -149,7 +149,7 @@ public final class GeneratorData {
         "outlook.com",
         "aol.com",
         "icloud.com",
-
+        "eagles.ewu.edu"
     };
 
     public static final String[] PHONE_NAMES = {
@@ -190,7 +190,35 @@ public final class GeneratorData {
         "Highland",
         "Pleasent",
         "Hillside",
-        "Country Homes"
+        "Country Homes",
+        "This",
+        "That",
+        "The Other",
+        "Wallaby",
+        "Zzwzx",
+        "Frying Pan",
+        "Meth Bible Camp",
+        "Old Trashpile",
+        "Hard To Find",
+        "Stubtoe",
+        "Buttle",
+        "Hanky Panky",
+        "Bathtub",
+        "Yellow Snow",
+        "Peepee Falls",
+        "Goa",
+        "Lizard Lick",
+        "Bear Bottom",
+        "Billy Goat Strut",
+        "Bucket of Blood",
+        "Noname",
+        "Live Long",
+        "Memory",
+        "North Sandwitch",
+        "Shades of Death",
+        "Blueball",
+        "Titman",
+        ""
     };
 
     public static final String[] STREET_TYPES = {
@@ -199,7 +227,9 @@ public final class GeneratorData {
         "Blvd.",
         "Ln.",
         "Ct.",
-        "Dr."
+        "Dr.",
+        "Way",
+        "Row"
     };
 
     public static final String[] STREET_DIRS = {
@@ -217,7 +247,15 @@ public final class GeneratorData {
         "WA",
         "ID",
         "MT",
-        "OR"
+        "OR",
+        "AZ",
+        "WS",
+        "OH",
+        "AR",
+        "TX",
+        "VA",
+        "EWU",
+        "0,0"
     };
 
     public static final String[][] CITIES = {
@@ -246,7 +284,8 @@ public final class GeneratorData {
             "Millwood",
             "Liberty Lake",
             "Spokane Valley",
-            "Four Lakes"
+            "Four Lakes",
+            "Swede Heaven"
           },
           {
             // Idaho cities
@@ -281,7 +320,60 @@ public final class GeneratorData {
             "Corvallis",
             "Hillsboro",
             "Albany",
-            "Ashland"
+            "Ashland",
+            "Boring",
+            "Idiotville",
+            "Drain",
+            "Remote",
+            "Riddle",
+            "Brothers/Sisters",
+            "Zigzag"
+          },
+          {
+            // Arizona Cities
+            "Scottsdale",
+            "Lake Havasu City",
+            "Catfish Paradise",
+            "Why"
+          },
+          {
+            // Wisconsin Cities
+            "Iamalone",
+            "Madison",
+            "Milwaukee"
+          },
+          {
+            // Ohio Cities
+            "Pee Pee Township",
+            "Knockemstiff"
+          },
+          {
+            // Arkansas Cities
+            "Possum Grape"
+          },
+          {
+            // Texas Cities
+            "Ding-Dong",
+            "Cut 'n Shoot",
+            "Noodle",
+            "Oatmeal",
+            "Happy",
+            "Nemo",
+            "Earth"
+          },
+          {
+            //Virginia Cities
+            "Onancock"
+          },
+          {
+            // EWU 'cities'
+            "Happy Stu Land",
+            "Ima Giver",
+            "Trus-teur coed"
+          },
+          {
+            // Null city
+            "Null Island"
           }
     };
 
@@ -311,7 +403,15 @@ public final class GeneratorData {
       "Hyundai",
       "Suzuki",
       "Nissan",
-      "Tesla"
+      "Tesla",
+      "Dodge",
+      "Land Rover",
+      "Isuzu",
+      "Kia",
+      "Subaru",
+      "Mazda",
+      "Mitsubishi",
+      "Volugrafo"
     };
 
     public static final String[][] MODELS = {
@@ -334,9 +434,8 @@ public final class GeneratorData {
         "CR-V",
         "Accord",
         "HR-V",
-        "Odyssey",
-        "Insight",
-        "Pilot"
+        "That's",
+        "Life Dunk"
       },
       {
         // Toyota MODELS
@@ -349,7 +448,8 @@ public final class GeneratorData {
         "Yaris",
         "Supra",
         "Tacoma",
-        "4Runner"
+        "4Runner",
+        "Sienna"
       },
       {
         // Ford MODELS
@@ -357,12 +457,16 @@ public final class GeneratorData {
         "Fiesta",
         "Explorer",
         "Ranger",
+        "F-69",
         "F-150",
         "F-250",
         "F-350",
         "F-420", // The best Ford pickup
         "Escape",
-        "Expedition"
+        "Expedition",
+        "Edge",
+        "Fusion",
+        "Focus"
       },
       {
         // BMW MODELS
@@ -429,7 +533,8 @@ public final class GeneratorData {
         "Murano",
         "Maxima",
         "Titan",
-        "NV"
+        "NV",
+        "Friend-Me"
       },
       {
         // Tesla MODELS
@@ -440,6 +545,43 @@ public final class GeneratorData {
         "Model 3",
         "Model X",
         "Model Y"
+      },
+      {
+        // Dodge MODELS
+        "Dart",
+        "Ram",
+      },
+      {
+        // Land Rover MODELS
+        "Range Rover Evoque 2.0 TD4 E-capability 4x4 HSE Dynamic"
+      },
+      {
+        // Isuzu MODELS
+        "Mysterious Utility Wizard",
+        "GIGA 20 Light Dump"
+      },
+      {
+        // Kia MODELS
+        "Cee'd"
+      },
+      {
+        // Subaru MODELS
+        "Gravel Express"
+      },
+      {
+        // Mazda MODELS
+        "Scrum Wagon",
+        "Bongo Friendee",
+        "Carol Me Lady"
+      },
+      {
+        //Mitsubishi MODELS
+        "Lettuce",
+        "Mini Active Urban Sandal"
+      },
+      {
+        // Volugrafo MODELS
+        "Bimbo"
       }
     };
 
