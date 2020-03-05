@@ -16,7 +16,7 @@ public class VehicleGeneratorUtils {
     final String[] makeModel = generateMakeModel();
     final String make = makeModel[0];
     final String model = makeModel[1];
-    final String year = (new Random().nextInt(100) + 1920) + "";
+    final String year = (new Random().nextInt(200) + 1920) + "";
     final String plate = LicensePlate.generateLicensePlate();
     final String mileage = (new Random().nextInt(400000) + 1000) + "";
     String motor = "";
@@ -26,7 +26,7 @@ public class VehicleGeneratorUtils {
       motor = generateMotor();
     }
     final String vin = VinGeneratorUtils.getRandomVin();
-    final String comments = "Vehicular commentary";
+    final String comments = VEHICLE_COMMENTS[new Random().nextInt(VEHICLE_COMMENTS.length)];
 
     return new Vehicle(make, model, year, plate, mileage, motor, vin, comments);
   }

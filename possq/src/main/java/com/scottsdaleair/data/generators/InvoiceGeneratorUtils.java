@@ -2,13 +2,14 @@ package com.scottsdaleair.data.generators;
 
 import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.data.generators.PartGeneratorUtils;
+import static com.scottsdaleair.data.generators.GeneratorData.*;
 
 import java.util.Random;
 
 public class InvoiceGeneratorUtils {
   /**
    * Creates a randomly generated invoice.
-   * 
+   *
    * @param customerID The ID of the customer associated with this invoice
    * @param vin        The ID of the car associated with this invoice
    * @return
@@ -21,8 +22,8 @@ public class InvoiceGeneratorUtils {
     for (int x = 0; x < partCount; x++) {
       parts[x] = PartGeneratorUtils.createTestPart().getPartNum();
     }
-    String pubNotes = "A very public note";
-    String privNotes = "A super secret note";
+    String pubNotes = CUSTOMER_COMMENTS[new Random().nextInt(CUSTOMER_COMMENTS.length)];
+    String privNotes = CUSTOMER_COMMENTS_PRIV[new Random().nextInt(CUSTOMER_COMMENTS_PRIV.length)];;
     return new Invoice(invoiceNum, date, customerID, vin, parts, null, null, pubNotes, privNotes);
   }
 
