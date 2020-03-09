@@ -12,8 +12,8 @@
 
 /* ----------------- N A V ----------------- */
 #pane_Nav {
-    -fx-prefHeight: 800;
-    -fx-prefWidth: 266;
+    -fx-pref-height: 800;
+    -fx-pref-width: 266;
     -fx-background-color: #1E703A;
     -fx-font-size: 24;
 }
@@ -21,8 +21,8 @@
 .navButton {
     -fx-text-fill: #FFFFFF;
     -fx-background-color: none;
-    -fx-prefWidth: 266;
-    -fx-prefHeight: 51;
+    -fx-pref-width: 266;
+    -fx-pref-height: 51;
 }
 
 .navButton:hover,

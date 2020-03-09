@@ -113,7 +113,7 @@ public class POS2controller {
 
     @FXML
     private void genPDF(ActionEvent event) throws Exception{
-        //43618446
+        //122125
         String invoiceNum = txt_InvoiceNum.getText();
         Invoice invoice = Invoice.getFromDb(invoiceNum);
         Customer cust = Customer.getFromDb(invoice.getCustomerID());
