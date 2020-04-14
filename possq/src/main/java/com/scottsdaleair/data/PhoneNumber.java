@@ -14,6 +14,16 @@ public class PhoneNumber {
     this.num = num;
   }
 
+  public PhoneNumber name(String name) {
+    this.name = name;
+    return this;
+  }
+
+  public PhoneNumber num(String num) {
+    this.num = num;
+    return this;
+  }
+
   public PhoneNumber parsePhoneNumber(String number) {
     return null;
   }
@@ -34,15 +44,7 @@ public class PhoneNumber {
     this.num = num;
   }
 
-  public PhoneNumber name(String name) {
-    this.name = name;
-    return this;
-  }
 
-  public PhoneNumber num(String num) {
-    this.num = num;
-    return this;
-  }
 
   @Override
   public boolean equals(Object o) {
@@ -63,7 +65,7 @@ public class PhoneNumber {
 
   @Override
   public String toString() {
-    return "{" + " name='" + getName() + "'" + ", num='" + getNum() + "'" + "}";
+    return "{" + "name='" + getName() + "'" + ", num='" + getNum() + "'" + "}";
   }
 
 }
