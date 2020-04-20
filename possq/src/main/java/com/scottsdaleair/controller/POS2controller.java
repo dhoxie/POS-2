@@ -3,6 +3,8 @@ package com.scottsdaleair.controller;
 import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.pdfGenerator.PDFInvoice;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
@@ -41,7 +43,7 @@ public class POS2controller {
     @FXML
     private Button btn_SearchCustomers;
     @FXML
-    private TableView<?> tbl_CustomerResults;
+    private TableView<ObservableList> tbl_CustomerResults;
 
 
 
@@ -82,6 +84,8 @@ public class POS2controller {
 
 
     // -------------- M E T H O D S --------------
+
+    // Scene Changing
     @FXML
     private void changeScene (ActionEvent event) throws Exception {
         Stage stage;
@@ -110,10 +114,10 @@ public class POS2controller {
 
 
 
-
+    // PDF Generation Method
     @FXML
     private void genPDF(ActionEvent event) throws Exception{
-        //43618446
+        //122125
         String invoiceNum = txt_InvoiceNum.getText();
         Invoice invoice = Invoice.getFromDb(invoiceNum);
         Customer cust = Customer.getFromDb(invoice.getCustomerID());
@@ -136,8 +140,34 @@ public class POS2controller {
         catch(Throwable e) {
             System.out.println("Caught");
         }
-
     }
 
+
+    // Add Customers to table ----- Refactor this later for more versatility.  Works for basic data testing though
+    @FXML
+    private void buildData(){
+
+
+        //call DatabaseGetter.java for those utils
+        Customer[] customers = DatabaseGetter.getAllCustomers();
+        System.out.println("In buildData");
+        /*ObservableList<ObservableList> data = FXCollections.observableArrayList();
+
+        //Adding data
+        int rows = 8;
+        int cur = 0;
+        while(cur != rows){
+            ObservableList<String> row = FXCollections.observableArrayList();
+            row.add(customers[cur].getFname());
+            row.add(customers[cur].getLname());
+            row.add(customers[cur].getAddress());
+            row.add(customers[cur].getPhone().toString());
+            System.out.println("Row " + cur + " added");
+            data.add(row);
+        }
+
+        tbl_CustomerResults.setItems(data);
+        */
+    }
 
 }
