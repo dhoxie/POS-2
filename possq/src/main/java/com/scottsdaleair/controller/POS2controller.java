@@ -146,28 +146,28 @@ public class POS2controller {
     // Add Customers to table ----- Refactor this later for more versatility.  Works for basic data testing though
     @FXML
     private void buildData(){
-
-
         //call DatabaseGetter.java for those utils
         Customer[] customers = DatabaseGetter.getAllCustomers();
         System.out.println("In buildData");
-        /*ObservableList<ObservableList> data = FXCollections.observableArrayList();
+        ObservableList<ObservableList> data = FXCollections.observableArrayList();
 
         //Adding data
-        int rows = 8;
+        int rows = 8/*23*/;
         int cur = 0;
         while(cur != rows){
             ObservableList<String> row = FXCollections.observableArrayList();
             row.add(customers[cur].getFname());
             row.add(customers[cur].getLname());
             row.add(customers[cur].getAddress());
-            row.add(customers[cur].getPhone().toString());
+            row.add(customers[cur].getPhone().toString()); //fix issue of not showing getNum for some reason
+
+            tbl_CustomerResults.getItems().add(row);
             System.out.println("Row " + cur + " added");
-            data.add(row);
+            //data.add(row);
+            cur++;
         }
 
-        tbl_CustomerResults.setItems(data);
-        */
+        //tbl_CustomerResults.setItems(data);
     }
 
 }
