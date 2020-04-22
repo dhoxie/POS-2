@@ -1,6 +1,5 @@
 package com.scottsdaleair.data;
 
-import com.scottsdaleair.data.PhoneNumber;
 import com.scottsdaleair.utils.DatabaseUtils;
 
 import java.util.Objects;

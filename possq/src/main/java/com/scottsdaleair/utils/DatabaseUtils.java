@@ -65,7 +65,8 @@ public class DatabaseUtils {
     addObjToCollection(collection, obj);
   }
 
-  private static Object[] searchCollection(MongoCollection<Document> collection, String key, String value, Type t) {
+  private static Object[] searchCollection(MongoCollection<Document> collection,
+      String key, String value, Type t) {
     Gson gson = new Gson();
     Document match = new Document(key, value);
     FindIterable<Document> results = collection.find(match);
@@ -95,7 +96,8 @@ public class DatabaseUtils {
    * @param t              Type of object returned
    * @return Object[] containing search results
    */
-  public static Object[] getFromCollection(String collectionName, String key, String value, Type t) {
+  public static Object[] getFromCollection(String collectionName,
+      String key, String value, Type t) {
 
     return getFromDb(DatabaseUtils.dbName, collectionName, key, value, t);
   }
@@ -113,7 +115,8 @@ public class DatabaseUtils {
     return retrieveCollection(collection, t);
   }
 
-  private static Object[] getFromDb(String dbname, String collectionName, String key, String value, Type t) {
+  private static Object[] getFromDb(String dbname,
+      String collectionName, String key, String value, Type t) {
     MongoDatabase database = DatabaseUtils.client.getDatabase(dbname);
     MongoCollection<Document> collection = database.getCollection(collectionName);
     return searchCollection(collection, key, value, t);

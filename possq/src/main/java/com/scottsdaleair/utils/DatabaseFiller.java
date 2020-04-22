@@ -4,7 +4,6 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
 
 import com.scottsdaleair.data.Customer;
-import com.scottsdaleair.utils.DatabaseUtils;
 import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.data.Vehicle;
 import com.scottsdaleair.data.generators.CustomerGeneratorUtils;
@@ -20,7 +19,7 @@ import org.bson.Document;
 public class DatabaseFiller {
 
   /**
-   * Fills the database with data fitting a given number of customers
+   * Fills the database with data fitting a given number of customers.
    * @param customerCount  Number of customers to add
    */
   public static void fillDb(int customerCount) {

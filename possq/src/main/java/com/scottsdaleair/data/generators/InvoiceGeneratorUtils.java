@@ -1,7 +1,6 @@
 package com.scottsdaleair.data.generators;
 
 import com.scottsdaleair.data.Invoice;
-import com.scottsdaleair.data.generators.PartGeneratorUtils;
 
 import java.util.Random;
 
