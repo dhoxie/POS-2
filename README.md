@@ -37,7 +37,7 @@ New branches should be created with the following name format:
 
 Where `<group_tag>` is as defined below,
 `<issue_num>` is the issue number associated with this branch,
-and `<name>` is concise, descriptive title for the branch.
+and `<name>` is the concise, descriptive title for the branch.
 
 Groups:
 | Group tag | Description      |
