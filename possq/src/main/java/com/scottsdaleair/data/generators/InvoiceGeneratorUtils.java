@@ -1,7 +1,6 @@
 package com.scottsdaleair.data.generators;
 
 import com.scottsdaleair.data.Invoice;
-import com.scottsdaleair.data.generators.PartGeneratorUtils;
 
 import java.util.Random;
 
@@ -19,7 +18,7 @@ public class InvoiceGeneratorUtils {
     int partCount = new Random().nextInt(10);
     String[] parts = new String[partCount];
     for (int x = 0; x < partCount; x++) {
-      parts[x] = PartGeneratorUtils.createTestPart().getPartNum();
+      parts[x] = PartGeneratorUtils.createTestPart().getPartID();
     }
     String pubNotes = "A very public note";
     String privNotes = "A super secret note";

@@ -23,7 +23,7 @@ public class PhoneNumberTest {
     }
 
     @Test
-    public void setNum_validInput_allValuesInstatiated(){
+    public void setNum_validInput_allValuesInstantiated(){
         PhoneNumber phoneNumber = new PhoneNumber("test", "test");
         phoneNumber.setNum("changed");
         boolean numChanged = phoneNumber.getNum().equals("changed");
