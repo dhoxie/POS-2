@@ -142,6 +142,11 @@ public class POS2controller {
         }
     }
 
+    @FXML
+    private void emailPDF(ActionEvent event) throws Exception{
+
+    }
+
 
     // Add Customers to table ----- Refactor this later for more versatility.  Works for basic data testing though
     @FXML
