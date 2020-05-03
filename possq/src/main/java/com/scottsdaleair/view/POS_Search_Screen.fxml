@@ -8,6 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
+
 <VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scottsdaleair.controller.Pos2controller">
     <stylesheets>
         <URL value="@css/default.css" />
@@ -17,26 +18,10 @@
         <AnchorPane fx:id="pane_Nav" layoutX="-1.0" minHeight="0.0" minWidth="0.0">
             <Button fx:id="btn_POS_NAV" layoutX="1.0" layoutY="226.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Point of Sale" />
             <Button fx:id="btn_Customers_NAV" layoutX="1.0" layoutY="285.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Customers" />
-            <Button fx:id="btn_Inventory_NAV" layoutX="1.0" layoutY="342.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" styleClass="navButton" text="Inventory" textFill="WHITE">
-                <font>
-                    <Font size="24.0" />
-                </font>
-            </Button>
-            <Button fx:id="btn_Calendar_NAV" layoutX="1.0" layoutY="400.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" styleClass="navButton" text="Calendar" textFill="WHITE">
-                <font>
-                    <Font size="24.0" />
-                </font>
-            </Button>
-            <Button fx:id="btn_Reports_NAV" layoutX="1.0" layoutY="460.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" styleClass="navButton" text="Reports" textFill="WHITE">
-                <font>
-                    <Font size="24.0" />
-                </font>
-            </Button>
-            <Button fx:id="btn_Settings_NAV" layoutX="1.0" layoutY="725.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="266.0" style="-fx-background-color: none;" styleClass="navButton" text="Settings" textFill="WHITE">
-                <font>
-                    <Font size="20.0" />
-                </font>
-            </Button>
+            <Button fx:id="btn_Inventory_NAV" layoutX="1.0" layoutY="342.0" mnemonicParsing="false" styleClass="navButton" text="Inventory" />
+            <Button fx:id="btn_Calendar_NAV" layoutX="1.0" layoutY="400.0" mnemonicParsing="false" styleClass="navButton" text="Calendar" />
+            <Button fx:id="btn_Reports_NAV" layoutX="1.0" layoutY="460.0" mnemonicParsing="false" styleClass="navButton" text="Reports" />
+            <Button fx:id="btn_Settings_NAV" layoutX="1.0" layoutY="725.0" mnemonicParsing="false" styleClass="navButton" text="Settings" />
             <ImageView fitHeight="79.0" fitWidth="247.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                 <image>
                     <Image url="@./imgs/1.PNG" />
@@ -232,11 +217,12 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Button fx:id="btn_GenPDF" layoutX="757.0" layoutY="299.0" mnemonicParsing="false" onAction="#genPDF" prefHeight="26.0" prefWidth="149.0" style="-fx-background-color: #1E703A;" text="Create PDF" textFill="WHITE">
+                <Button fx:id="btn_GenPDF" layoutX="757.0" layoutY="299.0" mnemonicParsing="false" onAction="#genPdf" prefHeight="26.0" prefWidth="149.0" style="-fx-background-color: #1E703A;" text="Create PDF" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>
                 </Button>
+            <Separator layoutX="15.0" layoutY="340.0" prefHeight="0.0" prefWidth="914.0" />
             </AnchorPane>
         </AnchorPane>
     </AnchorPane>
