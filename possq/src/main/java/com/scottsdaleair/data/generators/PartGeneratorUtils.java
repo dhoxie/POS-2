@@ -30,10 +30,23 @@ public class PartGeneratorUtils {
     String partNum = new Random().nextInt(1000000000) + "";
     String vendor = generateVendorID();
     int onHand = new Random().nextInt(50);
-    String price = "$" + new Random().nextInt(100) + "." + new Random().nextInt(99);
+    String price = GeneratorUtils.getPrice(100, 100);
     Part partRet = new Part(partNum, vendor, onHand, price);
     savePart(partRet);
     return partRet;
+  }
+
+  /**
+   * Creates a specific number of parts.
+   * @param partCount The number of parts to create
+   * @return A String array of part ids created
+   */
+  public static String[] createTestParts(int partCount) {
+    String[] parts = new String[partCount];
+    for (int x = 0; x < partCount; x++) {
+      parts[x] = createTestPart().getPartNum();
+    }
+    return parts;
   }
   
   private static String generateVendorID() {

@@ -1,7 +1,6 @@
 package com.scottsdaleair.data.generators;
 
 import com.scottsdaleair.data.Invoice;
-import com.scottsdaleair.data.generators.PartGeneratorUtils;
 
 import java.util.Random;
 
@@ -14,16 +13,16 @@ public class InvoiceGeneratorUtils {
    * @return
    */
   public static Invoice createTestInvoice(String customerID, String vin) {
-    String invoiceNum = new Random().nextInt(1000000000) + "";
+    Random rnd = new Random();
+    String invoiceNum = rnd.nextInt(1000000000) + "";
     String date = generateDate();
-    int partCount = new Random().nextInt(10);
-    String[] parts = new String[partCount];
-    for (int x = 0; x < partCount; x++) {
-      parts[x] = PartGeneratorUtils.createTestPart().getPartNum();
-    }
+    String[] parts = PartGeneratorUtils.createTestParts(rnd.nextInt(10));
+    String[] services = ServiceGenerator.createTestServices(rnd.nextInt(3));
+    String[] kits = KitGenerator.createTestServices(rnd.nextInt(1));
     String pubNotes = "A very public note";
     String privNotes = "A super secret note";
-    return new Invoice(invoiceNum, date, customerID, vin, parts, null, null, pubNotes, privNotes);
+    return new Invoice(invoiceNum, date, customerID, vin, parts, services,
+        kits, pubNotes, privNotes);
   }
 
   private static String generateDate() {
