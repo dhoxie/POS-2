@@ -38,9 +38,8 @@ public class DatabaseTest extends TestCase {
 
     @Test
     public void testQueryInvoices(){
-        Invoice[] someInvoices = DatabaseGetter.queryInvoices("id", "____");
-
-        assertTrue(someInvoices.length == 1 && someInvoices[0].getId() == "111"); //change id value to match
+        Invoice[] someInvoices = DatabaseGetter.queryInvoices("id", "497658563");
+        assertTrue(someInvoices.length == 1 && someInvoices[0].getId().equals("497658563"));
     }
 
     @Test
@@ -51,9 +50,8 @@ public class DatabaseTest extends TestCase {
 
     @Test
     public void testQueryKits(){
-        Kit[] someKits = DatabaseGetter.queryKits("id", "___");
-
-        assertTrue(someKits.length == 1 && someKits[0].getId() == "111"); //change id value to match
+        Kit[] someKits = DatabaseGetter.queryKits("id", "220839086");
+        assertTrue(someKits.length == 1 && someKits[0].getId().equals("220839086"));
     }
 
     @Test
@@ -64,9 +62,8 @@ public class DatabaseTest extends TestCase {
 
     @Test
     public void testQueryParts(){
-        Part[] someParts = DatabaseGetter.queryParts("partNum", "___");
-
-        assertTrue(someParts.length == 1 && someParts[0].getPartNum() == "111");
+        Part[] someParts = DatabaseGetter.queryParts("partID", "433396766");
+        assertTrue(someParts.length == 1 && someParts[0].getPartNum().equals("433396766"));
     }
 
     @Test
@@ -77,9 +74,9 @@ public class DatabaseTest extends TestCase {
 
     @Test
     public void testQueryServices(){
-        Service[] someServices = DatabaseGetter.queryServices("id", "___");
+        Service[] someServices = DatabaseGetter.queryServices("id", "836891868");
 
-        assertTrue(someServices.length == 1 && someServices[0].getId() == "111");
+        assertTrue(someServices.length == 1 && someServices[0].getId().equals("836891868"));
     }
 
     public void testGetAllVehicles(){
@@ -89,9 +86,9 @@ public class DatabaseTest extends TestCase {
 
     @Test
     public void testQueryVehicles(){
-        Vehicle[] someVehicles = DatabaseGetter.queryVehicles("vin", "___");
+        Vehicle[] someVehicles = DatabaseGetter.queryVehicles("vin", "2GTJK39U624XX9K5D");
 
-        assertTrue(someVehicles.length == 1 && someVehicles[0].getVin() == "111");
+        assertTrue(someVehicles.length == 1 && someVehicles[0].getVin().equals("2GTJK39U624XX9K5D"));
     }
 
 }
