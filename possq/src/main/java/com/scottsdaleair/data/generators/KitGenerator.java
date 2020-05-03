@@ -47,7 +47,7 @@ public class KitGenerator {
    * @param k The kit to add
    */
   public static void saveService(Kit k) {
-    DatabaseUtils.addObjToCollection("services", k);
+    DatabaseUtils.addObjToCollection("kits", k);
 
   }
   
