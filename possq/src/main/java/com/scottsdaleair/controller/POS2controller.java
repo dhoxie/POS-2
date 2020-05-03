@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.net.URL;
 import java.awt.Desktop;
@@ -37,9 +38,11 @@ public class POS2controller {
     @FXML
     private AnchorPane pane_Customers;
     @FXML
-    private TextField txt_FirstNameSearch;
+    private TextField txtFirstNameSearch;
     @FXML
-    private TextField txt_LastNameSearch;
+    private TextField txtLastNameSearch;
+    @FXML
+    private TextField txtAddressSearch;
     @FXML
     private Button btn_SearchCustomers;
     @FXML
@@ -151,13 +154,25 @@ public class POS2controller {
     // Add Customers to table ----- Refactor this later for more versatility.  Works for basic data testing though
     @FXML
     private void buildData(){
-        //call DatabaseGetter.java for those utils
-        Customer[] customers = DatabaseGetter.getAllCustomers();
-        System.out.println("In buildData");
+        tbl_CustomerResults.getItems().clear();
+        Customer[] customers;
+        if(!txtFirstNameSearch.getText().isEmpty()){
+            customers = DatabaseGetter.queryCustomers("fname", txtFirstNameSearch.getText());
+        }
+        else if(!txtLastNameSearch.getText().isEmpty()){
+            customers = DatabaseGetter.queryCustomers("lname", txtLastNameSearch.getText());
+        }
+        else if(!txtAddressSearch.getText().isEmpty()){
+            customers = DatabaseGetter.queryCustomers("address", txtAddressSearch.getText());
+        }
+        else{
+            customers = DatabaseGetter.getAllCustomers();
+        }
+
         ObservableList<Customer> data = FXCollections.observableArrayList();
 
         //Adding data
-        int rows = 23;
+        int rows = customers.length;
         int cur = 0;
         while(cur != rows){
             data.add(customers[cur]);
