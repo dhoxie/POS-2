@@ -8,7 +8,6 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-
 <VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scottsdaleair.controller.Pos2controller">
     <stylesheets>
         <URL value="@css/default.css" />
@@ -16,8 +15,8 @@
 
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
         <AnchorPane fx:id="pane_Nav" layoutX="-1.0" minHeight="0.0" minWidth="0.0">
-            <Button fx:id="btn_POS_NAV" layoutX="1.0" layoutY="226.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Point of Sale" />
-            <Button fx:id="btn_Customers_NAV" layoutX="1.0" layoutY="285.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Customers" />
+            <Button fx:id="btnPosNav" layoutX="1.0" layoutY="226.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Point of Sale" />
+            <Button fx:id="btnCustomersNav" layoutX="1.0" layoutY="285.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Customers" />
             <Button fx:id="btn_Inventory_NAV" layoutX="1.0" layoutY="342.0" mnemonicParsing="false" styleClass="navButton" text="Inventory" />
             <Button fx:id="btn_Calendar_NAV" layoutX="1.0" layoutY="400.0" mnemonicParsing="false" styleClass="navButton" text="Calendar" />
             <Button fx:id="btn_Reports_NAV" layoutX="1.0" layoutY="460.0" mnemonicParsing="false" styleClass="navButton" text="Reports" />
@@ -75,7 +74,7 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txt_LNameSearch" layoutX="14.0" layoutY="40.0" prefHeight="26.0" prefWidth="185.0">
+                <TextField fx:id="txtLNameSearch" layoutX="14.0" layoutY="40.0" prefHeight="26.0" prefWidth="185.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>
@@ -84,7 +83,7 @@
                         </InnerShadow>
                     </effect>
                 </TextField>
-                <TextField fx:id="txt_FNameSearch" layoutX="213.0" layoutY="40.0" prefHeight="26.0" prefWidth="127.0">
+                <TextField fx:id="txtFNameSearch" layoutX="213.0" layoutY="40.0" prefHeight="26.0" prefWidth="127.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>
@@ -93,7 +92,7 @@
                         </InnerShadow>
                     </effect>
                 </TextField>
-                <TextField fx:id="txt_AddressSearch" layoutX="15.0" layoutY="91.0" prefHeight="26.0" prefWidth="327.0">
+                <TextField fx:id="txtAddressSearch" layoutX="15.0" layoutY="91.0" prefHeight="26.0" prefWidth="327.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>
@@ -102,7 +101,7 @@
                         </InnerShadow>
                     </effect>
                 </TextField>
-                <TextField fx:id="txt_CitySearch" layoutX="15.0" layoutY="143.0">
+                <TextField fx:id="txtCitySearch" layoutX="15.0" layoutY="143.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>
@@ -111,7 +110,7 @@
                         </InnerShadow>
                     </effect>
                 </TextField>
-                <TextField fx:id="txt_StateSearch" layoutX="180.0" layoutY="143.0" prefHeight="26.0" prefWidth="47.0">
+                <TextField fx:id="txtStateSearch" layoutX="180.0" layoutY="143.0" prefHeight="26.0" prefWidth="47.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>
@@ -120,7 +119,7 @@
                         </InnerShadow>
                     </effect>
                 </TextField>
-                <TextField fx:id="txt_ZipSearch" layoutX="242.0" layoutY="143.0" prefHeight="26.0" prefWidth="100.0">
+                <TextField fx:id="txtZipSearch" layoutX="242.0" layoutY="143.0" prefHeight="26.0" prefWidth="100.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>
@@ -129,7 +128,7 @@
                         </InnerShadow>
                     </effect>
                 </TextField>
-                <TextField fx:id="txt_EmailSearch" layoutX="15.0" layoutY="195.0" prefHeight="26.0" prefWidth="266.0">
+                <TextField fx:id="txtEmailSearch" layoutX="15.0" layoutY="195.0" prefHeight="26.0" prefWidth="266.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>
@@ -138,7 +137,7 @@
                         </InnerShadow>
                     </effect>
                 </TextField>
-                <TextArea fx:id="txt_CustomerNotes" layoutX="15.0" layoutY="247.0" prefHeight="77.0" prefWidth="327.0">
+                <TextArea fx:id="txtCustomerNotes" layoutX="15.0" layoutY="247.0" prefHeight="77.0" prefWidth="327.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>
@@ -152,7 +151,7 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txt_HomeSearch" layoutX="402.0" layoutY="40.0" prefHeight="26.0" prefWidth="150.0">
+                <TextField fx:id="txtHomeSearch" layoutX="402.0" layoutY="40.0" prefHeight="26.0" prefWidth="150.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>
@@ -161,7 +160,7 @@
                         </InnerShadow>
                     </effect>
                 </TextField>
-                <TextField fx:id="txt_CellSearch" layoutX="402.0" layoutY="91.0" prefHeight="26.0" prefWidth="150.0">
+                <TextField fx:id="txtCellSearch" layoutX="402.0" layoutY="91.0" prefHeight="26.0" prefWidth="150.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>
@@ -175,7 +174,7 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextField fx:id="txt_WorkSearch" layoutX="402.0" layoutY="142.0" prefHeight="26.0" prefWidth="150.0">
+                <TextField fx:id="txtWorkSearch" layoutX="402.0" layoutY="142.0" prefHeight="26.0" prefWidth="150.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>
@@ -194,7 +193,7 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextArea fx:id="txt_PrivateNotes" layoutX="402.0" layoutY="247.0" prefHeight="77.0" prefWidth="327.0">
+                <TextArea fx:id="txtPrivateNotes" layoutX="402.0" layoutY="247.0" prefHeight="77.0" prefWidth="327.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>
@@ -203,7 +202,7 @@
                         </InnerShadow>
                     </effect>
                 </TextArea>
-                <TextField fx:id="txt_InvoiceNum" layoutX="757.0" layoutY="247.0" prefHeight="26.0" prefWidth="150.0">
+                <TextField fx:id="txtInvoiceNum" layoutX="757.0" layoutY="247.0" prefHeight="26.0" prefWidth="150.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>
@@ -217,7 +216,7 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <Button fx:id="btn_GenPDF" layoutX="757.0" layoutY="299.0" mnemonicParsing="false" onAction="#genPdf" prefHeight="26.0" prefWidth="149.0" style="-fx-background-color: #1E703A;" text="Create PDF" textFill="WHITE">
+                <Button fx:id="btnGenPDF" layoutX="757.0" layoutY="299.0" mnemonicParsing="false" onAction="#genPdf" prefHeight="26.0" prefWidth="149.0" style="-fx-background-color: #1E703A;" text="Create PDF" textFill="WHITE">
                     <font>
                         <Font name="System Bold" size="12.0" />
                     </font>

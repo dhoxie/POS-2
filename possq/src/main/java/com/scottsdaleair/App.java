@@ -29,8 +29,7 @@ public class App extends Application {
     launch(args);
   }
 
-  // ============================ M E T H O D S
-  // =========================================
+  // ============== M E T H O D ===============
 
 
 }
