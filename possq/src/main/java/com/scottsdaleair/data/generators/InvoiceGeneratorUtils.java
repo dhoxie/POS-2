@@ -18,7 +18,7 @@ public class InvoiceGeneratorUtils {
     String date = generateDate();
     String[] parts = PartGeneratorUtils.createTestParts(rnd.nextInt(10));
     String[] services = ServiceGenerator.createTestServices(rnd.nextInt(3));
-    String[] kits = KitGenerator.createTestServices(rnd.nextInt(2));
+    String[] kits = KitGenerator.createTestKits(rnd.nextInt(2));
     String pubNotes = "A very public note";
     String privNotes = "A super secret note";
     return new Invoice(invoiceNum, date, customerID, vin, parts, services,

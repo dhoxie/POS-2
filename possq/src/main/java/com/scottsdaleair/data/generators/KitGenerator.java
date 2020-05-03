@@ -34,7 +34,7 @@ public class KitGenerator {
    * @param kitCount The number of kits to create
    * @return A String array of kit ids created
    */
-  public static String[] createTestServices(int kitCount) {
+  public static String[] createTestKits(int kitCount) {
     String[] kits = new String[kitCount];
     for (int x = 0; x < kitCount; x++) {
       kits[x] = createTestKit().getId();
