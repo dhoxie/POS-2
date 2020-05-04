@@ -3,6 +3,10 @@ package com.scottsdaleair.controller;
 import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.pdfGenerator.PDFInvoice;
+import com.scottsdaleair.email.*;
+
+
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.*;
@@ -144,6 +148,28 @@ public class POS2controller {
 
     @FXML
     private void emailPDF(ActionEvent event) throws Exception{
+        String invoiceNum = txt_InvoiceNum.getText();
+        
+        String email = txt_EmailSearch.getText();
+       
+        if(invoiceNum.equals("")){
+            // @kayla 
+            // pop up to say that there needs to be an invoice num enterend; 
+             
+        }
+        if(email.equals("")){
+            // @kayla 
+            // pop up to say that there needs to be an email entered ; 
+            
+        }
+        Invoice invoice2 = Invoice.getFromDb(invoiceNum);
+        Customer cust = Customer.getFromDb(invoice2.getCustomerID());
+        // not checking for if already created yet... 
+        Invoice invoice = Invoice.getFromDb(invoiceNum);
+        new PDFInvoice(invoice).start();
+        Email theEmail = new Email("This is your invoice from Northwest Automotive Center ", invoice.getId() + cust.getFname() + cust.getLname() + ".pdf");
+        SendInvoice tmp = new SendInvoice( email , theEmail);
+        tmp.send();
 
     }
 

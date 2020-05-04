@@ -17,15 +17,23 @@ public class DatabaseUtils {
   private static final String dbAddr = "73.42.132.222";
   private static final int dbPort = 27017;
   public static final String dbName = "userdat";
-
-  private static final MongoClient client;
+  public static final String backupDbAddress = "35.247.126.11";
+  private static MongoClient client;
 
   static {
     try {
       client = new MongoClient(dbAddr, dbPort);
     } catch (Exception e) {
-      e.printStackTrace();
-      throw new RuntimeException("Exception occured in creating singleton instance");
+      client = null;
+    }
+    if(client == null){
+    	try{
+    		client = null;
+    		client = new MongoClient(backupDbAddress, dbPort);
+    	}catch(Exception e){
+    		e.printStackTrace();
+    		throw new RuntimeException("Exception occured in creating singleton instance");
+    	}
     }
   }
 
