@@ -26,11 +26,11 @@ public class PartGeneratorUtils {
    * @return  A {@code Part}
    */
   public static Part createTestPart() {
-    Random rnd = new Random();
+    Random rnd = GeneratorUtils.rand();
     String partNum = rnd.nextInt(1000000000) + "";
-    String vendor = generateVendorID();
+    String vendor = GeneratorUtils.getRandValue(partVendors);
     int onHand = rnd.nextInt(50);
-    String price = GeneratorUtils.getPrice(100, 100);
+    String price = GeneratorUtils.getRealisticPrice(200);
     Part partRet = new Part(partNum, vendor, onHand, price);
     savePart(partRet);
     return partRet;
@@ -47,11 +47,6 @@ public class PartGeneratorUtils {
       parts[x] = createTestPart().getPartNum();
     }
     return parts;
-  }
-  
-  private static String generateVendorID() {
-    int vendorID = new Random().nextInt(partVendors.length);
-    return partVendors[vendorID];
   }
 
   /**

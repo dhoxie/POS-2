@@ -17,13 +17,13 @@ public class KitGenerator {
    * @return A {@code Kit}
    */
   public static Kit createTestKit() {
-    Random rnd = new Random();
+    Random rnd = GeneratorUtils.rand();
     final String id = rnd.nextInt(1000000000) + "";
-    final String name = kitNames[rnd.nextInt(kitNames.length)];
+    final String name =  GeneratorUtils.getRandValue(kitNames);
     String[] parts = PartGeneratorUtils.createTestParts(rnd.nextInt(5));
     String[] services = ServiceGenerator.createTestServices(rnd.nextInt(2));
     String description = "Well Described Kit";
-    String price = GeneratorUtils.getPrice(rnd.nextInt(75), rnd.nextInt(100));
+    String price = GeneratorUtils.getRealisticPrice(500);
     Kit retKit = new Kit(id, name, parts, services, description, price);
     saveService(retKit);
     return retKit;

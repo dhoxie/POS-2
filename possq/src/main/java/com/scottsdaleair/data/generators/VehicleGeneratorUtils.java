@@ -2,8 +2,6 @@ package com.scottsdaleair.data.generators;
 
 import com.scottsdaleair.data.Vehicle;
 
-import java.util.Random;
-
 public class VehicleGeneratorUtils {
 
   static final String[] makes = {
@@ -174,14 +172,14 @@ public class VehicleGeneratorUtils {
     final String[] makeModel = generateMakeModel();
     final String make = makeModel[0];
     final String model = makeModel[1];
-    final String year = (new Random().nextInt(100) + 1920) + "";
+    final String year = (GeneratorUtils.rand().nextInt(100) + 1920) + "";
     final String plate = LicensePlate.generateLicensePlate();
-    final String mileage = (new Random().nextInt(400000) + 1000) + "";
+    final String mileage = (GeneratorUtils.rand().nextInt(400000) + 1000) + "";
     String motor = "";
     if (make == "Tesla") {
       motor = "Tesla Dual 438 kW electric";
     } else {
-      motor = generateMotor();
+      motor = GeneratorUtils.getRandValue(motors);
     }
     final String vin = VinGeneratorUtils.getRandomVin();
     final String comments = "Vehicular commentary";
@@ -190,15 +188,9 @@ public class VehicleGeneratorUtils {
   }
 
   private static String[] generateMakeModel() {
-    final int randMake = new Random().nextInt(makes.length);
-    final int randModel = new Random().nextInt(models[randMake].length);
-    String[] makeModel = { makes[randMake], models[randMake][randModel] };
+    final int randMake = GeneratorUtils.rand().nextInt(makes.length);
+    String[] makeModel = { makes[randMake], GeneratorUtils.getRandValue(models[randMake]) };
     return makeModel;
-  }
-
-  private static String generateMotor() {
-    final int randMotor = new Random().nextInt(motors.length);
-    return motors[randMotor];
   }
 
 }
