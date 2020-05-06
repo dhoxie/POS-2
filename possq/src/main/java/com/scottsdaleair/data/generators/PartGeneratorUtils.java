@@ -1,8 +1,7 @@
 package com.scottsdaleair.data.generators;
 
-import com.scottsdaleair.utils.DatabaseUtils;
 import com.scottsdaleair.data.Part;
-
+import com.scottsdaleair.utils.DatabaseUtils;
 import java.util.Random;
 
 public class PartGeneratorUtils {
@@ -27,18 +26,27 @@ public class PartGeneratorUtils {
    * @return  A {@code Part}
    */
   public static Part createTestPart() {
-    String partNum = new Random().nextInt(1000000000) + "";
-    String vendor = generateVendorID();
-    int onHand = new Random().nextInt(50);
-    String price = "$" + new Random().nextInt(100) + "." + new Random().nextInt(99);
+    Random rnd = GeneratorUtils.rand();
+    String partNum = rnd.nextInt(1000000000) + "";
+    String vendor = GeneratorUtils.getRandValue(partVendors);
+    int onHand = rnd.nextInt(50);
+    String price = GeneratorUtils.getRealisticPrice(200);
     Part partRet = new Part(partNum, vendor, onHand, price);
     savePart(partRet);
     return partRet;
   }
-  
-  private static String generateVendorID() {
-    int vendorID = new Random().nextInt(partVendors.length);
-    return partVendors[vendorID];
+
+  /**
+   * Creates a specific number of parts.
+   * @param partCount The number of parts to create
+   * @return A String array of part ids created
+   */
+  public static String[] createTestParts(int partCount) {
+    String[] parts = new String[partCount];
+    for (int x = 0; x < partCount; x++) {
+      parts[x] = createTestPart().getPartNum();
+    }
+    return parts;
   }
 
   /**
