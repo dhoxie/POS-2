@@ -1,9 +1,6 @@
 package com.scottsdaleair.data.generators;
 
 import com.scottsdaleair.data.Invoice;
-import com.scottsdaleair.data.generators.PartGeneratorUtils;
-
-import java.util.Random;
 
 public class InvoiceGeneratorUtils {
   /**
@@ -14,20 +11,19 @@ public class InvoiceGeneratorUtils {
    * @return
    */
   public static Invoice createTestInvoice(String customerID, String vin) {
-    String invoiceNum = new Random().nextInt(1000000000) + "";
+    String invoiceNum = GeneratorUtils.rand().nextInt(1000000000) + "";
     String date = generateDate();
-    int partCount = new Random().nextInt(10);
-    String[] parts = new String[partCount];
-    for (int x = 0; x < partCount; x++) {
-      parts[x] = PartGeneratorUtils.createTestPart().getPartNum();
-    }
+    String[] parts = PartGeneratorUtils.createTestParts(GeneratorUtils.rand().nextInt(10));
+    String[] services = ServiceGenerator.createTestServices(GeneratorUtils.rand().nextInt(3));
+    String[] kits = KitGenerator.createTestKits(GeneratorUtils.rand().nextInt(2));
     String pubNotes = "A very public note";
     String privNotes = "A super secret note";
-    return new Invoice(invoiceNum, date, customerID, vin, parts, null, null, pubNotes, privNotes);
+    return new Invoice(invoiceNum, date, customerID, vin, parts, services,
+        kits, pubNotes, privNotes);
   }
 
   private static String generateDate() {
-    return new Random().nextInt(12) + "-" + new Random().nextInt(30)
-        + "-" + (new Random().nextInt(40) + 1980);
+    return GeneratorUtils.rand().nextInt(12) + "-" + GeneratorUtils.rand().nextInt(30)
+        + "-" + (GeneratorUtils.rand().nextInt(40) + 1980);
   }
 }

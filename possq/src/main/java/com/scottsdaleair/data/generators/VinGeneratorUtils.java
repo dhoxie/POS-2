@@ -11,7 +11,7 @@ import java.util.stream.Stream;
  * number (VIN).
  */
 public final class VinGeneratorUtils {
-  private static final Random RANDOM = new Random();
+  private static final Random RANDOM = GeneratorUtils.rand();
   private static final String PREFIXES_FILE_NAME = "vin-prefixes.txt";
   private static final String ALLOWED_CHARS = "0123456789ABCDEFGHJKLMNPRSTUVWXYZ";
 

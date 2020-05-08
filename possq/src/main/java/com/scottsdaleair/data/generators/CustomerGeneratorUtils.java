@@ -2,7 +2,6 @@ package com.scottsdaleair.data.generators;
 
 import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.PhoneNumber;
-
 import java.util.Random;
 
 public class CustomerGeneratorUtils {
@@ -234,8 +233,8 @@ public class CustomerGeneratorUtils {
   public static Customer createTestCustomer(final String customerID, final String[] invoices,
       final String[] vehicles) {
     final String id = customerID;
-    final String fname = generateFirstName();
-    final String lname = generateLastName();
+    final String fname = GeneratorUtils.getRandValue(firstNames);
+    final String lname = GeneratorUtils.getRandValue(lastaNames);
     final String email = generateEmail(fname, lname);
     final String address = generateAddress();
     final PhoneNumber[] phones = generatePhoneNumbers();
@@ -244,19 +243,8 @@ public class CustomerGeneratorUtils {
     return custRet;
   }
 
-  private static String generateFirstName() {
-    final int randFirstName = new Random().nextInt(firstNames.length);
-    return firstNames[randFirstName];
-  }
-
-  private static String generateLastName() {
-    final int randLastName = new Random().nextInt(lastaNames.length);
-    return lastaNames[randLastName];
-  }
-
   private static String generateEmail(final String firstname, final String lastname) {
-    Random rand = new Random();
-    final int randEmailHost = rand.nextInt(emailHosts.length);
+    Random rand = GeneratorUtils.rand();
     final boolean beginningNums = rand.nextInt(10) < 3;
     final boolean useFname = rand.nextInt(2) < 1;
     final boolean useLname = rand.nextInt(10) < 2;
@@ -275,11 +263,9 @@ public class CustomerGeneratorUtils {
         email += firstname.toLowerCase();
       }
     } else {
-      int randUname = rand.nextInt(unames.length);
-      email += unames[randUname];
+      email += GeneratorUtils.getRandValue(unames);
       if (rand.nextInt(3) < 1) {
-        int randUname2 = rand.nextInt(unames.length);
-        email += unames[randUname2];
+        email += GeneratorUtils.getRandValue(unames);
       }
     }
     if (useLname) {
@@ -295,12 +281,12 @@ public class CustomerGeneratorUtils {
     }
 
 
-    email += "@" + emailHosts[randEmailHost];
+    email += "@" + GeneratorUtils.getRandValue(emailHosts);
     return email;
   }
 
   private static PhoneNumber generatePhoneNumber() {
-    Random rand = new Random();
+    Random rand = GeneratorUtils.rand();
     int countryCode = rand.nextInt(5);
     int areaCode = rand.nextInt(800) + 100;
     int preNum = rand.nextInt(900) + 100;
@@ -312,12 +298,12 @@ public class CustomerGeneratorUtils {
     }
     num = "(" + areaCode + ")";
     num += " " + preNum + "-" + postNum;
-    String name = phoneNumNames[rand.nextInt(phoneNumNames.length)];
+    String name = GeneratorUtils.getRandValue(phoneNumNames);
     return new PhoneNumber(name, num);
   }
 
   private static PhoneNumber[] generatePhoneNumbers() {
-    int numberCount = new Random().nextInt(3) + 1;
+    int numberCount = GeneratorUtils.rand().nextInt(3) + 1;
     PhoneNumber[] nums = new PhoneNumber[numberCount];
     for (int i = 0; i < numberCount; i++) {
       nums[i] = generatePhoneNumber();
@@ -326,23 +312,20 @@ public class CustomerGeneratorUtils {
   }
 
   private static String generateAddress() {
-    Random rand = new Random();
+    Random rand = GeneratorUtils.rand();
     String addr = "";
     int addrNum = rand.nextInt(100000);
     int randPostCode = rand.nextInt(90000) + 10000;
-    int randStreet = rand.nextInt(streetNames.length);
-    int randStreetType = rand.nextInt(streetTypes.length);
     int randState = rand.nextInt(states.length);
-    int randCity = rand.nextInt(cities[randState].length);
     addr = addrNum + "";
 
     boolean streeHasDir = rand.nextInt(10) < 4;
     if (streeHasDir) {
-      addr += " " + streetDirs[rand.nextInt(streetDirs.length)];
+      addr += " " + GeneratorUtils.getRandValue(streetDirs);
     }
-    addr += " " + streetNames[randStreet]
-        + " " + streetTypes[randStreetType]
-        + " " + cities[randState][randCity]
+    addr += " " + GeneratorUtils.getRandValue(streetNames)
+        + " " + GeneratorUtils.getRandValue(streetTypes)
+        + " " + GeneratorUtils.getRandValue(cities[randState])
         + ", " + states[randState]
         + " " + randPostCode;
     return addr;
