@@ -52,8 +52,8 @@ public class AppTest extends ApplicationTest {
 //	
 	@Test
 	public void has_pos_navbar() {
-//		TextField tfieldFirstName = find("#txt_FirstNameSearch");
-		clickOn("#txt_FirstNameSearch");
+//		TextField txfieldFirstName = find("#txtFirstNameSearch");
+		clickOn("#txtFirstNameSearch");
 		System.out.println("Clicked on field");
 		write("This is a test!");
 	
