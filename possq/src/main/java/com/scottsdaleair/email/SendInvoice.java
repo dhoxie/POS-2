@@ -28,12 +28,14 @@ public class SendInvoice {
         // can be changed to string to return error/sent message
         String host="smtp.zoho.com";
         // will change to providor that he uses
-        final String user="spencercurley@spencercurley.com";//change accordingly
+        final String user="invoices@scottsdaleairport.tech";//change accordingly
         // may want this be able to be changed if they want to send the email from which they send it
         // this will be the email that he wants to use after testing is done
         // might have to create a new email
         //final String password="mW6q0kJdBSQa";//change accordingly
-        final String password = "KC6DbfmnHrPH";
+        //final String password = "KC6DbfmnHrPH";
+        	// for spencers email 
+        final String password ="mIq3LX5hycEk";
         // will change with email account
         String sendTo=this.to;//change accordingly
 
