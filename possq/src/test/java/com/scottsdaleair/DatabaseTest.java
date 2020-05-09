@@ -2,6 +2,7 @@ package com.scottsdaleair;
 
 import com.scottsdaleair.controller.DatabaseGetter;
 import com.scottsdaleair.data.Invoice;
+import com.scottsdaleair.utils.DatabaseUtils;
 import junit.framework.TestCase;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ public class DatabaseTest extends TestCase {
     @Test
     public void testGetAllCustomers(){
         Customer[] allCustomers = DatabaseGetter.getAllCustomers();
-        assertTrue(allCustomers.length != 0);
+        assertTrue(allCustomers.length == DatabaseUtils.getEntireCollection("customers", Customer.class).length);
     }
 
     @Test
@@ -33,7 +34,7 @@ public class DatabaseTest extends TestCase {
     @Test
     public void testGetAllInvoices(){
         Invoice[] allInvoices = DatabaseGetter.getAllInvoices();
-        assertTrue(allInvoices.length != 0);
+        assertTrue(allInvoices.length  == DatabaseUtils.getEntireCollection("invoices", Invoice.class).length);
     }
 
     @Test
@@ -45,7 +46,7 @@ public class DatabaseTest extends TestCase {
     @Test
     public void testGetAllKits(){
         Kit[] allKits = DatabaseGetter.getAllKits();
-        assertTrue(allKits.length != 0);
+        assertTrue(allKits.length  == DatabaseUtils.getEntireCollection("kits", Kit.class).length);
     }
 
     @Test
@@ -57,7 +58,7 @@ public class DatabaseTest extends TestCase {
     @Test
     public void testGetAllParts(){
         Part[] allParts = DatabaseGetter.getAllParts();
-        assertTrue(allParts.length != 0);
+        assertTrue(allParts.length == DatabaseUtils.getEntireCollection("customers", Customer.class).length);
     }
 
     @Test
@@ -69,7 +70,7 @@ public class DatabaseTest extends TestCase {
     @Test
     public void testGetAllServices(){
         Service[] allServices = DatabaseGetter.getAllServices();
-        assertTrue(allServices.length != 0);
+        assertTrue(allServices.length == DatabaseUtils.getEntireCollection("services", Service.class).length);
     }
 
     @Test
@@ -81,7 +82,7 @@ public class DatabaseTest extends TestCase {
 
     public void testGetAllVehicles(){
         Vehicle[] allVehicles = DatabaseGetter.getAllVehicles();
-        assertTrue(allVehicles.length != 0);
+        assertTrue(allVehicles.length  == DatabaseUtils.getEntireCollection("vehicles", Vehicle.class).length);
     }
 
     @Test
