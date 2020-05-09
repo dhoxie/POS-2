@@ -12,6 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.net.URL;
 import java.awt.Desktop;
@@ -20,64 +21,27 @@ public class POS2controller {
 
     // Nav Buttons
     @FXML
-    private Button btn_POS_NAV;
+    private Button btnPOSNAV;
     @FXML
-    private Button btn_Customers_NAV;
-    @FXML
-    private Button btn_Inventory_NAV;
-    @FXML
-    private Button btn_Calendar_NAV;
-    @FXML
-    private Button btn_Reports_NAV;
-    @FXML
-    private Button btn_Settings_NAV;
+    private Button btnCustomersNAV;
 
 
     // Customer Search Screen
     @FXML
-    private AnchorPane pane_Customers;
+    private TextField txtFirstNameSearch;
     @FXML
-    private TextField txt_FirstNameSearch;
+    private TextField txtLastNameSearch;
     @FXML
-    private TextField txt_LastNameSearch;
+    private TextField txtAddressSearch;
     @FXML
-    private Button btn_SearchCustomers;
-    @FXML
-    private TableView<ObservableList> tbl_CustomerResults;
+    private TableView<Customer> tblCustomerResults;
 
 
 
     // POS Search Screen
     @FXML
-    private AnchorPane pane_POS;
-    @FXML
-    private TextField txt_FNameSearch;
-    @FXML
-    private TextField txt_LNameSearch;
-    @FXML
-    private TextField txt_AddressSearch;
-    @FXML
-    private TextField txt_CitySearch;
-    @FXML
-    private TextField txt_StateSearch;
-    @FXML
-    private TextField txt_ZipSearch;
-    @FXML
-    private TextField txt_EmailSearch;
-    @FXML
-    private TextArea txt_CustomerNotes;
-    @FXML
-    private TextField txt_HomeSearch;
-    @FXML
-    private TextField txt_CellSearch;
-    @FXML
-    private TextField txt_WorkSearch;
-    @FXML
-    private TextArea txt_PrivateNotes;
-    @FXML
-    private TextField txt_InvoiceNum;
-    @FXML
-    private Button btn_GenPDF;
+    private TextField txtInvoiceNum;
+
 
 
 
@@ -93,16 +57,16 @@ public class POS2controller {
         URL url;
         FXMLLoader fxmlLoader = new FXMLLoader();
 
-        if(event.getSource()==btn_POS_NAV){
-            stage = (Stage) btn_POS_NAV.getScene().getWindow();
+        if(event.getSource()==btnPOSNAV){
+            stage = (Stage) btnPOSNAV.getScene().getWindow();
             url = new File("src/main/java/com/scottsdaleair/view/POS_Search_Screen.fxml").toURI().toURL();
         }
-        else if(event.getSource()==btn_Customers_NAV){
-            stage = (Stage) btn_Customers_NAV.getScene().getWindow();
+        else if(event.getSource()==btnCustomersNAV){
+            stage = (Stage) btnCustomersNAV.getScene().getWindow();
             url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI().toURL();
         }
         else{
-            stage = (Stage) btn_Customers_NAV.getScene().getWindow();
+            stage = (Stage) btnCustomersNAV.getScene().getWindow();
             url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI().toURL();
         }
 
@@ -118,7 +82,7 @@ public class POS2controller {
     @FXML
     private void genPDF(ActionEvent event) throws Exception{
         //122125
-        String invoiceNum = txt_InvoiceNum.getText();
+        String invoiceNum = txtInvoiceNum.getText();
         Invoice invoice = Invoice.getFromDb(invoiceNum);
         Customer cust = Customer.getFromDb(invoice.getCustomerID());
         try {
@@ -142,32 +106,41 @@ public class POS2controller {
         }
     }
 
+    @FXML
+    private void emailPDF(ActionEvent event) throws Exception{
+
+    }
+
 
     // Add Customers to table ----- Refactor this later for more versatility.  Works for basic data testing though
     @FXML
     private void buildData(){
-
-
-        //call DatabaseGetter.java for those utils
-        Customer[] customers = DatabaseGetter.getAllCustomers();
-        System.out.println("In buildData");
-        /*ObservableList<ObservableList> data = FXCollections.observableArrayList();
-
-        //Adding data
-        int rows = 8;
-        int cur = 0;
-        while(cur != rows){
-            ObservableList<String> row = FXCollections.observableArrayList();
-            row.add(customers[cur].getFname());
-            row.add(customers[cur].getLname());
-            row.add(customers[cur].getAddress());
-            row.add(customers[cur].getPhone().toString());
-            System.out.println("Row " + cur + " added");
-            data.add(row);
+        tblCustomerResults.getItems().clear();
+        Customer[] customers;
+        if(!txtFirstNameSearch.getText().isEmpty()){
+            customers = DatabaseGetter.queryCustomers("fname", txtFirstNameSearch.getText());
+        }
+        else if(!txtLastNameSearch.getText().isEmpty()){
+            customers = DatabaseGetter.queryCustomers("lname", txtLastNameSearch.getText());
+        }
+        else if(!txtAddressSearch.getText().isEmpty()){
+            customers = DatabaseGetter.queryCustomers("address", txtAddressSearch.getText());
+        }
+        else{
+            customers = DatabaseGetter.getAllCustomers();
         }
 
-        tbl_CustomerResults.setItems(data);
-        */
+        ObservableList<Customer> data = FXCollections.observableArrayList();
+
+        //Adding data
+        int rows = customers.length;
+        int cur = 0;
+        while(cur != rows){
+            data.add(customers[cur]);
+            cur++;
+        }
+
+        tblCustomerResults.setItems(data);
     }
 
 }
