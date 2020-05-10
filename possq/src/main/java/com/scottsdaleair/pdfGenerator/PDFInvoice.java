@@ -4,6 +4,9 @@ import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.data.Part;
 import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.Vehicle;
+import com.scottsdaleair.data.PhoneNumber;
+import com.scottsdaleair.pdfGenerator.CellFactory;
+import com.itextpdf.kernel.color.Color;
 import com.itextpdf.kernel.geom.PageSize;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -26,10 +29,12 @@ public class PDFInvoice {
     private  Document theDocument;
     private PdfDocument pdf;
     private Table pTable;
+    private CellFactory theCellFactory;
     public PDFInvoice(Invoice theInvoice){
         this.theInvoice = theInvoice;
         theCust = Customer.getFromDb(theInvoice.getCustomerID());
         theVehicle = Vehicle.getFromDb(theInvoice.getVehicleVin());
+        theCellFactory = new CellFactory();
     }
 
     /**
@@ -171,46 +176,22 @@ public class PDFInvoice {
         // created all of the cell data
         // adding to an inner table
         innerTableFirst.addCell(firstNameCellText);
-        innerTableFirst.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTableFirst.addCell(theCellFactory.getColon());
         innerTableFirst.addCell(firstCellData);
         innerTableFirst.addCell(lastNameCellText);
-        innerTableFirst.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTableFirst.addCell(theCellFactory.getColon());
         innerTableFirst.addCell(lastNameCellData);
         innerTableFirst.addCell(addressCellText);
-        innerTableFirst.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTableFirst.addCell(theCellFactory.getColon());
         innerTableFirst.addCell(addressCellData);
         innerTableFirst.addCell(cityStateCellText);
-        innerTableFirst.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTableFirst.addCell(theCellFactory.getColon());
         innerTableFirst.addCell(cityStateCellData);
         innerTableFirst.addCell(techCellText);
-        innerTableFirst.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTableFirst.addCell(theCellFactory.getColon());
         innerTableFirst.addCell(techCellData);
         innerTableFirst.addCell(managerCellText);
-        innerTableFirst.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTableFirst.addCell(theCellFactory.getColon());
         innerTableFirst.addCell(managerCellData);
 
         Cell phoneCellText = new Cell(1,1)
@@ -246,25 +227,13 @@ public class PDFInvoice {
                 .setBorder(Border.NO_BORDER)
                 .add(new Paragraph(theVehicle.getMake()));
         innerTable.addCell(phoneCellText);
-        innerTable.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTable.addCell(theCellFactory.getColon());
         innerTable.addCell(phoneCellData);
         innerTable.addCell(wPhoneCellText);
-        innerTable.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTable.addCell(theCellFactory.getColon());
         innerTable.addCell(wPhoneCellData);
         innerTable.addCell(zipCellText);
-        innerTable.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTable.addCell(theCellFactory.getColon());
         innerTable.addCell(zipCellData);
         Cell PhoneCell = new Cell(1,1)
                 .setBorder(Border.NO_BORDER)
@@ -320,53 +289,25 @@ public class PDFInvoice {
                 .setBorder(Border.NO_BORDER)
                 .add(new Paragraph(theVehicle.getVin()));
         innerTableLast.addCell(tagCellText);
-        innerTableLast.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTableLast.addCell(theCellFactory.getColon());
         innerTableLast.addCell(tagCellData);
         innerTableLast.addCell(yearCellText);
-        innerTableLast.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTableLast.addCell(theCellFactory.getColon());
         innerTableLast.addCell(yearCellData);
         innerTableLast.addCell(makeCellText);
-        innerTableLast.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTableLast.addCell(theCellFactory.getColon());
         innerTableLast.addCell(makeCellData);
         innerTableLast.addCell(modelCellText);
-        innerTableLast.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTableLast.addCell(theCellFactory.getColon());
         innerTableLast.addCell(modelCellData);
         innerTableLast.addCell(manufactorCellText);
-        innerTableLast.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTableLast.addCell(theCellFactory.getColon());
         innerTableLast.addCell(manufactorCellData);
         innerTableLast.addCell(mileageCellText);
-        innerTableLast.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTableLast.addCell(theCellFactory.getColon());
         innerTableLast.addCell(mileageCellData);
         innerTableLast.addCell(vinCellText);
-        innerTableLast.addCell(new Cell(1,1)
-                .setTextAlignment(TextAlignment.CENTER)
-                .setBorder(Border.NO_BORDER)
-                .add(new Paragraph(":"))
-                .setWidth(1));
+        innerTableLast.addCell(theCellFactory.getColon());
         innerTableLast.addCell(vinCellData);
 
         Cell nameAddrCell = new Cell(1,1)
