@@ -15,24 +15,24 @@ public class Part {
 
   /**
    * Represents a vehicle part.
-   * @param partNum The ID of the part
+   * @param partID The ID of the part
    * @param vendor  The manufacturer of the part
    * @param onHand  The current inventory count of this part
    * @param price   The price of this part
    */
-  public Part(String partNum, String vendor, int onHand, String price) {
-    this.partID = partNum;
+  public Part(String partID, String vendor, int onHand, String price) {
+    this.partID = partID;
     this.vendor = vendor;
     this.onHand = onHand;
     this.price = price;
   }
 
-  public String getPartNum() {
+  public String getPartID() {
     return this.partID;
   }
 
-  public void setPartNum(String partNum) {
-    this.partID = partNum;
+  public void setPartID(String partID) {
+    this.partID = partID;
   }
 
   public String getVendor() {
@@ -59,6 +59,7 @@ public class Part {
     this.price = price;
   }
 
+  /* What is the purpose of this code? Not currently in use.  - Daylyn (Tester/Reviewer)
   public Part partNum(String partNum) {
     this.partID = partNum;
     return this;
@@ -78,6 +79,7 @@ public class Part {
     this.price = price;
     return this;
   }
+  */
 
   /**
    * Get the part object from db by id.
@@ -113,7 +115,7 @@ public class Part {
 
   @Override
   public String toString() {
-    return "{" + " partNum='" + getPartNum()
+    return "{" + " partID='" + getPartID()
         + "'" + ", vendor='" + getVendor()
         + "'" + ", onHand='" + getOnHand() + "'"
         + ", price='" + getPrice() + "'" + "}";

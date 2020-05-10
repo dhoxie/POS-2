@@ -3,6 +3,12 @@ package com.scottsdaleair.controller;
 import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.pdfGenerator.PDFInvoice;
+import com.scottsdaleair.email.*;
+
+
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.*;
 import javafx.fxml.*;
 import javafx.scene.*;
@@ -10,6 +16,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import javax.xml.crypto.Data;
 import java.io.File;
 import java.net.URL;
 import java.awt.Desktop;
@@ -18,70 +25,35 @@ public class POS2controller {
 
     // Nav Buttons
     @FXML
-    private Button btn_POS_NAV;
+    private Button btnPOSNAV;
     @FXML
-    private Button btn_Customers_NAV;
-    @FXML
-    private Button btn_Inventory_NAV;
-    @FXML
-    private Button btn_Calendar_NAV;
-    @FXML
-    private Button btn_Reports_NAV;
-    @FXML
-    private Button btn_Settings_NAV;
+    private Button btnCustomersNAV;
 
 
     // Customer Search Screen
     @FXML
-    private AnchorPane pane_Customers;
+    private TextField txtFirstNameSearch;
     @FXML
-    private TextField txt_FirstNameSearch;
+    private TextField txtLastNameSearch;
     @FXML
-    private TextField txt_LastNameSearch;
+    private TextField txtAddressSearch;
     @FXML
-    private Button btn_SearchCustomers;
-    @FXML
-    private TableView<?> tbl_CustomerResults;
+    private TableView<Customer> tblCustomerResults;
 
 
 
     // POS Search Screen
     @FXML
-    private AnchorPane pane_POS;
-    @FXML
-    private TextField txt_FNameSearch;
-    @FXML
-    private TextField txt_LNameSearch;
-    @FXML
-    private TextField txt_AddressSearch;
-    @FXML
-    private TextField txt_CitySearch;
-    @FXML
-    private TextField txt_StateSearch;
-    @FXML
-    private TextField txt_ZipSearch;
-    @FXML
-    private TextField txt_EmailSearch;
-    @FXML
-    private TextArea txt_CustomerNotes;
-    @FXML
-    private TextField txt_HomeSearch;
-    @FXML
-    private TextField txt_CellSearch;
-    @FXML
-    private TextField txt_WorkSearch;
-    @FXML
-    private TextArea txt_PrivateNotes;
-    @FXML
-    private TextField txt_InvoiceNum;
-    @FXML
-    private Button btn_GenPDF;
+    private TextField txtInvoiceNum;
+
 
 
 
 
 
     // -------------- M E T H O D S --------------
+
+    // Scene Changing
     @FXML
     private void changeScene (ActionEvent event) throws Exception {
         Stage stage;
@@ -89,16 +61,16 @@ public class POS2controller {
         URL url;
         FXMLLoader fxmlLoader = new FXMLLoader();
 
-        if(event.getSource()==btn_POS_NAV){
-            stage = (Stage) btn_POS_NAV.getScene().getWindow();
+        if(event.getSource()==btnPOSNAV){
+            stage = (Stage) btnPOSNAV.getScene().getWindow();
             url = new File("src/main/java/com/scottsdaleair/view/POS_Search_Screen.fxml").toURI().toURL();
         }
-        else if(event.getSource()==btn_Customers_NAV){
-            stage = (Stage) btn_Customers_NAV.getScene().getWindow();
+        else if(event.getSource()==btnCustomersNAV){
+            stage = (Stage) btnCustomersNAV.getScene().getWindow();
             url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI().toURL();
         }
         else{
-            stage = (Stage) btn_Customers_NAV.getScene().getWindow();
+            stage = (Stage) btnCustomersNAV.getScene().getWindow();
             url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI().toURL();
         }
 
@@ -110,11 +82,11 @@ public class POS2controller {
 
 
 
-
+    // PDF Generation Method
     @FXML
     private void genPDF(ActionEvent event) throws Exception{
-        //43618446
-        String invoiceNum = txt_InvoiceNum.getText();
+        //122125
+        String invoiceNum = txtInvoiceNum.getText();
         Invoice invoice = Invoice.getFromDb(invoiceNum);
         Customer cust = Customer.getFromDb(invoice.getCustomerID());
         try {
@@ -136,8 +108,65 @@ public class POS2controller {
         catch(Throwable e) {
             System.out.println("Caught");
         }
+    }
+
+    @FXML
+    private void emailPDF(ActionEvent event) throws Exception{
+        String invoiceNum = txt_InvoiceNum.getText();
+        
+        String email = txt_EmailSearch.getText();
+       
+        if(invoiceNum.equals("")){
+            // @kayla 
+            // pop up to say that there needs to be an invoice num enterend; 
+             
+        }
+        if(email.equals("")){
+            // @kayla 
+            // pop up to say that there needs to be an email entered ; 
+            
+        }
+        Invoice invoice2 = Invoice.getFromDb(invoiceNum);
+        Customer cust = Customer.getFromDb(invoice2.getCustomerID());
+        // not checking for if already created yet... 
+        Invoice invoice = Invoice.getFromDb(invoiceNum);
+        new PDFInvoice(invoice).start();
+        Email theEmail = new Email("This is your invoice from Northwest Automotive Center ", invoice.getId() + cust.getFname() + cust.getLname() + ".pdf");
+        SendInvoice tmp = new SendInvoice( email , theEmail);
+        tmp.send();
 
     }
 
+
+    // Add Customers to table ----- Refactor this later for more versatility.  Works for basic data testing though
+    @FXML
+    private void buildData(){
+        tblCustomerResults.getItems().clear();
+        Customer[] customers;
+        if(!txtFirstNameSearch.getText().isEmpty()){
+            customers = DatabaseGetter.queryCustomers("fname", txtFirstNameSearch.getText());
+        }
+        else if(!txtLastNameSearch.getText().isEmpty()){
+            customers = DatabaseGetter.queryCustomers("lname", txtLastNameSearch.getText());
+        }
+        else if(!txtAddressSearch.getText().isEmpty()){
+            customers = DatabaseGetter.queryCustomers("address", txtAddressSearch.getText());
+        }
+        else{
+            customers = DatabaseGetter.getAllCustomers();
+        }
+
+        ObservableList<Customer> data = FXCollections.observableArrayList();
+
+        //Adding data
+        int rows = customers.length;
+        int cur = 0;
+        while(cur != rows){
+            data.add(customers[cur]);
+            cur++;
+        }
+
+        tblCustomerResults.setItems(data);
+    }
 
 }

@@ -2,8 +2,6 @@ package com.scottsdaleair.pdfGenerator;
 
 import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.data.Part;
-import com.scottsdaleair.data.Service;
-import com.scottsdaleair.data.Kit;
 import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.Vehicle;
 import com.scottsdaleair.data.PhoneNumber;
@@ -18,7 +16,6 @@ import com.itextpdf.layout.border.SolidBorder;
 import com.itextpdf.layout.element.*;
 import com.itextpdf.layout.property.*;
 
-import javax.swing.*;
 import java.io.FileNotFoundException;
 import java.util.Calendar;
 /**
@@ -415,7 +412,7 @@ public class PDFInvoice {
         pTable.setFontSize(8);
         
         
-        pTable.addCell(new Cell(1,1).add(new Paragraph(toAdd.getPartNum())));
+        pTable.addCell(new Cell(1,1).add(new Paragraph(toAdd.getPartID())));
         pTable.addCell(new Cell(1,1).add(new Paragraph(toAdd.getVendor())));
         pTable.addCell(new Cell(1,1).add(new Paragraph("inc")));
         pTable.addCell(new Cell(1,1).add(new Paragraph(toAdd.getPrice())));

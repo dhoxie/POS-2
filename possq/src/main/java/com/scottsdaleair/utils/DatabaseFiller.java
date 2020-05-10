@@ -2,19 +2,15 @@ package com.scottsdaleair.utils;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
-
 import com.scottsdaleair.data.Customer;
-import com.scottsdaleair.utils.DatabaseUtils;
 import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.data.Vehicle;
 import com.scottsdaleair.data.generators.CustomerGeneratorUtils;
+import com.scottsdaleair.data.generators.GeneratorUtils;
 import com.scottsdaleair.data.generators.InvoiceGeneratorUtils;
 import com.scottsdaleair.data.generators.VehicleGeneratorUtils;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
-
-import java.util.Random;
-
 import org.bson.Document;
 
 public class DatabaseFiller {
@@ -27,9 +23,9 @@ public class DatabaseFiller {
 
     for (int i = 0; i < customerCount; i++) {
 
-      String customerID = new Random().nextInt(1000000000) + "";
+      String customerID = GeneratorUtils.rand().nextInt(1000000000) + "";
 
-      int vehicleCount = new Random().nextInt(3) + 1;
+      int vehicleCount = GeneratorUtils.rand().nextInt(3) + 1;
 
       Vehicle[] vehicles = new Vehicle[vehicleCount];
       for (int x = 0; x < vehicleCount; x++) {
@@ -37,11 +33,11 @@ public class DatabaseFiller {
         DatabaseUtils.addObjToCollection("vehicles", vehicles[x]);
       }
 
-      int invoiceCount = new Random().nextInt(10);
+      int invoiceCount = GeneratorUtils.rand().nextInt(10);
       Invoice[] invoices = new Invoice[invoiceCount];
       for (int x = 0; x < invoiceCount; x++) {
         invoices[x] = InvoiceGeneratorUtils.createTestInvoice(customerID + "",
-            vehicles[new Random().nextInt(vehicleCount)].getVin());
+            vehicles[GeneratorUtils.rand().nextInt(vehicleCount)].getVin());
         DatabaseUtils.addObjToCollection("invoices", invoices[x]);
       }
 
