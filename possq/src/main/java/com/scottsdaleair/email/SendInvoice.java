@@ -25,21 +25,12 @@ public class SendInvoice {
      * This will attach the PDF to the email, set the body of the email , set the subject of the email and send the email
      */
     public void send() {
-        // can be changed to string to return error/sent message
+        
         String host="smtp.zoho.com";
-        // will change to providor that he uses
-        final String user="invoices@scottsdaleairport.tech";//change accordingly
-        // may want this be able to be changed if they want to send the email from which they send it
-        // this will be the email that he wants to use after testing is done
-        // might have to create a new email
-        //final String password="mW6q0kJdBSQa";//change accordingly
-        //final String password = "KC6DbfmnHrPH";
-        	// for spencers email 
+        final String user="invoices@scottsdaleairport.tech";
         final String password ="mIq3LX5hycEk";
-        // will change with email account
-        String sendTo=this.to;//change accordingly
-
-        //Get the session object
+     
+        String sendTo=this.to;
         Properties props = setUpProperties(host);
 
         Session session = Session.getDefaultInstance(props,
@@ -76,14 +67,7 @@ public class SendInvoice {
         props.put("mail.smtp.host", host);
         props.put("mail.smtp.port", "587");
         props.put("mail.smtp.auth", "true");
-        props.put("mail.smtp.starttls.enable", "true");
-        // will have to periodicly turn on less secure apps to make this work
-        /*props.put("mail.smtp.starttls.enable", "true");
-        props.put("mail.smtp.port",  587);
-        props.put("mail.smtp.host",host);
-        props.put("mail.smtp.auth", "true");
-         */
-        // will change to providors properties
+        props.put("mail.smtp.starttls.enable", "true")
         return props;
     }
     // thisisthepassword42
