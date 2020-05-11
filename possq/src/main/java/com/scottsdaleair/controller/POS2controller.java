@@ -8,6 +8,7 @@ import com.scottsdaleair.pdfGenerator.PDFInvoice;
 import java.awt.Desktop;
 import java.io.File;
 import java.net.URL;
+import java.util.HashMap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -57,12 +58,12 @@ public class POS2controller {
       url = new File("src/main/java/com/scottsdaleair/view/POS_Search_Screen.fxml").toURI().toURL();
     } else if (event.getSource() == btnCustomersNAV) {
       stage = (Stage) btnCustomersNAV.getScene().getWindow();
-      url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml")
-        .toURI().toURL();
+      url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI()
+          .toURL();
     } else {
       stage = (Stage) btnCustomersNAV.getScene().getWindow();
-      url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml")
-        .toURI().toURL();
+      url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI()
+          .toURL();
     }
 
     root = FXMLLoader.load(url);
@@ -132,14 +133,22 @@ public class POS2controller {
   private void buildData() {
     tblCustomerResults.getItems().clear();
     Customer[] customers;
+    HashMap<String, String> query = new HashMap<>();
+
     if (!txtFirstNameSearch.getText().isEmpty()) {
-      customers = DatabaseGetter.queryCustomers("fname", txtFirstNameSearch.getText());
-    } else if (!txtLastNameSearch.getText().isEmpty()) {
-      customers = DatabaseGetter.queryCustomers("lname", txtLastNameSearch.getText());
-    } else if (!txtAddressSearch.getText().isEmpty()) {
-      customers = DatabaseGetter.queryCustomers("address", txtAddressSearch.getText());
-    } else {
+      query.put("fname", txtFirstNameSearch.getText());
+    }
+    if (!txtLastNameSearch.getText().isEmpty()) {
+      query.put("lname", txtLastNameSearch.getText());
+    }
+    if (!txtAddressSearch.getText().isEmpty()) {
+      query.put("address", txtAddressSearch.getText());
+    }
+    
+    if (query.isEmpty()) {
       customers = DatabaseGetter.getAllCustomers();
+    } else {
+      customers = DatabaseGetter.queryCustomers(query);
     }
 
     ObservableList<Customer> data = FXCollections.observableArrayList();
