@@ -77,7 +77,7 @@
                 </Label>
                 <TextField fx:id="txtLastNameSearch" layoutX="14.0" layoutY="40.0" prefHeight="26.0" prefWidth="185.0">
                     <effect>
-                        <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                        <InnerShadow blurType="ONE_PASS_BOX" height="28.09" offsetX="2.0" offsetY="2.0" radius="13.905000000000001" width="29.53">
                             <color>
                                 <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
                             </color>
@@ -194,7 +194,7 @@
                         <Font size="14.0" />
                     </font>
                 </Label>
-                <TextArea fx:id="txtPrivateNotes" layoutX="402.0" layoutY="247.0" prefHeight="77.0" prefWidth="327.0">
+                <TextArea fx:id="txtPrivateCustomerNotes" layoutX="402.0" layoutY="247.0" prefHeight="77.0" prefWidth="327.0">
                     <effect>
                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                             <color>

@@ -41,6 +41,7 @@ public class POS2controller {
   // POS Search Screen
   @FXML
   private TextField txtInvoiceNum;
+  @FXML
   private TextField txtEmailSearch;
 
   // -------------- M E T H O D S --------------

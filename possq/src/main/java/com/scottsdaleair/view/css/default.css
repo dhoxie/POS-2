@@ -31,3 +31,9 @@
     -fx-text-fill: #1E703A;
     -fx-background-color: #F1F0F2;
 }
+
+.separator .line {
+    -fx-border-color: #1e703a;
+    -fx-border-width: 2;
+    -fx-border-radius: 4;
+}
