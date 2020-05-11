@@ -18,7 +18,7 @@ public class DatabaseUtils {
   private static final int dbPort = 27017;
   public static final String dbName = "userdat";
   public static final String backupDbAddress = "35.247.126.11";
-  private static MongoClient client;
+  public static MongoClient client;
 
   static {
     try {
@@ -139,6 +139,9 @@ public class DatabaseUtils {
    */
   public static Object[] getFromCollection(String collectionName, HashMap<String, String> queryMap,
       Type t) {
+    System.out.println("DBUTILS:: Getting with type: " + t.getTypeName());
+    System.out.println("DBUTILS:: Getting with collectionName: " + collectionName);
+    System.out.println("DBUTILS:: Getting with hasmap: " + queryMap);
     return getFromDb(DatabaseUtils.dbName, collectionName, queryMap, t);
   }
 

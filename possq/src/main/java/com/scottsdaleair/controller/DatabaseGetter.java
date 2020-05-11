@@ -8,6 +8,7 @@ import com.scottsdaleair.data.Service;
 import com.scottsdaleair.data.Vehicle;
 import com.scottsdaleair.utils.DataConverter;
 import com.scottsdaleair.utils.DatabaseUtils;
+import java.util.HashMap;
 
 public class DatabaseGetter {
 
@@ -24,12 +25,23 @@ public class DatabaseGetter {
   /**
    * Get all {@link Customer}s based on a (key,value) pair.
    * 
-   * @param key Property of the ustomer to match
+   * @param key   Property of the ustomer to match
    * @param value Value of the property to match
    * @return {@link Customer}[]
    */
   public static Customer[] queryCustomers(String key, String value) {
     Object[] results = DatabaseUtils.getFromCollection("customers", key, value, Customer.class);
+    return DataConverter.objToCust(results);
+  }
+
+  /**
+   * Get all {@link Customer}s based on a (key,value) map.
+   * 
+   * @param queryMap Map of key/value pairs for query
+   * @return {@link Customer}[]
+   */
+  public static Customer[] queryCustomers(HashMap<String, String> queryMap) {
+    Object[] results = DatabaseUtils.getFromCollection("customers", queryMap, Customer.class);
     return DataConverter.objToCust(results);
   }
 
@@ -46,12 +58,23 @@ public class DatabaseGetter {
   /**
    * Get all {@link Invoice}s based on a (key,value) pair.
    * 
-   * @param key Property of the Invoice to match
+   * @param key   Property of the Invoice to match
    * @param value Value of the property to match
    * @return {@link Invoice}[]
    */
   public static Invoice[] queryInvoices(String key, String value) {
     Object[] results = DatabaseUtils.getFromCollection("invoices", key, value, Invoice.class);
+    return DataConverter.objToInv(results);
+  }
+
+  /**
+   * Get all {@link Invoice}s based on a (key,value) map.
+   * 
+   * @param queryMap Map of key/value pairs for query
+   * @return {@link Invoice}[]
+   */
+  public static Invoice[] queryInvoices(HashMap<String, String> queryMap) {
+    Object[] results = DatabaseUtils.getFromCollection("invoices", queryMap, Invoice.class);
     return DataConverter.objToInv(results);
   }
 
@@ -68,12 +91,23 @@ public class DatabaseGetter {
   /**
    * Get all {@link Kit}s based on a (key,value) pair.
    * 
-   * @param key Property of the Kit to match
+   * @param key   Property of the Kit to match
    * @param value Value of the property to match
    * @return {@link Kit}[]
    */
   public static Kit[] queryKits(String key, String value) {
     Object[] results = DatabaseUtils.getFromCollection("kits", key, value, Kit.class);
+    return DataConverter.objToKit(results);
+  }
+
+  /**
+   * Get all {@link Kit}s based on a (key,value) map.
+   * 
+   * @param queryMap Map of key/value pairs for query
+   * @return {@link Kit}[]
+   */
+  public static Kit[] queryKits(HashMap<String, String> queryMap) {
+    Object[] results = DatabaseUtils.getFromCollection("kits", queryMap, Kit.class);
     return DataConverter.objToKit(results);
   }
 
@@ -90,7 +124,7 @@ public class DatabaseGetter {
   /**
    * Get all {@link Part}s based on a (key,value) pair.
    * 
-   * @param key Property of the Part to match
+   * @param key   Property of the Part to match
    * @param value Value of the property to match
    * @return {@link Part}[]
    */
@@ -98,6 +132,18 @@ public class DatabaseGetter {
     Object[] results = DatabaseUtils.getFromCollection("parts", key, value, Part.class);
     return DataConverter.objToPrt(results);
   }
+
+  /**
+   * Get all {@link Part}s based on a (key,value) map.
+   * 
+   * @param queryMap Map of key/value pairs for query
+   * @return {@link Part}[]
+   */
+  public static Part[] queryParts(HashMap<String, String> queryMap) {
+    Object[] results = DatabaseUtils.getFromCollection("parts", queryMap, Part.class);
+    return DataConverter.objToPrt(results);
+  }
+
 
   /**
    * Get all {@link Service}s in the database.
@@ -112,12 +158,23 @@ public class DatabaseGetter {
   /**
    * Get all {@link Service}s based on a (key,value) pair.
    * 
-   * @param key Property of the Service to match
+   * @param key   Property of the Service to match
    * @param value Value of the property to match
    * @return {@link Service}[]
    */
   public static Service[] queryServices(String key, String value) {
     Object[] results = DatabaseUtils.getFromCollection("services", key, value, Service.class);
+    return DataConverter.objToSvc(results);
+  }
+
+  /**
+   * Get all {@link Service}s based on a (key,value) map.
+   * 
+   * @param queryMap Map of key/value pairs for query
+   * @return {@link Service}[]
+   */
+  public static Service[] queryServices(HashMap<String, String> queryMap) {
+    Object[] results = DatabaseUtils.getFromCollection("services", queryMap, Service.class);
     return DataConverter.objToSvc(results);
   }
 
@@ -134,12 +191,23 @@ public class DatabaseGetter {
   /**
    * Get all {@link Vehicle}s based on a (key,value) pair.
    * 
-   * @param key Property of the Vehicle to match
+   * @param key   Property of the Vehicle to match
    * @param value Value of the property to match
    * @return {@link Vehicle}[]
    */
   public static Vehicle[] queryVehicles(String key, String value) {
     Object[] results = DatabaseUtils.getFromCollection("vehicles", key, value, Vehicle.class);
+    return DataConverter.objToVehc(results);
+  }
+
+  /**
+   * Get all {@link Vehicle}s based on a (key,value) pair.
+   * 
+   * @param queryMap Map of key/value pairs for query
+   * @return {@link Vehicle}[]
+   */
+  public static Vehicle[] queryVehicles(HashMap<String, String> queryMap) {
+    Object[] results = DatabaseUtils.getFromCollection("vehicles", queryMap, Vehicle.class);
     return DataConverter.objToVehc(results);
   }
 
