@@ -1,15 +1,12 @@
 package com.scottsdaleair.utils;
 
 import com.google.gson.Gson;
-
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-
 import org.bson.Document;
 
 public class DatabaseUtils {
@@ -26,14 +23,14 @@ public class DatabaseUtils {
     } catch (Exception e) {
       client = null;
     }
-    if(client == null){
-    	try{
-    		client = null;
-    		client = new MongoClient(backupDbAddress, dbPort);
-    	}catch(Exception e){
-    		e.printStackTrace();
-    		throw new RuntimeException("Exception occured in creating singleton instance");
-    	}
+    if (client == null) {
+      try {
+        client = null;
+        client = new MongoClient(backupDbAddress, dbPort);
+      } catch (Exception e) {
+        e.printStackTrace();
+        throw new RuntimeException("Exception occured in creating singleton instance");
+      }
     }
   }
 
@@ -73,7 +70,8 @@ public class DatabaseUtils {
     addObjToCollection(collection, obj);
   }
 
-  private static Object[] searchCollection(MongoCollection<Document> collection, String key, String value, Type t) {
+  private static Object[] searchCollection(MongoCollection<Document> collection, String key,
+      String value, Type t) {
     Gson gson = new Gson();
     Document match = new Document(key, value);
     FindIterable<Document> results = collection.find(match);
@@ -103,7 +101,8 @@ public class DatabaseUtils {
    * @param t              Type of object returned
    * @return Object[] containing search results
    */
-  public static Object[] getFromCollection(String collectionName, String key, String value, Type t) {
+  public static Object[] getFromCollection(String collectionName, String key, String value,
+      Type t) {
 
     return getFromDb(DatabaseUtils.dbName, collectionName, key, value, t);
   }
@@ -116,12 +115,13 @@ public class DatabaseUtils {
    * @return Object[] containing search results
    */
   public static Object[] getEntireCollection(String collectionName, Type t) {
-    MongoCollection<Document> collection = DatabaseUtils.client.getDatabase(DatabaseUtils.dbName)
-        .getCollection(collectionName);
+    MongoCollection<Document> collection =
+        DatabaseUtils.client.getDatabase(DatabaseUtils.dbName).getCollection(collectionName);
     return retrieveCollection(collection, t);
   }
 
-  private static Object[] getFromDb(String dbname, String collectionName, String key, String value, Type t) {
+  private static Object[] getFromDb(String dbname, String collectionName, String key, String value,
+      Type t) {
     MongoDatabase database = DatabaseUtils.client.getDatabase(dbname);
     MongoCollection<Document> collection = database.getCollection(collectionName);
     return searchCollection(collection, key, value, t);

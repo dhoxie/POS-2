@@ -1,8 +1,6 @@
 package com.scottsdaleair.data;
 
-import com.scottsdaleair.data.PhoneNumber;
 import com.scottsdaleair.utils.DatabaseUtils;
-
 import java.util.Objects;
 
 /**
@@ -173,7 +171,7 @@ public class Customer {
     // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
     Object[] users = DatabaseUtils.getFromCollection("customers", "id", customerId,
         Customer.class);
-    return (Customer)users[0];
+    return (Customer) users[0];
   }
 
   @Override

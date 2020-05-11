@@ -1,7 +1,6 @@
 package com.scottsdaleair.data;
 
 import com.scottsdaleair.utils.DatabaseUtils;
-
 import java.util.Objects;
 
 public class Part {
@@ -90,7 +89,7 @@ public class Part {
     // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
     Object[] invoices = DatabaseUtils.getFromCollection("parts", "partID", partId,
         Part.class);
-    return (Part)invoices[0];
+    return (Part) invoices[0];
   }
 
   @Override
