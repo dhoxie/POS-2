@@ -1,12 +1,15 @@
 package com.scottsdaleair.utils;
 
 import com.google.gson.Gson;
+import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import org.bson.Document;
 
 public class DatabaseUtils {
@@ -73,7 +76,25 @@ public class DatabaseUtils {
   private static Object[] searchCollection(MongoCollection<Document> collection, String key,
       String value, Type t) {
     Gson gson = new Gson();
-    Document match = new Document(key, value);
+    // Document match = new Document(key, value);
+    BasicDBObject match = new BasicDBObject();
+    match.append(key, value);
+    FindIterable<Document> results = collection.find(match);
+    ArrayList<Object> retListAr = new ArrayList<>();
+    for (Document d : results) {
+      retListAr.add(gson.fromJson(d.toJson(), t));
+    }
+    return retListAr.toArray();
+  }
+
+  private static Object[] searchCollection(MongoCollection<Document> collection,
+      HashMap<String, String> queryMap, Type t) {
+    Gson gson = new Gson();
+    // Document match = new Document(key, value);
+    BasicDBObject match = new BasicDBObject();
+    for (Map.Entry<String, String> query : queryMap.entrySet()) {
+      match.append(query.getKey(), query.getValue());
+    }
     FindIterable<Document> results = collection.find(match);
     ArrayList<Object> retListAr = new ArrayList<>();
     for (Document d : results) {
@@ -103,8 +124,22 @@ public class DatabaseUtils {
    */
   public static Object[] getFromCollection(String collectionName, String key, String value,
       Type t) {
+    HashMap<String, String> singleQuery = new HashMap<>();
+    singleQuery.put(key, value);
+    return getFromCollection(collectionName, singleQuery, t);
+  }
 
-    return getFromDb(DatabaseUtils.dbName, collectionName, key, value, t);
+  /**
+   * Returns an object array of results.
+   * 
+   * @param collectionName Name of collection to search
+   * @param queryMap       Set of key/value pairs to search by.
+   * @param t              Type of object returned
+   * @return Object[] containing search results
+   */
+  public static Object[] getFromCollection(String collectionName, HashMap<String, String> queryMap,
+      Type t) {
+    return getFromDb(DatabaseUtils.dbName, collectionName, queryMap, t);
   }
 
   /**
@@ -125,5 +160,12 @@ public class DatabaseUtils {
     MongoDatabase database = DatabaseUtils.client.getDatabase(dbname);
     MongoCollection<Document> collection = database.getCollection(collectionName);
     return searchCollection(collection, key, value, t);
+  }
+
+  private static Object[] getFromDb(String dbname, String collectionName,
+      HashMap<String, String> queryMap, Type t) {
+    MongoDatabase database = DatabaseUtils.client.getDatabase(dbname);
+    MongoCollection<Document> collection = database.getCollection(collectionName);
+    return searchCollection(collection, queryMap, t);
   }
 }
