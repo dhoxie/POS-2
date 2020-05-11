@@ -1,5 +1,7 @@
 package com.scottsdaleair;
 
+import static org.junit.Assert.assertTrue;
+
 import com.scottsdaleair.controller.DatabaseGetter;
 import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.Invoice;
@@ -8,10 +10,70 @@ import com.scottsdaleair.data.Part;
 import com.scottsdaleair.data.Service;
 import com.scottsdaleair.data.Vehicle;
 import com.scottsdaleair.utils.DatabaseUtils;
-import junit.framework.TestCase;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class DatabaseTest extends TestCase {
+public class DatabaseTest {
+
+
+  /**
+   * Sets up the database for testing.
+   */
+  @BeforeClass
+  public static void initDB() {
+    Customer[] someCustomers = DatabaseGetter.queryCustomers("id", "1234567");
+    if (someCustomers.length < 1) {
+      Customer cust = new Customer("1234567", "Kayla", "Testificate", "testemail@test.com",
+          "1234 Test St", null, null, null);
+      DatabaseUtils.addObjToCollection("customers", cust);
+    }
+
+    Vehicle[] someVehicles = DatabaseGetter.queryVehicles("vin", "2GTJK39U624XX9K5D");
+    if (someVehicles.length < 1) {
+      Vehicle veh = new Vehicle("TestMake", "TestModel", "-1", "TESTR", "101", "TESTMTR",
+          "2GTJK39U624XX9K5D", "TSTCMT");
+      DatabaseUtils.addObjToCollection("vehicles", veh);
+    }
+
+    Part[] someParts = DatabaseGetter.queryParts("partID", "433396766");
+    String[] parts = new String[1];
+    if (someParts.length < 1) {
+      Part prt = new Part("433396766", "Test Makers", 1, "$-1.99");
+      DatabaseUtils.addObjToCollection("parts", prt);
+      parts[0] = prt.getPartID();
+    } else {
+      parts[0] = someParts[0].getPartID();
+    }
+
+    Service[] someServices = DatabaseGetter.queryServices("id", "836891868");
+    String[] services = new String[1];
+    if (someServices.length < 1) {
+      Service srv =
+          new Service("836891868", "Test Service", parts, "A service to test on", "$-1.99");
+      DatabaseUtils.addObjToCollection("services", srv);
+      services[0] = srv.getId();
+    } else {
+      services[0] = someServices[0].getId();
+    }
+
+    Kit[] someKits = DatabaseGetter.queryKits("id", "220839086");
+    String[] kits = new String[1];
+    if (someKits.length < 1) {
+      Kit kit = new Kit("220839086", "Test Kit", parts, services, "A kit to test on", "$-1.99");
+      DatabaseUtils.addObjToCollection("kits", kit);
+      kits[0] = kit.getId();
+    } else {
+      kits[0] = someKits[0].getId();
+    }
+
+    Invoice[] someInvoices = DatabaseGetter.queryInvoices("id", "497658563");
+    if (someInvoices.length < 1) {
+      Invoice inv = new Invoice("497658563", "somedate", "1234567", "2GTJK39U624XX9K5D", parts,
+          services, kits, "PRIVTEST", "PUBTEST");
+      DatabaseUtils.addObjToCollection("invoices", inv);
+    }
+
+  }
 
   @Test
   public void testGetAllCustomers() {
@@ -63,7 +125,7 @@ public class DatabaseTest extends TestCase {
   public void testGetAllParts() {
     Part[] allParts = DatabaseGetter.getAllParts();
     assertTrue(
-        allParts.length == DatabaseUtils.getEntireCollection("customers", Customer.class).length);
+        allParts.length == DatabaseUtils.getEntireCollection("parts", Customer.class).length);
   }
 
   @Test

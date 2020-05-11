@@ -10,14 +10,14 @@ import org.testfx.api.FxRobotException;
 
 public class NavTabsTest extends AppTest {
 
-  final String navPaneID = "#pane_Nav";
-  final String paneCustID = "#pane_Customers";
-  final String panePOSID = "#pane_POS";
+  final String navPaneID = "#paneNav";
+  final String paneCustID = "#paneCustomers";
+  final String panePOSID = "#panePOS";
 
 
   @Test(expected = FxRobotException.class)
   public void clickOnBogusNavElement() {
-    clickOn("#btn_Bogus_NAV");
+    clickOn("#btnBogusNAV");
   }
 
   @Test
