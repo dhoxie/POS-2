@@ -70,31 +70,6 @@ public class Service {
     this.price = price;
   }
 
-  public Service id(String id) {
-    this.id = id;
-    return this;
-  }
-
-  public Service name(String name) {
-    this.name = name;
-    return this;
-  }
-
-  public Service parts(String[] parts) {
-    this.parts = parts;
-    return this;
-  }
-
-  public Service description(String description) {
-    this.description = description;
-    return this;
-  }
-
-  public Service price(String price) {
-    this.price = price;
-    return this;
-  }
-
   @Override
   public boolean equals(Object o) {
     if (o == this) {
