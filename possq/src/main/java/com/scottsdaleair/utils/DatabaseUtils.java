@@ -5,6 +5,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Collation;
+import com.mongodb.client.model.CollationStrength;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import org.bson.Document;
@@ -16,6 +18,8 @@ public class DatabaseUtils {
   public static final String dbName = "userdat";
   public static final String backupDbAddress = "35.247.126.11";
   private static MongoClient client;
+  private static final Collation collation =
+      Collation.builder().locale("en").collationStrength(CollationStrength.SECONDARY).build();
 
   static {
     try {
@@ -74,7 +78,7 @@ public class DatabaseUtils {
       String value, Type t) {
     Gson gson = new Gson();
     Document match = new Document(key, value);
-    FindIterable<Document> results = collection.find(match);
+    FindIterable<Document> results = collection.find(match).collation(collation);
     ArrayList<Object> retListAr = new ArrayList<>();
     for (Document d : results) {
       retListAr.add(gson.fromJson(d.toJson(), t));
