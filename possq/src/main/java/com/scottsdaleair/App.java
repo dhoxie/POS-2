@@ -8,26 +8,17 @@ public class App extends Application {
   private static Config theConfig; 
   @Override
   public void start(Stage primaryStage) throws Exception {
-    System.out.println("testing config before ");
-   
     primaryStage.setTitle(window.title);
     primaryStage.setScene(window.getScene());
     primaryStage.show();
-    System.out.println("testing config after ");
-    theConfig = Config.getConfig();
-    if(theConfig != null){
-      System.out.println(theConfig.getPrimaryDatabaseIp());
-      theConfig.changePrimaryDatabase("thisis the new ip" , "this is the newport ");
-    }else{
-      System.out.println("was null");
-    }
-    
   }
   @Override 
-  public void stop(){
+  public void stop()throws Exception{
+    theConfig = Config.getConfig();
     theConfig.finalize();
     theConfig = null;
   }
+  
 
   public static void main(String[] args) {
     launch(args);

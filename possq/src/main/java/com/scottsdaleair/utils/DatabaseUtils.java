@@ -10,13 +10,14 @@ import com.mongodb.client.model.CollationStrength;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import org.bson.Document;
-
+import com.scottsdaleair.utils.Config; 
 public class DatabaseUtils {
 
-  private static final String dbAddr = "73.42.132.222";
-  private static final int dbPort = 27017;
+  private static final String dbAddr = Config.getConfig().getPrimaryDatabaseIp();
+  private static final int dbPort = Integer.parseInt(Config.getConfig().getPrimaryDatabasePort());
   public static final String dbName = "userdat";
-  public static final String backupDbAddress = "35.247.126.11";
+  public static final String backupDbAddress = Config.getConfig().getSecondaryDatabaseIp();
+  public static final int backupDbPort = Integer.parseInt(Config.getConfig().getSecondaryDatabasePort());
   private static MongoClient client;
   private static final Collation collation =
       Collation.builder().locale("en").collationStrength(CollationStrength.SECONDARY).build();
@@ -30,7 +31,7 @@ public class DatabaseUtils {
     if (client == null) {
       try {
         client = null;
-        client = new MongoClient(backupDbAddress, dbPort);
+        client = new MongoClient(backupDbAddress, backupDbPort);
       } catch (Exception e) {
         e.printStackTrace();
         throw new RuntimeException("Exception occured in creating singleton instance");

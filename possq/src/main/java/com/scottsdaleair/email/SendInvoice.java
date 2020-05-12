@@ -9,6 +9,7 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import com.scottsdaleair.utils.Config;
 /**
  * A Class used to send an invoice via email.
  * 
@@ -41,7 +42,7 @@ public class SendInvoice {
 
     String host = "smtp.zoho.com";
     final String user = "invoices@scottsdaleairport.tech";
-    final String password = "mIq3LX5hycEk";
+    final String password = Config.getConfig().getEmailPassword();
 
     String sendTo = this.to;
     Properties props = setUpProperties(host);

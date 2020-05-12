@@ -12,3 +12,6 @@ tmp/
 .idea/
 .project/
 .DS_Store
+
+#configExclude
+config.scottsdaleAirConfig

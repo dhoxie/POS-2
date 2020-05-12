@@ -41,6 +41,7 @@ public class POS2controller {
   // POS Search Screen
   @FXML
   private TextField txtInvoiceNum;
+  @FXML
   private TextField txtEmailSearch;
 
   // -------------- M E T H O D S --------------
@@ -101,9 +102,7 @@ public class POS2controller {
   @FXML
   private void emailPDF(ActionEvent event) throws Exception {
     String invoiceNum = txtInvoiceNum.getText();
-
-    String email = txtEmailSearch.getText();
-
+    String email = txtEmailSearch.getText() ;
     if (invoiceNum.equals("")) {
       // @kayla
       // pop up to say that there needs to be an invoice num enterend;
