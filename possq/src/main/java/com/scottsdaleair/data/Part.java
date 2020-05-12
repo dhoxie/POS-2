@@ -58,28 +58,6 @@ public class Part {
     this.price = price;
   }
 
-  /* What is the purpose of this code? Not currently in use.  - Daylyn (Tester/Reviewer)
-  public Part partNum(String partNum) {
-    this.partID = partNum;
-    return this;
-  }
-
-  public Part vendor(String vendor) {
-    this.vendor = vendor;
-    return this;
-  }
-
-  public Part onHand(int onHand) {
-    this.onHand = onHand;
-    return this;
-  }
-
-  public Part price(String price) {
-    this.price = price;
-    return this;
-  }
-  */
-
   /**
    * Get the part object from db by id.
    * @param partId  id of the part

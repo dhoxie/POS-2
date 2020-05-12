@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 public class KitTest {
 
-  private Kit kit, kit2;
+  private Kit kit;
   String changed;
   String [] arr = {"1", "2", "3"};
   String [] changedArr = {"changed"};
@@ -17,7 +17,6 @@ public class KitTest {
   @Before
   public void setUp() throws Exception {
     kit = new Kit("id", "name", arr, arr, "description", "$0.00");
-    kit2 = kit;
     changed = "changed";
   }
 
@@ -67,24 +66,6 @@ public class KitTest {
   }
 
   @Test
-  public void testId() {
-    kit2 =  kit.id(changed);
-    assertNotEquals(kit, kit2);
-  }
-
-  @Test
-  public void testName() {
-    kit2 = kit.name(changed);
-    assertNotEquals(kit, kit2);
-  }
-
-  @Test
-  public void testParts() {
-    kit2 = kit.parts(changedArr);
-    assertNotEquals(kit, kit2);
-  }
-
-  @Test
   public void testEquals() {
     Kit diff = new Kit();
     assertNotEquals(kit, diff);
@@ -98,11 +79,5 @@ public class KitTest {
         + kit.getDescription() + "'" + ", price='" + kit.getPrice()
         + "'" + "}";
     assertEquals(expected, kit.toString());
-  }
-
-  @Test
-  public void testGetFromDb() {
-    Kit db = kit.getFromDb(kit.getId());
-    assertEquals(db, kit);
   }
 }

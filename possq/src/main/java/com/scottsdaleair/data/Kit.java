@@ -82,7 +82,7 @@ public class Kit {
     this.price = price;
   }
 
-  public Kit id(String id) {
+/*  public Kit id(String id) {
     this.id = id;
     return this;
   }
@@ -97,8 +97,7 @@ public class Kit {
     return this;
   }
 
-  // commented because not currently in use -Daylyn(Tester/Reviewer)
-/*  public Kit services(String[] services) {
+  public Kit services(String[] services) {
     this.services = services;
     return this;
   }
