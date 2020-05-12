@@ -44,7 +44,7 @@ public class PartGeneratorUtils {
   public static String[] createTestParts(int partCount) {
     String[] parts = new String[partCount];
     for (int x = 0; x < partCount; x++) {
-      parts[x] = createTestPart().getPartNum();
+      parts[x] = createTestPart().getPartID();
     }
     return parts;
   }

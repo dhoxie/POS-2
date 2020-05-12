@@ -20,7 +20,7 @@ public class GeneratorUtils {
    * @return String price $dollar.cents
    */
   public static String getRealisticPrice(int dollarRange) {
-    int centVals[] = {99, 95, 49};
+    int[] centVals = {99, 95, 49};
     int cents = centVals[rand.nextInt(centVals.length)];
     int roundBy = dollarRange / 5;
     int dollars = Integer.max((rand.nextInt(dollarRange) / roundBy) * roundBy - 1, 2);

@@ -16,7 +16,7 @@ import org.bson.Document;
 public class DatabaseFiller {
 
   /**
-   * Fills the database with data fitting a given number of customers
+   * Fills the database with data fitting a given number of customers.
    * @param customerCount  Number of customers to add
    */
   public static void fillDb(int customerCount) {
