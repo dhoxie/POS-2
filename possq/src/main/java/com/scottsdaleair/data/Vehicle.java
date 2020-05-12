@@ -104,46 +104,6 @@ public class Vehicle {
     this.comments = comments;
   }
 
-  public Vehicle make(String make) {
-    this.make = make;
-    return this;
-  }
-
-  public Vehicle model(String model) {
-    this.model = model;
-    return this;
-  }
-
-  public Vehicle year(String year) {
-    this.year = year;
-    return this;
-  }
-
-  public Vehicle plate(String plate) {
-    this.plate = plate;
-    return this;
-  }
-
-  public Vehicle mileage(String mileage) {
-    this.mileage = mileage;
-    return this;
-  }
-
-  public Vehicle motor(String motor) {
-    this.motor = motor;
-    return this;
-  }
-
-  public Vehicle vin(String vin) {
-    this.vin = vin;
-    return this;
-  }
-
-  public Vehicle comments(String comments) {
-    this.comments = comments;
-    return this;
-  }
-
   /**
    * Get the vehicle object from db by vin.
    * @param vin vin of the vehicle
