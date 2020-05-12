@@ -97,7 +97,8 @@ public class Kit {
     return this;
   }
 
-  public Kit services(String[] services) {
+  // commented because not currently in use -Daylyn(Tester/Reviewer)
+/*  public Kit services(String[] services) {
     this.services = services;
     return this;
   }
@@ -110,7 +111,7 @@ public class Kit {
   public Kit price(String price) {
     this.price = price;
     return this;
-  }
+  }*/
 
   @Override
   public boolean equals(Object o) {

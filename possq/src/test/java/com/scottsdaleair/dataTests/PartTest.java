@@ -56,13 +56,12 @@ public class PartTest {
     assertEquals(part.getPrice(), changed);
   }
 
-  /*
-   * did not pass. I think DB may not be running, or we may need to rewrite this test to pass -
-   * Daylyn(Tester)
-   * 
-   * @Test public void testGetFromDb() { Part db = part.getFromDb(part.getPartID());
-   * assertEquals(db, part); }
-   */
+   //did not pass. I think DB may not be running, or we may need to rewrite this test to pass -
+   //Daylyn(Tester)
+   @Test public void testGetFromDb() {
+    Part db = part.getFromDb(part.getPartID());
+    assertEquals(db, part);
+  }
 
   @Test
   public void testEquals() {
