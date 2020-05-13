@@ -6,6 +6,8 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Collation;
+import com.mongodb.client.model.CollationStrength;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,7 +20,9 @@ public class DatabaseUtils {
   private static final int dbPort = 27017;
   public static final String dbName = "userdat";
   public static final String backupDbAddress = "35.247.126.11";
-  public static MongoClient client;
+  private static MongoClient client;
+  private static final Collation collation =
+      Collation.builder().locale("en").collationStrength(CollationStrength.SECONDARY).build();
 
   static {
     try {
