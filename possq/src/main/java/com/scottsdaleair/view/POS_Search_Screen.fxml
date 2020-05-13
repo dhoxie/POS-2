@@ -228,6 +228,7 @@
                   <Font name="System Bold" size="12.0" />
                </font>
             </Button>
+            <Label layoutX="402.0" layoutY="200.0" text="Label" />
             </AnchorPane>
         </AnchorPane>
     </AnchorPane>
