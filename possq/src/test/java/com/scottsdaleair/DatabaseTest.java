@@ -1,7 +1,7 @@
 package com.scottsdaleair;
 
 import static org.junit.Assert.assertTrue;
-
+import java.io.IOException;
 import com.scottsdaleair.controller.DatabaseGetter;
 import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.Invoice;
@@ -9,6 +9,7 @@ import com.scottsdaleair.data.Kit;
 import com.scottsdaleair.data.Part;
 import com.scottsdaleair.data.Service;
 import com.scottsdaleair.data.Vehicle;
+import com.scottsdaleair.utils.Configurator;
 import com.scottsdaleair.utils.DatabaseUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -21,6 +22,12 @@ public class DatabaseTest {
    */
   @BeforeClass
   public static void initDB() {
+    try {
+      Configurator.load();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     Customer[] someCustomers = DatabaseGetter.queryCustomers("id", "1234567");
     if (someCustomers.length < 1) {
       Customer cust = new Customer("1234567", "Kayla", "Testificate", "testemail@test.com",

@@ -1,5 +1,7 @@
 package com.scottsdaleair;
 
+import java.io.IOException;
+import com.scottsdaleair.utils.Configurator;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -15,6 +17,12 @@ public class App extends Application {
 
 
   public static void main(String[] args) {
+    try {
+      Configurator.load();
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     launch(args);
   }
 

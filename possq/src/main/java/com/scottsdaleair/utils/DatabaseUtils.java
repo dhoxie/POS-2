@@ -13,16 +13,17 @@ import org.bson.Document;
 
 public class DatabaseUtils {
 
-  private static final String dbAddr = "73.42.132.222";
-  private static final int dbPort = 27017;
+  private static final String dbAddr = Configurator.getDbIp();
+  private static final int dbPort = Configurator.getDbPort();
   public static final String dbName = "userdat";
-  public static final String backupDbAddress = "35.247.126.11";
+  public static final String backupDbAddress = Configurator.getBakIp();
   private static MongoClient client;
   private static final Collation collation =
       Collation.builder().locale("en").collationStrength(CollationStrength.SECONDARY).build();
 
   static {
     try {
+      System.out.println("Connecting to client: " + dbAddr + ":" + dbPort);
       client = new MongoClient(dbAddr, dbPort);
     } catch (Exception e) {
       client = null;
@@ -31,6 +32,7 @@ public class DatabaseUtils {
       try {
         client = null;
         client = new MongoClient(backupDbAddress, dbPort);
+        System.out.println("Connecting to client: " + backupDbAddress + ":" + dbPort);
       } catch (Exception e) {
         e.printStackTrace();
         throw new RuntimeException("Exception occured in creating singleton instance");
