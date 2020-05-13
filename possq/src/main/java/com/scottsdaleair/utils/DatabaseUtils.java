@@ -20,8 +20,8 @@ public class DatabaseUtils {
   private static final int dbPort = 27017;
   public static final String dbName = "userdat";
   public static final String backupDbAddress = "35.247.126.11";
-  private static MongoClient client;
-  private static final Collation collation =
+  public static MongoClient client;
+  public static final Collation collation =
       Collation.builder().locale("en").collationStrength(CollationStrength.SECONDARY).build();
 
   static {
@@ -83,7 +83,7 @@ public class DatabaseUtils {
     // Document match = new Document(key, value);
     BasicDBObject match = new BasicDBObject();
     match.append(key, value);
-    FindIterable<Document> results = collection.find(match);
+    FindIterable<Document> results = collection.find(match).collation(collation);
     ArrayList<Object> retListAr = new ArrayList<>();
     for (Document d : results) {
       retListAr.add(gson.fromJson(d.toJson(), t));

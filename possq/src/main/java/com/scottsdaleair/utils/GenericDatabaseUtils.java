@@ -27,7 +27,7 @@ public class GenericDatabaseUtils<T> {
     for (Map.Entry<String, String> query : queryMap.entrySet()) {
       match.append(query.getKey(), query.getValue());
     }
-    FindIterable<Document> results = collection.find(match);
+    FindIterable<Document> results = collection.find(match).collation(DatabaseUtils.collation);
     ArrayList<T> retListAr = new ArrayList<>();
     for (Document d : results) {
       retListAr.add(gson.fromJson(d.toJson(), this.type));
