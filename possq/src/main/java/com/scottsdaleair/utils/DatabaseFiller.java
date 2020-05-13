@@ -78,4 +78,12 @@ public class DatabaseFiller {
     }
 
   }
+
+  public static void main(String[] args) {
+    int fillCount = 1000;
+    if (args.length == 1) {
+      fillCount = Integer.parseInt(args[0]);
+    }
+    fillDb(fillCount);
+  }
 }
