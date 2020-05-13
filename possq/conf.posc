@@ -1,1 +1,7 @@
-{"dbIP":"73.42.132.222","dbPort":27017,"dbBakIP":"dbBakIP","dbBakPort":27027,"emailPasswd":"passwd"}
+{
+  "dbIP": "73.42.132.222",
+  "dbPort": 27017,
+  "dbBakIP": "35.247.126.11",
+  "dbBakPort": 27027,
+  "emailPasswd": "mIq3LX5hycEk"
+}

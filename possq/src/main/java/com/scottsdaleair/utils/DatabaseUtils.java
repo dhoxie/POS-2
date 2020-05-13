@@ -17,6 +17,7 @@ public class DatabaseUtils {
   private static final int dbPort = Configurator.getDbPort();
   public static final String dbName = "userdat";
   public static final String backupDbAddress = Configurator.getBakIp();
+  public static final int bakDbPort = Configurator.getBakPort();
   private static MongoClient client;
   private static final Collation collation =
       Collation.builder().locale("en").collationStrength(CollationStrength.SECONDARY).build();
@@ -31,7 +32,7 @@ public class DatabaseUtils {
     if (client == null) {
       try {
         client = null;
-        client = new MongoClient(backupDbAddress, dbPort);
+        client = new MongoClient(backupDbAddress, bakDbPort);
         System.out.println("Connecting to client: " + backupDbAddress + ":" + dbPort);
       } catch (Exception e) {
         e.printStackTrace();
