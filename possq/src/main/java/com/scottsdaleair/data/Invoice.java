@@ -1,6 +1,6 @@
 package com.scottsdaleair.data;
 
-import com.scottsdaleair.utils.DatabaseUtils;
+import com.scottsdaleair.controller.DatabaseGetter;
 import java.util.Objects;
 
 public class Invoice {
@@ -165,10 +165,7 @@ public class Invoice {
    * @return
    */
   public static Invoice getFromDb(String invoiceId) {
-    // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
-    Object[] invoices = DatabaseUtils.getFromCollection("invoices", "id", invoiceId,
-        Invoice.class);
-    return (Invoice) invoices[0];
+    return DatabaseGetter.queryDB("key", invoiceId, Invoice.class)[0];
   }
 
   @Override

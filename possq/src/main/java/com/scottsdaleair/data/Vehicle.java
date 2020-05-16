@@ -1,6 +1,6 @@
 package com.scottsdaleair.data;
 
-import com.scottsdaleair.utils.DatabaseUtils;
+import com.scottsdaleair.controller.DatabaseGetter;
 import java.util.Objects;
 
 public class Vehicle {
@@ -150,10 +150,7 @@ public class Vehicle {
    * @return
    */
   public static Vehicle getFromDb(String vin) {
-    // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
-    Object[] invoices = DatabaseUtils.getFromCollection("vehicles", "vin", vin,
-        Vehicle.class);
-    return (Vehicle) invoices[0];
+    return DatabaseGetter.queryDB("vehicles", vin, Vehicle.class)[0];
   }
 
   @Override

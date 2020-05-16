@@ -1,6 +1,6 @@
 package com.scottsdaleair.data;
 
-import com.scottsdaleair.utils.DatabaseUtils;
+import com.scottsdaleair.controller.DatabaseGetter;
 import java.util.Objects;
 
 /**
@@ -168,10 +168,7 @@ public class Customer {
    * @return
    */
   public static Customer getFromDb(String customerId) {
-    // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
-    Object[] users = DatabaseUtils.getFromCollection("customers", "id", customerId,
-        Customer.class);
-    return (Customer) users[0];
+    return DatabaseGetter.queryDB("id", customerId, Customer.class)[0];
   }
 
   @Override

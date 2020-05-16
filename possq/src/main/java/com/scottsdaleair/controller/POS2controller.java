@@ -146,9 +146,9 @@ public class POS2controller {
     }
     
     if (query.isEmpty()) {
-      customers = GenericDatabaseGetter.getAll(Customer.class);
+      customers = DatabaseGetter.getAll(Customer.class);
     } else {
-      customers = GenericDatabaseGetter.queryDB(query, Customer.class);
+      customers = DatabaseGetter.queryDB(query, Customer.class);
     }
 
     ObservableList<Customer> data = FXCollections.observableArrayList();
