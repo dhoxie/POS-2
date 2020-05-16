@@ -7,12 +7,12 @@ public class DatabaseGetter<T> {
 
 
   /**
-   * Query the database with a hasmap of key/value pairs.
+   * Query the database with a key/value pair.
    * 
-   * @param <T>      Type of data object
-   * @param key      Key to match to
-   * @param value    Value for key
-   * @param type     Class of data type (DataType.class)
+   * @param <T>   Type of data object
+   * @param key   Key to match to
+   * @param value Value for key
+   * @param type  Class of data type (DataType.class)
    * @return
    */
   public static <T> T[] queryDB(String key, String value, Class<T> type) {
