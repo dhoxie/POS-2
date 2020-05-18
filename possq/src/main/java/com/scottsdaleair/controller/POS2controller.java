@@ -7,6 +7,7 @@ import com.scottsdaleair.email.SendInvoice;
 import com.scottsdaleair.pdfGenerator.PDFInvoice;
 import java.awt.Desktop;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,10 +17,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
 
@@ -47,12 +45,17 @@ public class POS2controller {
   @FXML
   private TextField txtEmailSearch;
 
+  // Customer Profile Screen
+  @FXML
+  private Label labelCustName;
+
+
 
   // -------------- M E T H O D S --------------
 
   // Scene Changing
   @FXML
-  private void changeScene(ActionEvent event) throws Exception {
+  private void changeScene(ActionEvent event) throws IOException {
     Parent root;
     URL url;
     Stage stage;
@@ -177,6 +180,22 @@ public class POS2controller {
       customers = DatabaseGetter.getAllCustomers();
     }
 
+
+    tblCustomerResults.setRowFactory(tblCustomerResults -> {
+      TableRow<Customer> row = new TableRow<>();
+      row.setOnMouseClicked(mouseEvent -> {
+        if(mouseEvent.getClickCount() == 2 && (!row.isEmpty())){
+          try {
+            viewCustomer(row);
+          } catch (IOException e) {
+            new Exception("Ran into IO error in loading Customer Profile Screen");
+          }
+          System.out.println("Double clicked on item");
+        }
+      });
+      return row;
+    });
+
     ObservableList<Customer> data = FXCollections.observableArrayList();
 
     // Adding data
@@ -188,6 +207,24 @@ public class POS2controller {
     }
 
     tblCustomerResults.setItems(data);
+
+
+  }
+
+  private void viewCustomer(TableRow<Customer> row) throws IOException {
+    String id = row.getItem().getId();
+    Customer[] custList = DatabaseGetter.queryCustomers("id", id);
+    Customer cust = custList[0];
+
+    URL url = new File("src/main/java/com/scottsdaleair/view/Customer_Profile_Screen.fxml").toURI().toURL();
+    Stage stage = (Stage) btnCustomersNAV.getScene().getWindow();
+    Parent root = FXMLLoader.load(url);
+    Scene scene = new Scene(root);
+    stage.setScene(scene);
+    stage.show();
+
+    //System.out.println(labelCustName.getText());
+    //labelCustName.setText(cust.getFname() + " " + cust.getLname());
   }
 
 }

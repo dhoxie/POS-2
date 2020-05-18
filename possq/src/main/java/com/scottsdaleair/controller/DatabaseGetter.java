@@ -24,7 +24,7 @@ public class DatabaseGetter {
   /**
    * Get all {@link Customer}s based on a (key,value) pair.
    * 
-   * @param key Property of the ustomer to match
+   * @param key Property of the customer to match
    * @param value Value of the property to match
    * @return {@link Customer}[]
    */
