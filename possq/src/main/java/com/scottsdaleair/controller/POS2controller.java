@@ -8,6 +8,7 @@ import com.scottsdaleair.pdfGenerator.PDFInvoice;
 import java.awt.Desktop;
 import java.io.File;
 import java.net.URL;
+import java.util.HashMap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.concurrent.Task;
@@ -141,14 +142,22 @@ public class POS2controller {
   private void buildData() {
     tblCustomerResults.getItems().clear();
     Customer[] customers;
+    HashMap<String, String> query = new HashMap<>();
+
     if (!txtFirstNameSearch.getText().isEmpty()) {
-      customers = DatabaseGetter.queryCustomers("fname", txtFirstNameSearch.getText());
-    } else if (!txtLastNameSearch.getText().isEmpty()) {
-      customers = DatabaseGetter.queryCustomers("lname", txtLastNameSearch.getText());
-    } else if (!txtAddressSearch.getText().isEmpty()) {
-      customers = DatabaseGetter.queryCustomers("address", txtAddressSearch.getText());
+      query.put("fname", txtFirstNameSearch.getText());
+    }
+    if (!txtLastNameSearch.getText().isEmpty()) {
+      query.put("lname", txtLastNameSearch.getText());
+    }
+    if (!txtAddressSearch.getText().isEmpty()) {
+      query.put("address", txtAddressSearch.getText());
+    }
+    
+    if (query.isEmpty()) {
+      customers = DatabaseGetter.getAll(Customer.class);
     } else {
-      customers = DatabaseGetter.getAllCustomers();
+      customers = DatabaseGetter.queryDB(query, Customer.class);
     }
 
     ObservableList<Customer> data = FXCollections.observableArrayList();

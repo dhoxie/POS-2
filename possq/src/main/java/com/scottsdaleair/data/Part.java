@@ -1,6 +1,6 @@
 package com.scottsdaleair.data;
 
-import com.scottsdaleair.utils.DatabaseUtils;
+import com.scottsdaleair.controller.DatabaseGetter;
 import java.util.Objects;
 
 public class Part {
@@ -86,10 +86,7 @@ public class Part {
    * @return
    */
   public static Part getFromDb(String partId) {
-    // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
-    Object[] invoices = DatabaseUtils.getFromCollection("parts", "partID", partId,
-        Part.class);
-    return (Part) invoices[0];
+    return DatabaseGetter.queryDB("partID", partId, Part.class)[0];
   }
 
   @Override
