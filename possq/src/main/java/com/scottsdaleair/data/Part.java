@@ -30,10 +30,6 @@ public class Part {
     return this.partID;
   }
 
-  public void setPartID(String partID) {
-    this.partID = partID;
-  }
-
   public String getVendor() {
     return this.vendor;
   }

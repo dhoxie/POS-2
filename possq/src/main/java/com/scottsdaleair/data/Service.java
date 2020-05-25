@@ -1,6 +1,8 @@
 package com.scottsdaleair.data;
 
 import com.scottsdaleair.controller.DatabaseGetter;
+import com.scottsdaleair.utils.DataUtils;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Service {
@@ -32,10 +34,6 @@ public class Service {
 
   public String getId() {
     return this.id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
   }
 
   public String getName() {
@@ -70,29 +68,22 @@ public class Service {
     this.price = price;
   }
 
-  public Service id(String id) {
-    this.id = id;
-    return this;
+  public void addPart(String partID) {
+    this.parts = DataUtils.addToArray(partID, this.parts);
   }
 
-  public Service name(String name) {
-    this.name = name;
-    return this;
-  }
-
-  public Service parts(String[] parts) {
-    this.parts = parts;
-    return this;
-  }
-
-  public Service description(String description) {
-    this.description = description;
-    return this;
-  }
-
-  public Service price(String price) {
-    this.price = price;
-    return this;
+  /**
+   * Remove a referenced part from the Invoice.
+   * 
+   * @param partID The ID of the part to be removed
+   * @return The index of the removed ID or -1 if not found.
+   */
+  public int removePart(String partID) {
+    int index = Arrays.asList(this.parts).indexOf(partID);
+    if (index >= 0) {
+      this.parts = DataUtils.removeFromArray(index, this.parts);
+    }
+    return index;
   }
 
   @Override

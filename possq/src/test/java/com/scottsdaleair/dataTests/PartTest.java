@@ -33,12 +33,6 @@ public class PartTest {
   }
 
   @Test
-  public void testSetPartID() {
-    part.setPartID(changed);
-    assertEquals(part.getPartID(), changed);
-  }
-
-  @Test
   public void testSetVendor() {
     part.setVendor(changed);
     assertEquals(part.getVendor(), changed);
