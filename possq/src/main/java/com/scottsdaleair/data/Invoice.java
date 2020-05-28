@@ -119,43 +119,8 @@ public class Invoice {
     return this;
   }
 
-  public Invoice date(String date) {
-    this.date = date;
-    return this;
-  }
-
-  public Invoice customerID(String customerID) {
-    this.customerID = customerID;
-    return this;
-  }
-
-  public Invoice vehicleVin(String vehicleVin) {
-    this.vehicleVin = vehicleVin;
-    return this;
-  }
-
   public Invoice parts(String[] parts) {
     this.parts = parts;
-    return this;
-  }
-
-  public Invoice services(String[] services) {
-    this.services = services;
-    return this;
-  }
-
-  public Invoice kits(String[] kits) {
-    this.kits = kits;
-    return this;
-  }
-
-  public Invoice pubNotes(String pubNotes) {
-    this.pubNotes = pubNotes;
-    return this;
-  }
-
-  public Invoice privNotes(String privNotes) {
-    this.privNotes = privNotes;
     return this;
   }
 

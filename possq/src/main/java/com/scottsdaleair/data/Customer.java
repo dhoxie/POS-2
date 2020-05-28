@@ -61,29 +61,6 @@ public class Customer {
     this.vehicleVins = vehicleVins;
   }
 
-  public Customer histID(final String[] histID) {
-    this.history = histID;
-    return this;
-  }
-
-  public Customer vehicleVins(final String[] vehicleVins) {
-    this.vehicleVins = vehicleVins;
-    return this;
-  }
-
-  public PhoneNumber[] getPhones() {
-    return this.phones;
-  }
-
-  public void setPhones(final PhoneNumber[] phones) {
-    this.phones = phones;
-  }
-
-  public Customer phones(final PhoneNumber[] phones) {
-    this.phones = phones;
-    return this;
-  }
-
   public String getId() {
     return this.id;
   }
@@ -134,31 +111,6 @@ public class Customer {
 
   public Customer id(final String id) {
     this.id = id;
-    return this;
-  }
-
-  public Customer fname(final String fname) {
-    this.fname = fname;
-    return this;
-  }
-
-  public Customer lname(final String lname) {
-    this.lname = lname;
-    return this;
-  }
-
-  public Customer email(final String email) {
-    this.email = email;
-    return this;
-  }
-
-  public Customer address(final String address) {
-    this.address = address;
-    return this;
-  }
-
-  public Customer phone(final PhoneNumber[] phone) {
-    this.phones = phone;
     return this;
   }
 

@@ -176,11 +176,11 @@ public class PDFInvoice {
     Cell phoneCellText = new Cell(1, 1).setTextAlignment(TextAlignment.RIGHT)
         .setBorder(Border.NO_BORDER).add(new Paragraph("HPHONE"));
     Cell phoneCellData = new Cell().setTextAlignment(TextAlignment.LEFT).setBorder(Border.NO_BORDER)
-        .add(new Paragraph(theCust.getPhones()[0].getNum()));
+        .add(new Paragraph(theCust.getPhone()[0].getNum()));
     Cell workPhoneCellText = new Cell(1, 1).setTextAlignment(TextAlignment.RIGHT)
         .setBorder(Border.NO_BORDER).add(new Paragraph("WPHONE"));
     Cell workPhoneCellData = new Cell().setTextAlignment(TextAlignment.LEFT)
-        .setBorder(Border.NO_BORDER).add(new Paragraph(theCust.getPhones()[0].getNum()));
+        .setBorder(Border.NO_BORDER).add(new Paragraph(theCust.getPhone()[0].getNum()));
     Cell zipCellText = new Cell(1, 1).setTextAlignment(TextAlignment.RIGHT)
         .setBorder(Border.NO_BORDER).add(new Paragraph("ZIP"));
     Cell zipCellData = new Cell().setTextAlignment(TextAlignment.LEFT).setBorder(Border.NO_BORDER)
