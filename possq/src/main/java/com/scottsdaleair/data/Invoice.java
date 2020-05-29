@@ -1,6 +1,8 @@
 package com.scottsdaleair.data;
 
 import com.scottsdaleair.controller.DatabaseGetter;
+import com.scottsdaleair.utils.DataUtils;
+import java.util.Arrays;
 import java.util.Objects;
 
 public class Invoice {
@@ -26,6 +28,8 @@ public class Invoice {
    * @param customerID  The Customer ID for the transacted customer
    * @param vehicleVin  The VIN of the vehicle worked on
    * @param parts       The array of part ID's used
+   * @param services    The array of service ID's used
+   * @param kits        The array of kit ID's used
    * @param pubNotes    Notes included in customer invoice
    * @param privNotes   Notes seen only by staff
    */
@@ -44,10 +48,6 @@ public class Invoice {
 
   public String getId() {
     return this.id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
   }
 
   public String getDate() {
@@ -114,50 +114,60 @@ public class Invoice {
     this.privNotes = privNotes;
   }
 
-  public Invoice id(String id) {
-    this.id = id;
-    return this;
+  public void addPart(String partID) {
+    this.parts = DataUtils.addToArray(partID, this.parts);
   }
 
-  public Invoice date(String date) {
-    this.date = date;
-    return this;
+  /**
+   * Remove a referenced part from the Invoice.
+   * 
+   * @param partID The ID of the part to be removed
+   * @return The index of the removed ID or -1 if not found.
+   */
+  public int removePart(String partID) {
+    int index = Arrays.asList(this.parts).indexOf(partID);
+    if (index >= 0) {
+      this.parts = DataUtils.removeFromArray(index, this.parts);
+    }
+    return index;
   }
 
-  public Invoice customerID(String customerID) {
-    this.customerID = customerID;
-    return this;
+  public void addService(String serviceID) {
+    this.services = DataUtils.addToArray(serviceID, this.services);
   }
 
-  public Invoice vehicleVin(String vehicleVin) {
-    this.vehicleVin = vehicleVin;
-    return this;
+  /**
+   * Remove a referenced service from the Invoice.
+   * 
+   * @param serviceID The ID of the service to be removed
+   * @return The index of the removed ID or -1 if not found.
+   */
+  public int removeService(String serviceID) {
+    int index = Arrays.asList(this.services).indexOf(serviceID);
+    if (index >= 0) {
+      this.services = DataUtils.removeFromArray(index, this.services);
+    }
+    return index;
   }
 
-  public Invoice parts(String[] parts) {
-    this.parts = parts;
-    return this;
+  public void addKit(String kitID) {
+    this.kits = DataUtils.addToArray(kitID, this.kits);
   }
 
-  public Invoice services(String[] services) {
-    this.services = services;
-    return this;
+  /**
+   * Remove a referenced kit from the Invoice.
+   * 
+   * @param kitID The ID of the kit to be removed
+   * @return The index of the removed ID or -1 if not found.
+   */
+  public int removeKit(String kitID) {
+    int index = Arrays.asList(this.kits).indexOf(kitID);
+    if (index >= 0) {
+      this.kits = DataUtils.removeFromArray(index, this.kits);
+    }
+    return index;
   }
 
-  public Invoice kits(String[] kits) {
-    this.kits = kits;
-    return this;
-  }
-
-  public Invoice pubNotes(String pubNotes) {
-    this.pubNotes = pubNotes;
-    return this;
-  }
-
-  public Invoice privNotes(String privNotes) {
-    this.privNotes = privNotes;
-    return this;
-  }
 
   /**
    * Get the invoice object from db by id.
