@@ -14,28 +14,26 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class DatabaseTest {
-
-
   /**
    * Sets up the database for testing.
    */
   @BeforeClass
   public static void initDB() {
-    Customer[] someCustomers = DatabaseGetter.queryCustomers("id", "1234567");
+    Customer[] someCustomers = DatabaseGetter.queryDB("id", "1234567", Customer.class);
     if (someCustomers.length < 1) {
       Customer cust = new Customer("1234567", "Kayla", "Testificate", "testemail@test.com",
           "1234 Test St", null, null, null);
       DatabaseUtils.addObjToCollection("customers", cust);
     }
 
-    Vehicle[] someVehicles = DatabaseGetter.queryVehicles("vin", "2GTJK39U624XX9K5D");
+    Vehicle[] someVehicles = DatabaseGetter.queryDB("vin", "2GTJK39U624XX9K5D", Vehicle.class);
     if (someVehicles.length < 1) {
       Vehicle veh = new Vehicle("TestMake", "TestModel", "-1", "TESTR", "101", "TESTMTR",
           "2GTJK39U624XX9K5D", "TSTCMT");
       DatabaseUtils.addObjToCollection("vehicles", veh);
     }
 
-    Part[] someParts = DatabaseGetter.queryParts("partID", "433396766");
+    Part[] someParts = DatabaseGetter.queryDB("partID", "433396766", Part.class);
     String[] parts = new String[1];
     if (someParts.length < 1) {
       Part prt = new Part("433396766", "Test Makers", 1, "$-1.99");
@@ -45,7 +43,7 @@ public class DatabaseTest {
       parts[0] = someParts[0].getPartID();
     }
 
-    Service[] someServices = DatabaseGetter.queryServices("id", "836891868");
+    Service[] someServices = DatabaseGetter.queryDB("id", "836891868", Service.class);
     String[] services = new String[1];
     if (someServices.length < 1) {
       Service srv =
@@ -56,7 +54,7 @@ public class DatabaseTest {
       services[0] = someServices[0].getId();
     }
 
-    Kit[] someKits = DatabaseGetter.queryKits("id", "220839086");
+    Kit[] someKits = DatabaseGetter.queryDB("id", "220839086", Kit.class);
     String[] kits = new String[1];
     if (someKits.length < 1) {
       Kit kit = new Kit("220839086", "Test Kit", parts, services, "A kit to test on", "$-1.99");
@@ -66,7 +64,7 @@ public class DatabaseTest {
       kits[0] = someKits[0].getId();
     }
 
-    Invoice[] someInvoices = DatabaseGetter.queryInvoices("id", "497658563");
+    Invoice[] someInvoices = DatabaseGetter.queryDB("id", "497658563", Invoice.class);
     if (someInvoices.length < 1) {
       Invoice inv = new Invoice("497658563", "somedate", "1234567", "2GTJK39U624XX9K5D", parts,
           services, kits, "PRIVTEST", "PUBTEST");
@@ -77,14 +75,13 @@ public class DatabaseTest {
 
   @Test
   public void testGetAllCustomers() {
-    Customer[] allCustomers = DatabaseGetter.getAllCustomers();
-    assertTrue(allCustomers.length == DatabaseUtils.getEntireCollection("customers",
-        Customer.class).length);
+    Customer[] allCustomers = DatabaseGetter.getAll(Customer.class);
+    assertTrue((long) allCustomers.length == DatabaseUtils.getCollectionSize("customers"));
   }
 
   @Test
   public void testQueryCustomers() {
-    Customer[] someCustomers = DatabaseGetter.queryCustomers("fName", "Kayla");
+    Customer[] someCustomers = DatabaseGetter.queryDB("fName", "Kayla", Customer.class);
 
     int isAccurate = 0;
     for (Customer c : someCustomers) {
@@ -98,66 +95,66 @@ public class DatabaseTest {
 
   @Test
   public void testGetAllInvoices() {
-    Invoice[] allInvoices = DatabaseGetter.getAllInvoices();
+    Invoice[] allInvoices = DatabaseGetter.getAll(Invoice.class);
     assertTrue(
-        allInvoices.length == DatabaseUtils.getEntireCollection("invoices", Invoice.class).length);
+        (long) allInvoices.length == DatabaseUtils.getCollectionSize("invoices"));
   }
 
   @Test
   public void testQueryInvoices() {
-    Invoice[] someInvoices = DatabaseGetter.queryInvoices("id", "497658563");
+    Invoice[] someInvoices = DatabaseGetter.queryDB("id", "497658563", Invoice.class);
     assertTrue(someInvoices.length == 1 && someInvoices[0].getId().equals("497658563"));
   }
 
   @Test
   public void testGetAllKits() {
-    Kit[] allKits = DatabaseGetter.getAllKits();
-    assertTrue(allKits.length == DatabaseUtils.getEntireCollection("kits", Kit.class).length);
+    Kit[] allKits = DatabaseGetter.getAll(Kit.class);
+    assertTrue((long) allKits.length == DatabaseUtils.getCollectionSize("kits"));
   }
 
   @Test
   public void testQueryKits() {
-    Kit[] someKits = DatabaseGetter.queryKits("id", "220839086");
+    Kit[] someKits = DatabaseGetter.queryDB("id", "220839086", Kit.class);
     assertTrue(someKits.length == 1 && someKits[0].getId().equals("220839086"));
   }
 
   @Test
   public void testGetAllParts() {
-    Part[] allParts = DatabaseGetter.getAllParts();
+    Part[] allParts = DatabaseGetter.getAll(Part.class);
     assertTrue(
-        allParts.length == DatabaseUtils.getEntireCollection("parts", Customer.class).length);
+        (long) allParts.length == DatabaseUtils.getCollectionSize("parts"));
   }
 
   @Test
   public void testQueryParts() {
-    Part[] someParts = DatabaseGetter.queryParts("partID", "433396766");
+    Part[] someParts = DatabaseGetter.queryDB("partID", "433396766", Part.class);
     assertTrue(someParts.length == 1 && someParts[0].getPartID().equals("433396766"));
   }
 
   @Test
   public void testGetAllServices() {
-    Service[] allServices = DatabaseGetter.getAllServices();
+    Service[] allServices = DatabaseGetter.getAll(Service.class);
     assertTrue(
-        allServices.length == DatabaseUtils.getEntireCollection("services", Service.class).length);
+        (long) allServices.length == DatabaseUtils.getCollectionSize("services"));
   }
 
   @Test
   public void testQueryServices() {
-    Service[] someServices = DatabaseGetter.queryServices("id", "836891868");
+    Service[] someServices = DatabaseGetter.queryDB("id", "836891868", Service.class);
 
     assertTrue(someServices.length == 1 && someServices[0].getId().equals("836891868"));
   }
 
   @Test
   public void testGetAllVehicles() {
-    Vehicle[] allVehicles = DatabaseGetter.getAllVehicles();
+    Vehicle[] allVehicles = DatabaseGetter.getAll(Vehicle.class);
     assertTrue(
-        allVehicles.length == DatabaseUtils.getEntireCollection("vehicles", Vehicle.class).length);
+        (long) allVehicles.length == DatabaseUtils.getCollectionSize("vehicles"));
   }
 
   @Test
   public void testQueryVehicles() {
-    Vehicle[] someVehicles = DatabaseGetter.queryVehicles("vin", "2GTJK39U624XX9K5D");
+    Vehicle[] someVehicles = DatabaseGetter.queryDB("vin", "2GTJK39U624XX9K5D", Vehicle.class);
 
     assertTrue(someVehicles.length == 1 && someVehicles[0].getVin().equals("2GTJK39U624XX9K5D"));
   }

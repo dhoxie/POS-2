@@ -9,8 +9,10 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.HashMap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -60,12 +62,12 @@ public class POS2controller {
       url = new File("src/main/java/com/scottsdaleair/view/POS_Search_Screen.fxml").toURI().toURL();
     } else if (event.getSource() == btnCustomersNAV) {
       stage = (Stage) btnCustomersNAV.getScene().getWindow();
-      url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml")
-        .toURI().toURL();
+      url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI()
+          .toURL();
     } else {
       stage = (Stage) btnCustomersNAV.getScene().getWindow();
-      url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml")
-        .toURI().toURL();
+      url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI()
+          .toURL();
     }
 
     root = FXMLLoader.load(url);
@@ -77,31 +79,35 @@ public class POS2controller {
   // PDF Generation Method
   @FXML
   private void genPDF(ActionEvent event) throws Exception {
-    String invoiceNum = txtInvoiceNum.getText();
-    if (invoiceNum.equals("")) {
-      buildPopup((Stage) btnPOSNAV.getScene().getWindow(), "Invoice Field is needed");
-    }
-    else {
-      Invoice invoice = Invoice.getFromDb(invoiceNum);
-      Customer cust = Customer.getFromDb(invoice.getCustomerID());
-      try {
-        if (invoiceNum != null) {
-          new PDFInvoice(invoice).start();
-          File inv = new File(invoice.getId() + cust.getFname() + cust.getLname() + ".pdf");
-          if (inv.exists()) {
-            if (Desktop.isDesktopSupported()) {
-              Desktop.getDesktop().open(inv);
-            } else {
-              System.out.println("Desktop not supported");
+    Task<Void> pdfTask = new Task<>() {
+      @Override
+      public Void call() {
+        String invoiceNum = txtInvoiceNum.getText();
+        Invoice invoice = Invoice.getFromDb(invoiceNum);
+        Customer cust = Customer.getFromDb(invoice.getCustomerID());
+        try {
+          //
+          if (invoiceNum != null) {
+            new PDFInvoice(invoice).start();
+            File inv = new File(invoice.getId() + cust.getFname() + cust.getLname() + ".pdf");
+            if (inv.exists()) {
+              if (Desktop.isDesktopSupported()) {
+                Desktop.getDesktop().open(inv);
+              } else {
+                System.out.println("Desktop not supported");
+              }
             }
+          } else {
+            System.out.println("No Invoice Num");
           }
-        } else {
-          System.out.println("No Invoice Num");
+        } catch (Throwable e) {
+          System.out.println("Caught");
         }
-      } catch (Throwable e) {
-        System.out.println("Caught");
+        return null;
       }
-    }
+    };
+    // Event handlers can be attached to pdfTask for user notification.
+    new Thread(pdfTask).start();
   }
 
   @FXML
@@ -157,14 +163,22 @@ public class POS2controller {
   private void buildData() {
     tblCustomerResults.getItems().clear();
     Customer[] customers;
+    HashMap<String, String> query = new HashMap<>();
+
     if (!txtFirstNameSearch.getText().isEmpty()) {
-      customers = DatabaseGetter.queryCustomers("fname", txtFirstNameSearch.getText());
-    } else if (!txtLastNameSearch.getText().isEmpty()) {
-      customers = DatabaseGetter.queryCustomers("lname", txtLastNameSearch.getText());
-    } else if (!txtAddressSearch.getText().isEmpty()) {
-      customers = DatabaseGetter.queryCustomers("address", txtAddressSearch.getText());
+      query.put("fname", txtFirstNameSearch.getText());
+    }
+    if (!txtLastNameSearch.getText().isEmpty()) {
+      query.put("lname", txtLastNameSearch.getText());
+    }
+    if (!txtAddressSearch.getText().isEmpty()) {
+      query.put("address", txtAddressSearch.getText());
+    }
+    
+    if (query.isEmpty()) {
+      customers = DatabaseGetter.getAll(Customer.class);
     } else {
-      customers = DatabaseGetter.getAllCustomers();
+      customers = DatabaseGetter.queryDB(query, Customer.class);
     }
 
 
@@ -200,13 +214,10 @@ public class POS2controller {
 
   private void viewCustomer(TableRow<Customer> row) throws IOException {
     String id = row.getItem().getId();
-    Customer[] custList = DatabaseGetter.queryCustomers("id", id);
+    Customer[] custList = DatabaseGetter.queryDB("id", id, Customer.class);
     Customer cust = custList[0];
 
     Stage stage = (Stage) btnCustomersNAV.getScene().getWindow();
-
-    /*URL url = new File("src/main/java/com/scottsdaleair/view/Customer_Profile_Screen.fxml").toURI().toURL();
-    Parent root = FXMLLoader.load(url);*/
 
     FXMLLoader loader = new FXMLLoader(new File("src/main/java/com/scottsdaleair/view/Customer_Profile_Screen.fxml").toURI().toURL());
     Parent root = loader.load();
