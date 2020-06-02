@@ -102,7 +102,7 @@ public class CustomerProfileController {
         if(vins != null) {
             Vehicle[] vehicles = new Vehicle[vins.length];
             for (int i = 0; i < vins.length; i++) {
-                vehicles[i] = DatabaseGetter.queryVehicles("vin", vins[i])[0];
+                vehicles[i] = Vehicle.getFromDb(vins[i]);
             }
             ObservableList<Vehicle> data = FXCollections.observableArrayList();
 
@@ -129,10 +129,11 @@ public class CustomerProfileController {
         });
 
         String[] histids = cust.getHistID();
+        System.out.println(histids + " - Length of Invoices");
         if(histids != null) {
             Invoice[] invoices = new Invoice[histids.length];
             for (int i = 0; i < histids.length; i++) {
-                invoices[i] = DatabaseGetter.queryInvoices("id", histids[i])[0];
+                invoices[i] = Invoice.getFromDb(histids[i]);
             }
             ObservableList<Invoice> data = FXCollections.observableArrayList();
 
@@ -177,11 +178,9 @@ public class CustomerProfileController {
         stage.show();
     }
 
-
-
     private void viewVehicle(TableRow<Vehicle> row) throws IOException {
         String vin = row.getItem().getVin();
-        Vehicle[] vehicleList = DatabaseGetter.queryVehicles("vin", vin);
+        Vehicle[] vehicleList = DatabaseGetter.queryDB("vin", vin, Vehicle.class);
         Vehicle car = vehicleList[0];
 
         Stage stage = (Stage) btnCustomersNAV.getScene().getWindow();
@@ -199,7 +198,7 @@ public class CustomerProfileController {
     }
 
     private Invoice[] getInvoicesOfVehicle(String vin){
-        Invoice[] invoices = DatabaseGetter.queryInvoices("vehicleVin", vin);
+        Invoice[] invoices = DatabaseGetter.queryDB("vehicleVin", vin, Invoice.class);
         return invoices;
     }
 

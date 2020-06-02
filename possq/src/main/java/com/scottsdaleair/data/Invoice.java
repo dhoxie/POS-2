@@ -175,7 +175,7 @@ public class Invoice {
    * @return
    */
   public static Invoice getFromDb(String invoiceId) {
-    return DatabaseGetter.queryDB("key", invoiceId, Invoice.class)[0];
+    return DatabaseGetter.queryDB("id", invoiceId, Invoice.class)[0];
   }
 
   @Override

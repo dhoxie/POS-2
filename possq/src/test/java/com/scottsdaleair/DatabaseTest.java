@@ -22,7 +22,7 @@ public class DatabaseTest {
     Customer[] someCustomers = DatabaseGetter.queryDB("id", "1234567", Customer.class);
     if (someCustomers.length < 1) {
       Customer cust = new Customer("1234567", "Kayla", "Testificate", "testemail@test.com",
-          "1234 Test St", null, null, null);
+          "1234 Test St", null, new String[]{"497658563"}, null);
       DatabaseUtils.addObjToCollection("customers", cust);
     }
 
@@ -91,6 +91,21 @@ public class DatabaseTest {
     }
 
     assertTrue(isAccurate == someCustomers.length);
+  }
+
+  @Test
+  public void testGetCustomerHistory(){
+    Customer[] someCustomers = DatabaseGetter.queryDB("fName", "Kayla", Customer.class);
+    boolean isAccurate = false;
+    if(someCustomers != null) {
+      String[] history = someCustomers[0].getHistID();
+      if (history != null) {
+        if (history[0].equals("497658563")) {
+          isAccurate = true;
+        }
+      }
+    }
+    assertTrue(isAccurate);
   }
 
   @Test
