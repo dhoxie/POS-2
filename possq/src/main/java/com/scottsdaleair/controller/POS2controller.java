@@ -47,11 +47,6 @@ public class POS2controller {
   @FXML
   private TextField txtEmailSearch;
 
-  // Customer Profile Screen
-  @FXML
-  private Label labelCustName;
-
-
 
   // -------------- M E T H O D S --------------
 
@@ -84,7 +79,6 @@ public class POS2controller {
   // PDF Generation Method
   @FXML
   private void genPDF(ActionEvent event) throws Exception {
-<<<<<<< HEAD
     Task<Void> pdfTask = new Task<>() {
       @Override
       public Void call() {
@@ -102,28 +96,6 @@ public class POS2controller {
               } else {
                 System.out.println("Desktop not supported");
               }
-=======
-    // 122125
-    String invoiceNum = txtInvoiceNum.getText();
-    if (invoiceNum.equals("")) {
-      // @kayla
-      // pop up to say that there needs to be an invoice num enterend;
-      buildPopup((Stage) btnPOSNAV.getScene().getWindow(), "Invoice Field is needed");
-    }
-    else {
-      Invoice invoice = Invoice.getFromDb(invoiceNum);
-      Customer cust = Customer.getFromDb(invoice.getCustomerID());
-      try {
-        //
-        if (invoiceNum != null) {
-          new PDFInvoice(invoice).start();
-          File inv = new File(invoice.getId() + cust.getFname() + cust.getLname() + ".pdf");
-          if (inv.exists()) {
-            if (Desktop.isDesktopSupported()) {
-              Desktop.getDesktop().open(inv);
-            } else {
-              System.out.println("Desktop not supported");
->>>>>>> parent of c91ffcd... Vehicle and Customer Screen Displays Info
             }
           } else {
             System.out.println("No Invoice Num");
@@ -144,13 +116,9 @@ public class POS2controller {
     String email = txtEmailSearch.getText();
 
     if (invoiceNum.equals("")) {
-      // @kayla
-      // pop up to say that there needs to be an invoice num enterend;
       buildPopup((Stage) btnPOSNAV.getScene().getWindow(), "Invoice Field is needed");
     }
     else if (email.equals("")) {
-      // @kayla
-      // pop up to say that there needs to be an email entered ;
       buildPopup((Stage) btnPOSNAV.getScene().getWindow(), "Email Field is needed");
     }
     else {
@@ -249,23 +217,15 @@ public class POS2controller {
     Customer[] custList = DatabaseGetter.queryDB("id", id, Customer.class);
     Customer cust = custList[0];
 
-    URL url = new File("src/main/java/com/scottsdaleair/view/Customer_Profile_Screen.fxml").toURI().toURL();
     Stage stage = (Stage) btnCustomersNAV.getScene().getWindow();
-<<<<<<< HEAD
 
     FXMLLoader loader = new FXMLLoader(new File("src/main/java/com/scottsdaleair/view/Customer_Profile_Screen.fxml").toURI().toURL());
     Parent root = loader.load();
     CustomerProfileController controller = loader.getController();
     controller.loadData(cust);
-=======
-    Parent root = FXMLLoader.load(url);
->>>>>>> parent of c91ffcd... Vehicle and Customer Screen Displays Info
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
-
-    //System.out.println(labelCustName.getText());
-    //labelCustName.setText(cust.getFname() + " " + cust.getLname());
   }
 
 }
