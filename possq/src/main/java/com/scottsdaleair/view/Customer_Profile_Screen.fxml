@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scottsdaleair.controller.CustomerProfileController">
+<VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scottsdaleair.controller.POS2controller">
 
     <stylesheets>
         <URL value="@css/default.css" />
@@ -50,7 +50,7 @@
                         </AnchorPane>
                         <AnchorPane fx:id="StatsPane" prefHeight="358.0" prefWidth="915.0">
                             <children>
-                                <TextField fx:id="txtAddress" layoutX="37.0" layoutY="40.0" prefHeight="26.0" prefWidth="427.0">
+                                <TextField fx:id="txtLicensePlate" layoutX="37.0" layoutY="40.0" prefHeight="26.0" prefWidth="427.0">
                                     <effect>
                                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                                             <color>
@@ -59,7 +59,7 @@
                                         </InnerShadow>
                                     </effect>
                                 </TextField>
-                                <TextField fx:id="txtCity" layoutX="37.0" layoutY="92.0" prefHeight="26.0" prefWidth="210.0">
+                                <TextField fx:id="txtYear" layoutX="37.0" layoutY="92.0" prefHeight="26.0" prefWidth="210.0">
                                     <effect>
                                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                                             <color>
@@ -78,7 +78,7 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="txtEmail" layoutX="37.0" layoutY="142.0" prefHeight="26.0" prefWidth="428.0">
+                                <TextField fx:id="txtMileage" layoutX="37.0" layoutY="142.0" prefHeight="26.0" prefWidth="428.0">
                                     <effect>
                                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                                             <color>
@@ -92,7 +92,7 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="txtState" layoutX="263.0" layoutY="92.0" prefHeight="26.0" prefWidth="63.0">
+                                <TextField fx:id="txtMake" layoutX="263.0" layoutY="92.0" prefHeight="26.0" prefWidth="63.0">
                                     <effect>
                                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                                             <color>
@@ -106,7 +106,7 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="txtZIP" layoutX="342.0" layoutY="92.0" prefHeight="26.0" prefWidth="123.0">
+                                <TextField fx:id="txtModel" layoutX="342.0" layoutY="92.0" prefHeight="26.0" prefWidth="123.0">
                                     <effect>
                                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                                             <color>
@@ -120,7 +120,7 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="txtHomePhone" layoutX="521.0" layoutY="40.0" prefHeight="26.0" prefWidth="203.0">
+                                <TextField fx:id="txtMotor" layoutX="521.0" layoutY="40.0" prefHeight="26.0" prefWidth="203.0">
                                     <effect>
                                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                                             <color>
@@ -134,7 +134,7 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
-                                <TextField fx:id="txtWorkPhone" layoutX="521.0" layoutY="92.0" prefHeight="26.0" prefWidth="202.0">
+                                <TextField fx:id="txtVIN" layoutX="521.0" layoutY="92.0" prefHeight="26.0" prefWidth="202.0">
                                     <effect>
                                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                                             <color>
@@ -153,7 +153,7 @@
                                         <Font size="14.0" />
                                     </font>
                                 </Label>
-                                <TextArea fx:id="txtPrivateNotes" layoutX="381.0" layoutY="196.0" prefHeight="148.0" prefWidth="327.0">
+                                <TextArea fx:id="txtAutomobileNotes" layoutX="381.0" layoutY="196.0" prefHeight="148.0" prefWidth="327.0">
                                     <effect>
                                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                                             <color>
@@ -162,7 +162,7 @@
                                         </InnerShadow>
                                     </effect>
                                 </TextArea>
-                                <TextArea fx:id="txtNotes" layoutX="37.0" layoutY="196.0" prefHeight="148.0" prefWidth="327.0">
+                                <TextArea fx:id="txtPrivateAutomobileNotes" layoutX="37.0" layoutY="196.0" prefHeight="148.0" prefWidth="327.0">
                                     <effect>
                                         <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                                             <color>
@@ -177,7 +177,7 @@
                                     </font>
                                 </Label>
                                 <Separator layoutX="25.0" layoutY="357.0" prefHeight="5.0" prefWidth="880.0" />
-                        <TextField fx:id="txtCellPhone" layoutX="521.0" layoutY="144.0" prefHeight="26.0" prefWidth="202.0">
+                        <TextField fx:id="txtVIN1" layoutX="521.0" layoutY="144.0" prefHeight="26.0" prefWidth="202.0">
                            <effect>
                               <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                                  <color>
@@ -248,7 +248,7 @@
                               <Font name="System Bold" size="25.0" />
                            </font>
                         </Label>
-                        <TableView fx:id="tblInvoiceResults" layoutX="25.0" layoutY="67.0" prefHeight="400.0" prefWidth="882.0">
+                        <TableView fx:id="tblInvoiceResults1" layoutX="25.0" layoutY="67.0" prefHeight="400.0" prefWidth="882.0">
                            <columns>
                               <TableColumn prefWidth="153.06658935546875" text="Invoice Number">
                                  <cellValueFactory>

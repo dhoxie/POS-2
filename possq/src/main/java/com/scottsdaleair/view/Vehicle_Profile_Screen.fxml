@@ -9,7 +9,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scottsdaleair.controller.VehicleProfileController">
+<VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scottsdaleair.controller.POS2controller">
 
     <stylesheets>
         <URL value="@css/default.css" />
@@ -40,7 +40,7 @@
                <children>
                   <AnchorPane prefHeight="97.0" prefWidth="915.0">
                      <children>
-                        <Label fx:id="labelCarName" layoutX="26.0" layoutY="21.0" prefHeight="36.0" prefWidth="580.0" text="carName" textFill="#1e703a">
+                        <Label layoutX="26.0" layoutY="21.0" prefHeight="36.0" prefWidth="580.0" text="carName" textFill="#1e703a">
                            <font>
                               <Font name="System Bold" size="25.0" />
                            </font>
@@ -153,7 +153,7 @@
                                 <Font size="14.0" />
                             </font>
                         </Label>
-                        <TextArea fx:id="txtPrivateNotes" layoutX="380.0" layoutY="142.0" prefHeight="109.0" prefWidth="327.0">
+                        <TextArea fx:id="txtAutomobileNotes" layoutX="380.0" layoutY="142.0" prefHeight="109.0" prefWidth="327.0">
                             <effect>
                                 <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                                     <color>
@@ -162,7 +162,7 @@
                                 </InnerShadow>
                             </effect>
                         </TextArea>
-                        <TextArea fx:id="txtNotes" layoutX="36.0" layoutY="142.0" prefHeight="109.0" prefWidth="327.0">
+                        <TextArea fx:id="txtPrivateAutomobileNotes" layoutX="36.0" layoutY="142.0" prefHeight="109.0" prefWidth="327.0">
                            <effect>
                               <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
                                  <color>
