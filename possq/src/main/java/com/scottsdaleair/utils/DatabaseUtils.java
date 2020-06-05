@@ -1,5 +1,7 @@
 package com.scottsdaleair.utils;
 
+import static com.mongodb.client.model.Filters.eq;
+
 import com.google.gson.Gson;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
@@ -8,6 +10,7 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Collation;
 import com.mongodb.client.model.CollationStrength;
+import com.scottsdaleair.data.DatabaseObject;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,8 +25,8 @@ public class DatabaseUtils<T> {
   private static final String dbName = "userdat";
   private static final String backupDbAddress = "35.247.126.11";
   private static MongoClient client;
-  private static final Collation collation =
-      Collation.builder().locale("en").collationStrength(CollationStrength.SECONDARY).build();
+  private static final Collation collation = Collation.builder().locale("en")
+      .collationStrength(CollationStrength.SECONDARY).build();
 
   static {
     try {
@@ -82,6 +85,30 @@ public class DatabaseUtils<T> {
     addObjToCollection(collection, obj);
   }
 
+  /**
+   * Updates the specified object in the database by id.
+   * 
+   * @param collectionName  Name of the collection the object is in
+   * @param toUpdate        The DatabaseObject to update
+   */
+  public static void updateObjInCollection(String collectionName, DatabaseObject toUpdate) {
+    updateObjInDB(DatabaseUtils.dbName, collectionName, toUpdate);
+  }
+
+  private static void updateObjInCollection(MongoCollection<Document> collection,
+      DatabaseObject obj) {
+    Gson gson = new Gson();
+    String obJson = gson.toJson(obj);
+    Document toUpdate = Document.parse(obJson);
+    collection.replaceOne(eq("id", obj.getID()), toUpdate);
+  }
+
+  private static void updateObjInDB(String dbname, String collectionName, DatabaseObject obj) {
+    MongoDatabase database = DatabaseUtils.client.getDatabase(dbname);
+    MongoCollection<Document> collection = database.getCollection(collectionName);
+    updateObjInCollection(collection, obj);
+  }
+
   public static long getCollectionSize(String collectionName) {
     MongoDatabase database = DatabaseUtils.client.getDatabase(DatabaseUtils.dbName);
     return database.getCollection(collectionName).count();
@@ -94,8 +121,7 @@ public class DatabaseUtils<T> {
     for (Map.Entry<String, String> query : queryMap.entrySet()) {
       match.append(query.getKey(), query.getValue());
     }
-    FindIterable<Document> results =
-        collection.find(match).collation(DatabaseUtils.collation);
+    FindIterable<Document> results = collection.find(match).collation(DatabaseUtils.collation);
     ArrayList<T> retListAr = new ArrayList<>();
     for (Document d : results) {
       retListAr.add(gson.fromJson(d.toJson(), this.type));
@@ -150,8 +176,8 @@ public class DatabaseUtils<T> {
    * @return Object[] containing search results
    */
   public T[] getEntireCollection(String collectionName) {
-    MongoCollection<Document> collection = DatabaseUtils.client
-        .getDatabase(DatabaseUtils.dbName).getCollection(collectionName);
+    MongoCollection<Document> collection = DatabaseUtils.client.getDatabase(DatabaseUtils.dbName)
+        .getCollection(collectionName);
     return retrieveCollection(collection);
   }
 

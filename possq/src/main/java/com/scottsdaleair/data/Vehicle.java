@@ -1,20 +1,17 @@
 package com.scottsdaleair.data;
 
-import com.scottsdaleair.controller.DatabaseGetter;
+import com.scottsdaleair.controller.DBController;
 import java.util.Objects;
 
-public class Vehicle {
+public class Vehicle extends DatabaseObject {
   private String make;
   private String model;
   private String year;
   private String plate;
   private String mileage;
   private String motor;
-  private String vin; // Identifying value
   private String comments;
 
-  public Vehicle() {
-  }
 
   /**
    * Vehicle represents a vehicle.
@@ -30,13 +27,13 @@ public class Vehicle {
   public Vehicle(String make, String model, String year,
       String plate, String mileage, String motor, String vin,
       String comments) {
+    super(vin);
     this.make = make;
     this.model = model;
     this.year = year;
     this.plate = plate;
     this.mileage = mileage;
     this.motor = motor;
-    this.vin = vin;
     this.comments = comments;
   }
 
@@ -89,11 +86,7 @@ public class Vehicle {
   }
 
   public String getVin() {
-    return this.vin;
-  }
-
-  public void setVin(String vin) {
-    this.vin = vin;
+    return this.getID();
   }
 
   public String getComments() {
@@ -104,53 +97,13 @@ public class Vehicle {
     this.comments = comments;
   }
 
-  public Vehicle make(String make) {
-    this.make = make;
-    return this;
-  }
-
-  public Vehicle model(String model) {
-    this.model = model;
-    return this;
-  }
-
-  public Vehicle year(String year) {
-    this.year = year;
-    return this;
-  }
-
-  public Vehicle plate(String plate) {
-    this.plate = plate;
-    return this;
-  }
-
-  public Vehicle mileage(String mileage) {
-    this.mileage = mileage;
-    return this;
-  }
-
-  public Vehicle motor(String motor) {
-    this.motor = motor;
-    return this;
-  }
-
-  public Vehicle vin(String vin) {
-    this.vin = vin;
-    return this;
-  }
-
-  public Vehicle comments(String comments) {
-    this.comments = comments;
-    return this;
-  }
-
   /**
    * Get the vehicle object from db by vin.
    * @param vin vin of the vehicle
    * @return
    */
   public static Vehicle getFromDb(String vin) {
-    return DatabaseGetter.queryDB("vehicles", vin, Vehicle.class)[0];
+    return DBController.queryDB("vehicles", vin, Vehicle.class)[0];
   }
 
   @Override
@@ -165,12 +118,12 @@ public class Vehicle {
     return Objects.equals(make, vehicle.make) && Objects.equals(model, vehicle.model)
         && Objects.equals(year, vehicle.year) && Objects.equals(plate, vehicle.plate)
         && Objects.equals(mileage, vehicle.mileage) && Objects.equals(motor, vehicle.motor)
-        && Objects.equals(vin, vehicle.vin) && Objects.equals(comments, vehicle.comments);
+        && Objects.equals(getID(), vehicle.getID()) && Objects.equals(comments, vehicle.comments);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(make, model, year, plate, mileage, motor, vin, comments);
+    return Objects.hash(make, model, year, plate, mileage, motor, getID(), comments);
   }
 
   @Override

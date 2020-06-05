@@ -86,7 +86,7 @@ public class POS2controller {
           //
           if (invoiceNum != null) {
             new PDFInvoice(invoice).start();
-            File inv = new File(invoice.getId() + cust.getFname() + cust.getLname() + ".pdf");
+            File inv = new File(invoice.getID() + cust.getFname() + cust.getLname() + ".pdf");
             if (inv.exists()) {
               if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().open(inv);
@@ -130,7 +130,7 @@ public class POS2controller {
     Invoice invoice = Invoice.getFromDb(invoiceNum);
     new PDFInvoice(invoice).start();
     Email theEmail = new Email("This is your invoice from Northwest Automotive Center ",
-        invoice.getId() + cust.getFname() + cust.getLname() + ".pdf");
+        invoice.getID() + cust.getFname() + cust.getLname() + ".pdf");
     SendInvoice tmp = new SendInvoice(email, theEmail);
     tmp.send();
 
@@ -155,9 +155,9 @@ public class POS2controller {
     }
     
     if (query.isEmpty()) {
-      customers = DatabaseGetter.getAll(Customer.class);
+      customers = DBController.getAll(Customer.class);
     } else {
-      customers = DatabaseGetter.queryDB(query, Customer.class);
+      customers = DBController.queryDB(query, Customer.class);
     }
 
     ObservableList<Customer> data = FXCollections.observableArrayList();

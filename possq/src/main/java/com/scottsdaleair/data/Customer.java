@@ -1,6 +1,6 @@
 package com.scottsdaleair.data;
 
-import com.scottsdaleair.controller.DatabaseGetter;
+import com.scottsdaleair.controller.DBController;
 import com.scottsdaleair.utils.DataUtils;
 import java.util.Arrays;
 import java.util.Objects;
@@ -8,8 +8,7 @@ import java.util.Objects;
 /**
  * This class represents a customer. Private field {@link Customer#id}
  */
-public class Customer {
-  private String id;
+public class Customer extends DatabaseObject {
 
   private String fname;
   private String lname;
@@ -18,9 +17,6 @@ public class Customer {
   private PhoneNumber[] phones;
   private String[] invoices;
   private String[] vehicleVins;
-
-  public Customer() {
-  }
 
   /**
    * Class representing a customer.
@@ -39,7 +35,7 @@ public class Customer {
   public Customer(final String id, final String fname,
       final String lname, final String email, final String address,
       final PhoneNumber[] phones, final String[] history, final String[] vehicleVins) {
-    this.id = id;
+    super(id);
     this.fname = fname;
     this.lname = lname;
     this.email = email;
@@ -71,10 +67,6 @@ public class Customer {
 
   public void setPhones(final PhoneNumber[] phones) {
     this.phones = phones;
-  }
-
-  public String getId() {
-    return this.id;
   }
 
   public String getFname() {
@@ -172,7 +164,7 @@ public class Customer {
    * @return
    */
   public static Customer getFromDb(String customerId) {
-    return DatabaseGetter.queryDB("id", customerId, Customer.class)[0];
+    return DBController.queryDB("id", customerId, Customer.class)[0];
   }
 
   @Override
@@ -184,7 +176,7 @@ public class Customer {
       return false;
     }
     final Customer customer = (Customer) o;
-    return id == customer.id
+    return this.getID() == customer.getID()
         && Objects.equals(fname, customer.fname)
         && Objects.equals(lname, customer.lname)
         && Objects.equals(email, customer.email)
@@ -194,12 +186,12 @@ public class Customer {
 
   @Override
   public final int hashCode() {
-    return Objects.hash(id, fname, lname, email, address, phones);
+    return Objects.hash(getID(), fname, lname, email, address, phones);
   }
 
   @Override
   public final String toString() {
-    return "{" + " id='" + getId()
+    return "{" + " id='" + getID()
         + "'" + ", fname='" + getFname()
         + "'" + ", lname='" + getLname()
         + "'" + ", email='" + getEmail()

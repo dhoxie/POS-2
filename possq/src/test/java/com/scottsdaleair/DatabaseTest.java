@@ -2,7 +2,7 @@ package com.scottsdaleair;
 
 import static org.junit.Assert.assertTrue;
 
-import com.scottsdaleair.controller.DatabaseGetter;
+import com.scottsdaleair.controller.DBController;
 import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.data.Kit;
@@ -19,69 +19,69 @@ public class DatabaseTest {
    */
   @BeforeClass
   public static void initDB() {
-    Customer[] someCustomers = DatabaseGetter.queryDB("id", "1234567", Customer.class);
+    Customer[] someCustomers = DBController.queryDB("id", "1234567", Customer.class);
     if (someCustomers.length < 1) {
       Customer cust = new Customer("1234567", "Kayla", "Testificate", "testemail@test.com",
           "1234 Test St", null, null, null);
-      DatabaseUtils.addObjToCollection("customers", cust);
+      DBController.addToDB(cust, Customer.class);
     }
 
-    Vehicle[] someVehicles = DatabaseGetter.queryDB("vin", "2GTJK39U624XX9K5D", Vehicle.class);
+    Vehicle[] someVehicles = DBController.queryDB("id", "2GTJK39U624XX9K5D", Vehicle.class);
     if (someVehicles.length < 1) {
       Vehicle veh = new Vehicle("TestMake", "TestModel", "-1", "TESTR", "101", "TESTMTR",
           "2GTJK39U624XX9K5D", "TSTCMT");
-      DatabaseUtils.addObjToCollection("vehicles", veh);
+      DBController.addToDB(veh, Vehicle.class);
     }
 
-    Part[] someParts = DatabaseGetter.queryDB("partID", "433396766", Part.class);
+    Part[] someParts = DBController.queryDB("id", "433396766", Part.class);
     String[] parts = new String[1];
     if (someParts.length < 1) {
       Part prt = new Part("433396766", "Test Makers", 1, "$-1.99");
-      DatabaseUtils.addObjToCollection("parts", prt);
-      parts[0] = prt.getPartID();
+      DBController.addToDB(prt, Part.class);
+      parts[0] = prt.getID();
     } else {
-      parts[0] = someParts[0].getPartID();
+      parts[0] = someParts[0].getID();
     }
 
-    Service[] someServices = DatabaseGetter.queryDB("id", "836891868", Service.class);
+    Service[] someServices = DBController.queryDB("id", "836891868", Service.class);
     String[] services = new String[1];
     if (someServices.length < 1) {
       Service srv =
           new Service("836891868", "Test Service", parts, "A service to test on", "$-1.99");
-      DatabaseUtils.addObjToCollection("services", srv);
-      services[0] = srv.getId();
+      DBController.addToDB(srv, Service.class);
+      services[0] = srv.getID();
     } else {
-      services[0] = someServices[0].getId();
+      services[0] = someServices[0].getID();
     }
 
-    Kit[] someKits = DatabaseGetter.queryDB("id", "220839086", Kit.class);
+    Kit[] someKits = DBController.queryDB("id", "220839086", Kit.class);
     String[] kits = new String[1];
     if (someKits.length < 1) {
       Kit kit = new Kit("220839086", "Test Kit", parts, services, "A kit to test on", "$-1.99");
-      DatabaseUtils.addObjToCollection("kits", kit);
-      kits[0] = kit.getId();
+      DBController.addToDB(kit, Kit.class);
+      kits[0] = kit.getID();
     } else {
-      kits[0] = someKits[0].getId();
+      kits[0] = someKits[0].getID();
     }
 
-    Invoice[] someInvoices = DatabaseGetter.queryDB("id", "497658563", Invoice.class);
+    Invoice[] someInvoices = DBController.queryDB("id", "497658563", Invoice.class);
     if (someInvoices.length < 1) {
       Invoice inv = new Invoice("497658563", "somedate", "1234567", "2GTJK39U624XX9K5D", parts,
           services, kits, "PRIVTEST", "PUBTEST");
-      DatabaseUtils.addObjToCollection("invoices", inv);
+      DBController.addToDB(inv, Invoice.class);
     }
 
   }
 
   @Test
   public void testGetAllCustomers() {
-    Customer[] allCustomers = DatabaseGetter.getAll(Customer.class);
-    assertTrue((long) allCustomers.length == DatabaseUtils.getCollectionSize("customers"));
+    Customer[] allCustomers = DBController.getAll(Customer.class);
+    assertTrue((long) allCustomers.length == DBController.count(Customer.class));
   }
 
   @Test
   public void testQueryCustomers() {
-    Customer[] someCustomers = DatabaseGetter.queryDB("fName", "Kayla", Customer.class);
+    Customer[] someCustomers = DBController.queryDB("fName", "Kayla", Customer.class);
 
     int isAccurate = 0;
     for (Customer c : someCustomers) {
@@ -95,68 +95,79 @@ public class DatabaseTest {
 
   @Test
   public void testGetAllInvoices() {
-    Invoice[] allInvoices = DatabaseGetter.getAll(Invoice.class);
+    Invoice[] allInvoices = DBController.getAll(Invoice.class);
     assertTrue(
-        (long) allInvoices.length == DatabaseUtils.getCollectionSize("invoices"));
+        (long) allInvoices.length == DBController.count(Invoice.class));
   }
 
   @Test
   public void testQueryInvoices() {
-    Invoice[] someInvoices = DatabaseGetter.queryDB("id", "497658563", Invoice.class);
-    assertTrue(someInvoices.length == 1 && someInvoices[0].getId().equals("497658563"));
+    Invoice[] someInvoices = DBController.queryDB("id", "497658563", Invoice.class);
+    assertTrue(someInvoices.length == 1 && someInvoices[0].getID().equals("497658563"));
   }
 
   @Test
   public void testGetAllKits() {
-    Kit[] allKits = DatabaseGetter.getAll(Kit.class);
-    assertTrue((long) allKits.length == DatabaseUtils.getCollectionSize("kits"));
+    Kit[] allKits = DBController.getAll(Kit.class);
+    assertTrue((long) allKits.length == DBController.count(Kit.class));
   }
 
   @Test
   public void testQueryKits() {
-    Kit[] someKits = DatabaseGetter.queryDB("id", "220839086", Kit.class);
-    assertTrue(someKits.length == 1 && someKits[0].getId().equals("220839086"));
+    Kit[] someKits = DBController.queryDB("id", "220839086", Kit.class);
+    assertTrue(someKits.length == 1 && someKits[0].getID().equals("220839086"));
   }
 
   @Test
   public void testGetAllParts() {
-    Part[] allParts = DatabaseGetter.getAll(Part.class);
+    Part[] allParts = DBController.getAll(Part.class);
     assertTrue(
-        (long) allParts.length == DatabaseUtils.getCollectionSize("parts"));
+        (long) allParts.length == DBController.count(Part.class));
   }
 
   @Test
   public void testQueryParts() {
-    Part[] someParts = DatabaseGetter.queryDB("partID", "433396766", Part.class);
-    assertTrue(someParts.length == 1 && someParts[0].getPartID().equals("433396766"));
+    Part[] someParts = DBController.queryDB("id", "433396766", Part.class);
+    assertTrue(someParts.length == 1 && someParts[0].getID().equals("433396766"));
   }
 
   @Test
   public void testGetAllServices() {
-    Service[] allServices = DatabaseGetter.getAll(Service.class);
+    Service[] allServices = DBController.getAll(Service.class);
     assertTrue(
-        (long) allServices.length == DatabaseUtils.getCollectionSize("services"));
+        (long) allServices.length == DBController.count(Service.class));
   }
 
   @Test
   public void testQueryServices() {
-    Service[] someServices = DatabaseGetter.queryDB("id", "836891868", Service.class);
+    Service[] someServices = DBController.queryDB("id", "836891868", Service.class);
 
-    assertTrue(someServices.length == 1 && someServices[0].getId().equals("836891868"));
+    assertTrue(someServices.length == 1 && someServices[0].getID().equals("836891868"));
   }
 
   @Test
   public void testGetAllVehicles() {
-    Vehicle[] allVehicles = DatabaseGetter.getAll(Vehicle.class);
+    Vehicle[] allVehicles = DBController.getAll(Vehicle.class);
     assertTrue(
-        (long) allVehicles.length == DatabaseUtils.getCollectionSize("vehicles"));
+        (long) allVehicles.length == DBController.count(Vehicle.class));
   }
 
   @Test
   public void testQueryVehicles() {
-    Vehicle[] someVehicles = DatabaseGetter.queryDB("vin", "2GTJK39U624XX9K5D", Vehicle.class);
+    Vehicle[] someVehicles = DBController.queryDB("id", "2GTJK39U624XX9K5D", Vehicle.class);
 
     assertTrue(someVehicles.length == 1 && someVehicles[0].getVin().equals("2GTJK39U624XX9K5D"));
+  }
+
+  @Test
+  public void testUpdatingObject() {
+    Invoice[] someInvoices = DBController.queryDB("id", "497658563", Invoice.class);
+    Invoice someInvoice = someInvoices[0];
+    String updatedNote = "I have been updated";
+    someInvoice.setPrivNotes(updatedNote);
+    DBController.updateInDB(someInvoice, Invoice.class);
+    someInvoices = DBController.queryDB("id", "497658563", Invoice.class);
+    assertTrue(someInvoices.length == 1 && someInvoices[0].getPrivNotes().equals(updatedNote));
   }
 
 }

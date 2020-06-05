@@ -1,5 +1,6 @@
 package com.scottsdaleair.data.generators;
 
+import com.scottsdaleair.controller.DBController;
 import com.scottsdaleair.data.Service;
 import com.scottsdaleair.utils.DatabaseUtils;
 import java.util.Random;
@@ -41,7 +42,7 @@ public class ServiceGenerator {
   public static String[] createTestServices(int serviceCount) {
     String[] services = new String[serviceCount];
     for (int x = 0; x < serviceCount; x++) {
-      services[x] = createTestService().getId();
+      services[x] = createTestService().getID();
     }
     return services;
   }
@@ -51,7 +52,7 @@ public class ServiceGenerator {
    * @param s The service to add
    */
   public static void saveService(Service s) {
-    DatabaseUtils.addObjToCollection("services", s);
+    DBController.addToDB(s, Service.class);
 
   }
   

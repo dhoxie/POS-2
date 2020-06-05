@@ -1,19 +1,15 @@
 package com.scottsdaleair.data;
 
-import com.scottsdaleair.controller.DatabaseGetter;
+import com.scottsdaleair.controller.DBController;
 import com.scottsdaleair.utils.DataUtils;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Service {
-  private String id;
+public class Service extends DatabaseObject {
   private String name;
   private String[] parts;
   private String description;
   private String price;
-
-  public Service() {
-  }
 
   /**
    * A Service.
@@ -25,15 +21,11 @@ public class Service {
    * @param price       The cost of this service
    */
   public Service(String id, String name, String[] parts, String description, String price) {
-    this.id = id;
+    super(id);
     this.name = name;
     this.parts = parts;
     this.description = description;
     this.price = price;
-  }
-
-  public String getId() {
-    return this.id;
   }
 
   public String getName() {
@@ -95,19 +87,19 @@ public class Service {
       return false;
     }
     Service service = (Service) o;
-    return Objects.equals(id, service.id)
+    return Objects.equals(getID(), service.getID())
         && Objects.equals(name, service.name) && Objects.equals(parts, service.parts)
         && Objects.equals(description, service.description) && Objects.equals(price, service.price);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, parts, description, price);
+    return Objects.hash(getID(), name, parts, description, price);
   }
 
   @Override
   public String toString() {
-    return "{" + " id='" + getId() + "'"
+    return "{" + " id='" + getID() + "'"
         + ", name='" + getName() + "'" + ", parts='" + getParts() + "'"
         + ", description='" + getDescription() + "'" + ", price='" + getPrice() + "'" + "}";
   }
@@ -119,7 +111,7 @@ public class Service {
    * @return
    */
   public static Service getFromDb(String serviceId) {
-    return DatabaseGetter.queryDB("id", serviceId, Service.class)[0];
+    return DBController.queryDB("id", serviceId, Service.class)[0];
   }
 
 }

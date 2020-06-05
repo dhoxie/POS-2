@@ -2,6 +2,7 @@ package com.scottsdaleair.utils;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.client.MongoCollection;
+import com.scottsdaleair.controller.DBController;
 import com.scottsdaleair.data.Customer;
 import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.data.Vehicle;
@@ -30,7 +31,7 @@ public class DatabaseFiller {
       Vehicle[] vehicles = new Vehicle[vehicleCount];
       for (int x = 0; x < vehicleCount; x++) {
         vehicles[x] = VehicleGeneratorUtils.createTestVehicle();
-        DatabaseUtils.addObjToCollection("vehicles", vehicles[x]);
+        DBController.addToDB(vehicles[x], Vehicle.class);
       }
 
       int invoiceCount = GeneratorUtils.rand().nextInt(10);
@@ -38,12 +39,12 @@ public class DatabaseFiller {
       for (int x = 0; x < invoiceCount; x++) {
         invoices[x] = InvoiceGeneratorUtils.createTestInvoice(customerID + "",
             vehicles[GeneratorUtils.rand().nextInt(vehicleCount)].getVin());
-        DatabaseUtils.addObjToCollection("invoices", invoices[x]);
+        DBController.addToDB(invoices[x], Invoice.class);
       }
 
       String[] history = new String[invoiceCount];
       for (int x = 0; x < invoiceCount; x++) {
-        history[x] = invoices[x].getId();
+        history[x] = invoices[x].getID();
       }
 
       String[] vehicleVins = new String[vehicleCount];
@@ -52,8 +53,7 @@ public class DatabaseFiller {
       }
 
       Customer cust1 = CustomerGeneratorUtils.createTestCustomer(customerID, history, vehicleVins);
-
-      DatabaseUtils.addObjToCollection("customers", cust1);
+      DBController.addToDB(cust1, Customer.class);
     }
   }
 
