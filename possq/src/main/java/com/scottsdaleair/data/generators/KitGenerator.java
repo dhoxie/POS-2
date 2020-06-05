@@ -2,7 +2,6 @@ package com.scottsdaleair.data.generators;
 
 import com.scottsdaleair.controller.DBController;
 import com.scottsdaleair.data.Kit;
-import com.scottsdaleair.utils.DatabaseUtils;
 import java.util.Random;
 
 

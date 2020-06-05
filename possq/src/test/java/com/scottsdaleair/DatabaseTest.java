@@ -9,7 +9,6 @@ import com.scottsdaleair.data.Kit;
 import com.scottsdaleair.data.Part;
 import com.scottsdaleair.data.Service;
 import com.scottsdaleair.data.Vehicle;
-import com.scottsdaleair.utils.DatabaseUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 

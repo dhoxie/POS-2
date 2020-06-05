@@ -79,6 +79,11 @@ public class DatabaseFiller {
 
   }
 
+  /**
+   * Fill the database with a given number of generated Customer entries.
+   * The default if no args are given is 1000.
+   * @param args  Number of customer entries to generate
+   */
   public static void main(String[] args) {
     int fillCount = 1000;
     if (args.length == 1) {
