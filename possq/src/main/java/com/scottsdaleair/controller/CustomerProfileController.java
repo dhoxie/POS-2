@@ -5,9 +5,11 @@ import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.data.PhoneNumber;
 import com.scottsdaleair.data.Vehicle;
 import com.scottsdaleair.pdfGenerator.PDFInvoice;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -98,6 +100,34 @@ public class CustomerProfileController {
             return row;
         });
 
+        TableColumn<Vehicle, Vehicle> deleteVehicle = new TableColumn<>("Remove Vehicle");
+        deleteVehicle.setMinWidth(40);
+        deleteVehicle.setCellValueFactory(param -> new ReadOnlyObjectWrapper<>(param.getValue()));
+        deleteVehicle.setCellFactory(param -> new TableCell<Vehicle, Vehicle>(){
+            private final Button deleteButton = new Button("Remove");
+
+            @Override
+            protected void updateItem(Vehicle car, boolean empty){
+                super.updateItem(car, empty);
+
+                if(car == null){
+                    setGraphic(null);
+                    return;
+                }
+
+                setGraphic(deleteButton);
+                deleteButton.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        //Vehicle temp =  getTableView().getItems().get(car);
+                        getTableView().getItems().remove(car);
+                    }
+                });
+            }
+        });
+
+        tblAutomobileResults.getColumns().add(deleteVehicle);
+
         String[] vins = cust.getVehicleVins();
         if(vins != null) {
             Vehicle[] vehicles = new Vehicle[vins.length];
@@ -113,7 +143,6 @@ public class CustomerProfileController {
                 data.add(vehicles[cur]);
                 cur++;
             }
-
             tblAutomobileResults.setItems(data);
         }
 
@@ -129,6 +158,7 @@ public class CustomerProfileController {
         });
 
         String[] histids = cust.getHistID();
+        System.out.println("Customer: " + cust.toString());
         System.out.println(histids + " - Length of Invoices");
         if(histids != null) {
             Invoice[] invoices = new Invoice[histids.length];

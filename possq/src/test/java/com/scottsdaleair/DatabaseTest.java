@@ -81,12 +81,17 @@ public class DatabaseTest {
 
   @Test
   public void testQueryCustomers() {
-    Customer[] someCustomers = DatabaseGetter.queryDB("fName", "Kayla", Customer.class);
+    Customer[] someCustomers = DatabaseGetter.queryDB("id", "1234567", Customer.class);
 
-    int isAccurate = 0;
-    for (Customer c : someCustomers) {
-      if (c.getFname().equals("Kayla")) {
+    int isAccurate = -1;
+    if(someCustomers != null) {
+      if(someCustomers.length != 0) {
         isAccurate++;
+        for (Customer c : someCustomers) {
+          if (c.getFname().equals("Kayla")) {
+            isAccurate++;
+          }
+        }
       }
     }
 
@@ -95,7 +100,7 @@ public class DatabaseTest {
 
   @Test
   public void testGetCustomerHistory(){
-    Customer[] someCustomers = DatabaseGetter.queryDB("fName", "Kayla", Customer.class);
+    Customer[] someCustomers = DatabaseGetter.queryDB("id", "1234567", Customer.class);
     boolean isAccurate = false;
     if(someCustomers != null) {
       String[] history = someCustomers[0].getHistID();
