@@ -30,6 +30,8 @@ public class POS2controller {
   private Button btnPOSNAV;
   @FXML
   private Button btnCustomersNAV;
+  @FXML
+  private Button btnInventoryNAV;
 
   // Customer Search Screen
   @FXML
@@ -63,8 +65,11 @@ public class POS2controller {
     } else if (event.getSource() == btnCustomersNAV) {
       stage = (Stage) btnCustomersNAV.getScene().getWindow();
       url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI()
-          .toURL();
-    } else {
+              .toURL();
+    } else if (event.getSource() == btnInventoryNAV) {
+      stage = (Stage) btnPOSNAV.getScene().getWindow();
+      url = new File("src/main/java/com/scottsdaleair/view/Inventory_Screen.fxml").toURI().toURL();
+    }else {
       stage = (Stage) btnCustomersNAV.getScene().getWindow();
       url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI()
           .toURL();

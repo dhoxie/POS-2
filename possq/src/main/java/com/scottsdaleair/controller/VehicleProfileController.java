@@ -52,6 +52,8 @@ public class VehicleProfileController {
     private Button btnPOSNAV;
     @FXML
     private Button btnCustomersNAV;
+    @FXML
+    private Button btnInventoryNAV;
 
     public void loadData(Vehicle vehicle, Invoice[] invoices){
         labelCarName.setText(vehicle.getMake() + " " + vehicle.getModel());
@@ -130,7 +132,10 @@ public class VehicleProfileController {
             stage = (Stage) btnCustomersNAV.getScene().getWindow();
             url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml")
                     .toURI().toURL();
-        } else {
+        } else if (event.getSource() == btnInventoryNAV) {
+            stage = (Stage) btnPOSNAV.getScene().getWindow();
+            url = new File("src/main/java/com/scottsdaleair/view/Inventory_Screen.fxml").toURI().toURL();
+        }else {
             stage = (Stage) btnCustomersNAV.getScene().getWindow();
             url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml")
                     .toURI().toURL();
