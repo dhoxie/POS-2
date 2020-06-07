@@ -56,26 +56,33 @@ public class POS2controller {
   @FXML
   private void changeScene(ActionEvent event) throws IOException {
     Parent root;
-    URL url;
     Stage stage;
+    FXMLLoader loader;
 
     if (event.getSource() == btnPOSNAV) {
       stage = (Stage) btnPOSNAV.getScene().getWindow();
-      url = new File("src/main/java/com/scottsdaleair/view/POS_Search_Screen.fxml").toURI().toURL();
+      loader = new FXMLLoader(new File("src/main/java/com/scottsdaleair/view/POS_Search_Screen.fxml")
+              .toURI().toURL());
     } else if (event.getSource() == btnCustomersNAV) {
       stage = (Stage) btnCustomersNAV.getScene().getWindow();
-      url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI()
-              .toURL();
+      loader = new FXMLLoader(new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml")
+              .toURI().toURL());
     } else if (event.getSource() == btnInventoryNAV) {
       stage = (Stage) btnPOSNAV.getScene().getWindow();
-      url = new File("src/main/java/com/scottsdaleair/view/Inventory_Screen.fxml").toURI().toURL();
+      loader = new FXMLLoader(new File("src/main/java/com/scottsdaleair/view/Inventory_Screen.fxml")
+              .toURI().toURL());
     }else {
       stage = (Stage) btnCustomersNAV.getScene().getWindow();
-      url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI()
-          .toURL();
+      loader = new FXMLLoader(new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml")
+              .toURI().toURL());
+    }
+    root = loader.load();
+
+    if(event.getSource() == btnInventoryNAV) {
+      InventoryController controller = loader.getController();
+      controller.loadData();
     }
 
-    root = FXMLLoader.load(url);
     Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
