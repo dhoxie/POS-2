@@ -14,7 +14,7 @@ public class Configurator {
   private static Gson gson = new Gson();
   private static HashMap<String, Tuple<Config, ConfigStatus>> confs = new HashMap<>();
   private static String configExt = ".posc";
-  private static String confPath = "conf/";
+  private static String confPath = "./conf/";
 
 
   /**

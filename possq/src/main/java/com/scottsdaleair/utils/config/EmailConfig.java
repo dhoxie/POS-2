@@ -1,6 +1,6 @@
 package com.scottsdaleair.utils.config;
 
-public class EmailConfig extends Config {
+public class EmailConfig implements Config {
 
     private String email;
     private String password;
@@ -10,7 +10,6 @@ public class EmailConfig extends Config {
     }
 
     public EmailConfig(String password) {
-        super("email");
         this.password = password;
         this.email = "";
     }
@@ -21,6 +20,11 @@ public class EmailConfig extends Config {
 
     public String getPassword() {
         return this.password;
+    }
+
+    @Override
+    public String getFilename() {
+        return EmailConfig.class.getSimpleName().toLowerCase();
     }
 
 }

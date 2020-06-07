@@ -1,7 +1,7 @@
 package com.scottsdaleair.utils.config;
 
 
-public class DBConfig extends Config {
+public class DBConfig implements Config {
     private String dbIP;
     private int dbPort;
     private String dbBakIP;
@@ -12,7 +12,6 @@ public class DBConfig extends Config {
     }
 
     public DBConfig(String dbIp, int dbPort, String dbBakIP, int dbBakPort) {
-        super("database");
         this.dbIP = dbIp;
         this.dbPort = dbPort;
         this.dbBakIP = dbBakIP;
@@ -49,6 +48,11 @@ public class DBConfig extends Config {
 
     public void setDbBakPort(int dbBakPort) {
         this.dbBakPort = dbBakPort;
+    }
+
+    @Override
+    public String getFilename() {
+        return DBConfig.class.getSimpleName().toLowerCase();
     }
 
 
