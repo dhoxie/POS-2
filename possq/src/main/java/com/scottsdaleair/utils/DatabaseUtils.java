@@ -16,7 +16,7 @@ import org.bson.Document;
 public class DatabaseUtils {
 
   private static final String dbAddr = Configurator.getConfig(DBConfig.class).getDbIP();
-  private static final int dbPort = Configurator.getConfig(DBConfig.class).getDbPort()
+  private static final int dbPort = Configurator.getConfig(DBConfig.class).getDbPort();
   public static final String dbName = "userdat";
   public static final String backupDbAddress = Configurator.getConfig(DBConfig.class).getDbBakIP();
   public static final int bakDbPort = Configurator.getConfig(DBConfig.class).getDbBakPort();
