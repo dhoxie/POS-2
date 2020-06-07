@@ -11,6 +11,8 @@ import com.scottsdaleair.data.Service;
 import com.scottsdaleair.data.Vehicle;
 import com.scottsdaleair.utils.Configurator;
 import com.scottsdaleair.utils.DatabaseUtils;
+import com.scottsdaleair.utils.config.DBConfig;
+
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -23,7 +25,7 @@ public class DatabaseTest {
   @BeforeClass
   public static void initDB() {
     try {
-      Configurator.load();
+      Configurator.loadConfig(DBConfig.class);
     } catch (IOException e) {
       // TODO Auto-generated catch block
       e.printStackTrace();

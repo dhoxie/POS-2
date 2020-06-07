@@ -7,17 +7,19 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Collation;
 import com.mongodb.client.model.CollationStrength;
+import com.scottsdaleair.utils.config.DBConfig;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import org.bson.Document;
 
 public class DatabaseUtils {
 
-  private static final String dbAddr = Configurator.getDbIp();
-  private static final int dbPort = Configurator.getDbPort();
+  private static final String dbAddr = Configurator.getConfig(DBConfig.class).getDbIP();
+  private static final int dbPort = Configurator.getConfig(DBConfig.class).getDbPort()
   public static final String dbName = "userdat";
-  public static final String backupDbAddress = Configurator.getBakIp();
-  public static final int bakDbPort = Configurator.getBakPort();
+  public static final String backupDbAddress = Configurator.getConfig(DBConfig.class).getDbBakIP();
+  public static final int bakDbPort = Configurator.getConfig(DBConfig.class).getDbBakPort();
   private static MongoClient client;
   private static final Collation collation =
       Collation.builder().locale("en").collationStrength(CollationStrength.SECONDARY).build();
@@ -43,7 +45,7 @@ public class DatabaseUtils {
 
   /**
    * Adds an object to the specified Mongo collection.
-   * 
+   *
    * @param collection Collection to add object to
    * @param obj        The object to be added
    */
@@ -56,7 +58,7 @@ public class DatabaseUtils {
 
   /**
    * Adds an object to the default database and string-specified collection.
-   * 
+   *
    * @param collectionName The name of the collection
    * @param obj            The object to be added
    */
@@ -66,7 +68,7 @@ public class DatabaseUtils {
 
   /**
    * Adds an object to a string-specified database and collection.
-   * 
+   *
    * @param dbname         The name of the database
    * @param collectionName The name of the collection
    * @param obj            The object to be added
@@ -101,7 +103,7 @@ public class DatabaseUtils {
 
   /**
    * Returns an object array of results.
-   * 
+   *
    * @param collectionName Name of collection to search
    * @param key            Key field to search
    * @param value          Value of key to search
@@ -116,7 +118,7 @@ public class DatabaseUtils {
 
   /**
    * Get every object in the given collection of the given type.
-   * 
+   *
    * @param collectionName String name of collection
    * @param t              Type of class to retrieve
    * @return Object[] containing search results
