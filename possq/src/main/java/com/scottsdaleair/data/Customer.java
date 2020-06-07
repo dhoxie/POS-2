@@ -1,6 +1,8 @@
 package com.scottsdaleair.data;
 
-import com.scottsdaleair.utils.DatabaseUtils;
+import com.scottsdaleair.controller.DatabaseGetter;
+import com.scottsdaleair.utils.DataUtils;
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -14,7 +16,7 @@ public class Customer {
   private String email;
   private String address;
   private PhoneNumber[] phones;
-  private String[] history;
+  private String[] invoices;
   private String[] vehicleVins;
 
   public Customer() {
@@ -22,35 +24,37 @@ public class Customer {
 
   /**
    * Class representing a customer.
+   * 
    * @param id          Unique ID of this customer
    * @param fname       First name of this customer
    * @param lname       Last name of this customer
    * @param email       Email address associated with this customer
    * @param address     Physical address associated with this customer
    * @param phones      An array of phone numbers associated with this customer
-   * @param history     An array of {@code Invoice} id's associated with this customer 
-   * @param vehicleVins  An array of VIN numbers for {@code Vehicle}s associated with this customer
+   * @param history     An array of {@code Invoice} id's associated with this
+   *                    customer
+   * @param vehicleVins An array of VIN numbers for {@code Vehicle}s associated
+   *                    with this customer
    */
-  public Customer(final String id, final String fname, final String lname,
-      final String email, final String address,
-      final PhoneNumber[] phones, final String[] history,
-      final String[] vehicleVins) {
+  public Customer(final String id, final String fname,
+      final String lname, final String email, final String address,
+      final PhoneNumber[] phones, final String[] history, final String[] vehicleVins) {
     this.id = id;
     this.fname = fname;
     this.lname = lname;
     this.email = email;
     this.address = address;
     this.phones = phones;
-    this.history = history;
+    this.invoices = history;
     this.vehicleVins = vehicleVins;
   }
 
   public String[] getHistID() {
-    return this.history;
+    return this.invoices;
   }
 
   public void setHistID(final String[] history) {
-    this.history = history;
+    this.invoices = history;
   }
 
   public String[] getVehicleVins() {
@@ -61,16 +65,6 @@ public class Customer {
     this.vehicleVins = vehicleVins;
   }
 
-  public Customer histID(final String[] histID) {
-    this.history = histID;
-    return this;
-  }
-
-  public Customer vehicleVins(final String[] vehicleVins) {
-    this.vehicleVins = vehicleVins;
-    return this;
-  }
-
   public PhoneNumber[] getPhones() {
     return this.phones;
   }
@@ -79,17 +73,8 @@ public class Customer {
     this.phones = phones;
   }
 
-  public Customer phones(final PhoneNumber[] phones) {
-    this.phones = phones;
-    return this;
-  }
-
   public String getId() {
     return this.id;
-  }
-
-  void setId(final String id) {
-    this.id = id;
   }
 
   public String getFname() {
@@ -132,46 +117,62 @@ public class Customer {
     this.phones = phone;
   }
 
-  public Customer id(final String id) {
-    this.id = id;
-    return this;
+  // Add+remove referenced data arrays
+
+  /**
+   * Add a referenced invoice to the Customer.
+   * 
+   * @param invoiceID The ID of the invoice to be added
+   */
+  public void addInvoice(String invoiceID) {
+    this.invoices = DataUtils.addToArray(invoiceID, this.invoices);
   }
 
-  public Customer fname(final String fname) {
-    this.fname = fname;
-    return this;
+  /**
+   * Remove a referenced invoice from the Customer.
+   * 
+   * @param invoiceID The ID of the invoice to be removed
+   * @return The index of the removed ID or -1 if not found.
+   */
+  public int removeInvoice(String invoiceID) {
+    int index = Arrays.asList(this.invoices).indexOf(invoiceID);
+    if (index >= 0) {
+      this.invoices = DataUtils.removeFromArray(index, this.invoices);
+    }
+    return index;
   }
 
-  public Customer lname(final String lname) {
-    this.lname = lname;
-    return this;
+  /**
+   * Add a referenced vehicle to the Customer.
+   * 
+   * @param vehicleID The ID of the vehicle to be added
+   */
+  public void addVehicle(String vehicleID) {
+    this.vehicleVins = DataUtils.addToArray(vehicleID, this.vehicleVins);
   }
 
-  public Customer email(final String email) {
-    this.email = email;
-    return this;
-  }
-
-  public Customer address(final String address) {
-    this.address = address;
-    return this;
-  }
-
-  public Customer phone(final PhoneNumber[] phone) {
-    this.phones = phone;
-    return this;
+  /**
+   * Remove a referenced vehicle from the Customer.
+   * 
+   * @param vehicleID The ID of the vehicle to be removed
+   * @return The index of the removed ID or -1 if not found.
+   */
+  public int removeVehicle(String vehicleID) {
+    int index = Arrays.asList(this.vehicleVins).indexOf(vehicleID);
+    if (index >= 0) {
+      this.vehicleVins = DataUtils.removeFromArray(index, this.vehicleVins);
+    }
+    return index;
   }
 
   /**
    * Get the customer object from db by id.
-   * @param customerId  id of the customer
+   * 
+   * @param customerId id of the customer
    * @return
    */
   public static Customer getFromDb(String customerId) {
-    // DatabaseUtils.addObjToCollection("userdat", "customers", obj);
-    Object[] users = DatabaseUtils.getFromCollection("customers", "id", customerId,
-        Customer.class);
-    return (Customer) users[0];
+    return DatabaseGetter.queryDB("id", customerId, Customer.class)[0];
   }
 
   @Override
@@ -203,7 +204,6 @@ public class Customer {
         + "'" + ", lname='" + getLname()
         + "'" + ", email='" + getEmail()
         + "'" + ", address='" + getAddress()
-        + "'" + ", phone='" + getPhone()
-        + "'" + "}";
+        + "'" + ", phone='" + getPhone() + "'" + "}";
   }
 }

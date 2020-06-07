@@ -1,146 +1,55 @@
 package com.scottsdaleair.controller;
 
-import com.scottsdaleair.data.Customer;
-import com.scottsdaleair.data.Invoice;
-import com.scottsdaleair.data.Kit;
-import com.scottsdaleair.data.Part;
-import com.scottsdaleair.data.Service;
-import com.scottsdaleair.data.Vehicle;
-import com.scottsdaleair.utils.DataConverter;
 import com.scottsdaleair.utils.DatabaseUtils;
+import java.util.HashMap;
 
-public class DatabaseGetter {
+public class DatabaseGetter<T> {
+
 
   /**
-   * Get all {@link Customer}s in the database.
+   * Query the database with a key/value pair.
    * 
-   * @return {@link Customer}[]
+   * @param <T>   Type of data object
+   * @param key   Key to match to
+   * @param value Value for key
+   * @param type  Class of data type (DataType.class)
+   * @return
    */
-  public static Customer[] getAllCustomers() {
-    Object[] results = DatabaseUtils.getEntireCollection("customers", Customer.class);
-    return DataConverter.objToCust(results);
+  public static <T> T[] queryDB(String key, String value, Class<T> type) {
+    DatabaseUtils<T> gdu = new DatabaseUtils<T>(type);
+    String collectionName = type.getSimpleName().toLowerCase() + "s";
+    T[] results = gdu.getFromCollection(collectionName, key, value);
+    return results;
   }
 
   /**
-   * Get all {@link Customer}s based on a (key,value) pair.
+   * Query the database with a hasmap of key/value pairs.
    * 
-   * @param key Property of the ustomer to match
-   * @param value Value of the property to match
-   * @return {@link Customer}[]
+   * @param <T>      Type of data object
+   * @param queryMap HashMap of key/value query terms
+   * @param type     Class of data type (DataType.class)
+   * @return
    */
-  public static Customer[] queryCustomers(String key, String value) {
-    Object[] results = DatabaseUtils.getFromCollection("customers", key, value, Customer.class);
-    return DataConverter.objToCust(results);
+  public static <T> T[] queryDB(HashMap<String, String> queryMap, Class<T> type) {
+    DatabaseUtils<T> gdu = new DatabaseUtils<T>(type);
+    String collectionName = type.getSimpleName().toLowerCase() + "s";
+    T[] results = gdu.getFromCollection(collectionName, queryMap);
+    return results;
   }
 
   /**
-   * Get all {@link Invoice}s in the database.
+   * Get all entries of a data type at once.
    * 
-   * @return {@link Invoice}[]
+   * @param <T>  Type of the data being returned.
+   * @param type Class of the data type (DataType.class)
+   * @return
    */
-  public static Invoice[] getAllInvoices() {
-    Object[] results = DatabaseUtils.getEntireCollection("invoices", Invoice.class);
-    return DataConverter.objToInv(results);
+  public static <T> T[] getAll(Class<T> type) {
+    DatabaseUtils<T> gdu = new DatabaseUtils<T>(type);
+    String collectionName = type.getSimpleName().toLowerCase() + "s";
+    return gdu.getEntireCollection(collectionName);
   }
 
-  /**
-   * Get all {@link Invoice}s based on a (key,value) pair.
-   * 
-   * @param key Property of the Invoice to match
-   * @param value Value of the property to match
-   * @return {@link Invoice}[]
-   */
-  public static Invoice[] queryInvoices(String key, String value) {
-    Object[] results = DatabaseUtils.getFromCollection("invoices", key, value, Invoice.class);
-    return DataConverter.objToInv(results);
-  }
 
-  /**
-   * Get all {@link Kit}s in the database.
-   * 
-   * @return {@link Kit}[]
-   */
-  public static Kit[] getAllKits() {
-    Object[] results = DatabaseUtils.getEntireCollection("kits", Kit.class);
-    return DataConverter.objToKit(results);
-  }
-
-  /**
-   * Get all {@link Kit}s based on a (key,value) pair.
-   * 
-   * @param key Property of the Kit to match
-   * @param value Value of the property to match
-   * @return {@link Kit}[]
-   */
-  public static Kit[] queryKits(String key, String value) {
-    Object[] results = DatabaseUtils.getFromCollection("kits", key, value, Kit.class);
-    return DataConverter.objToKit(results);
-  }
-
-  /**
-   * Get all {@link Part}s in the database.
-   * 
-   * @return {@link Part}[]
-   */
-  public static Part[] getAllParts() {
-    Object[] results = DatabaseUtils.getEntireCollection("parts", Part.class);
-    return DataConverter.objToPrt(results);
-  }
-
-  /**
-   * Get all {@link Part}s based on a (key,value) pair.
-   * 
-   * @param key Property of the Part to match
-   * @param value Value of the property to match
-   * @return {@link Part}[]
-   */
-  public static Part[] queryParts(String key, String value) {
-    Object[] results = DatabaseUtils.getFromCollection("parts", key, value, Part.class);
-    return DataConverter.objToPrt(results);
-  }
-
-  /**
-   * Get all {@link Service}s in the database.
-   * 
-   * @return {@link Service}[]
-   */
-  public static Service[] getAllServices() {
-    Object[] results = DatabaseUtils.getEntireCollection("services", Service.class);
-    return DataConverter.objToSvc(results);
-  }
-
-  /**
-   * Get all {@link Service}s based on a (key,value) pair.
-   * 
-   * @param key Property of the Service to match
-   * @param value Value of the property to match
-   * @return {@link Service}[]
-   */
-  public static Service[] queryServices(String key, String value) {
-    Object[] results = DatabaseUtils.getFromCollection("services", key, value, Service.class);
-    return DataConverter.objToSvc(results);
-  }
-
-  /**
-   * Get all {@link Vehicle}s in the database.
-   * 
-   * @return {@link Vehicle}[]
-   */
-  public static Vehicle[] getAllVehicles() {
-    Object[] results = DatabaseUtils.getEntireCollection("vehicles", Vehicle.class);
-    return DataConverter.objToVehc(results);
-  }
-
-  /**
-   * Get all {@link Vehicle}s based on a (key,value) pair.
-   * 
-   * @param key Property of the Vehicle to match
-   * @param value Value of the property to match
-   * @return {@link Vehicle}[]
-   */
-  public static Vehicle[] queryVehicles(String key, String value) {
-    Object[] results = DatabaseUtils.getFromCollection("vehicles", key, value, Vehicle.class);
-    return DataConverter.objToVehc(results);
-  }
 
 }
