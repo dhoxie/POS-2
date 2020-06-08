@@ -16,7 +16,6 @@ public class Configurator {
   private static String configExt = ".posc";
   private static String confPath = "./conf/";
 
-
   /**
    * Loads the given config type into the Configurator. If the config has already
    * been loaded, this does nothing.
@@ -46,10 +45,7 @@ public class Configurator {
     String configName = nameFromType(confType);
     Tuple<Config, ConfigStatus> tup = confs.get(configName);
     if (tup.t1.isDirty()) {
-      Config conf = tup.t0;
-      saveConfig(conf, nameFromType(confType));
-      tup.t1.clean();
-      confs.put(configName, tup);
+      writeToDisk(tup, nameFromType(confType));
     }
   }
 
@@ -62,9 +58,7 @@ public class Configurator {
     for (String key : confs.keySet()) {
       Tuple<Config, ConfigStatus> tup = confs.get(key);
       if (tup.t1.isDirty()) {
-        saveConfig(tup.t0, key);
-        tup.t1.clean();
-        confs.put(key, tup);
+        writeToDisk(tup, key);
       }
     }
   }
@@ -89,9 +83,10 @@ public class Configurator {
 
   /**
    * Updates the config object in memory of the given type.
-   * @param <T>         Type of config class
-   * @param config      Config object to update
-   * @param configType  Type of config to update
+   *
+   * @param <T>        Type of config class
+   * @param config     Config object to update
+   * @param configType Type of config to update
    */
   public static <T extends Config> void updateConfig(T config, Class<T> configType) {
     String configName = nameFromType(configType);
@@ -102,17 +97,17 @@ public class Configurator {
   }
 
   /**
-   * Updates the given config object and saves it to disk.
-   * This is equivelant to calling:
-   *<br/>
+   * Updates the given config object and saves it to disk. This is equivelant to
+   * calling: <br/>
    * {@code
    *  updateConfig(config, ConfigType.class);
    *  saveConfig(ConfigType.class);
    * }
-   * @param <T>           Type of config class
-   * @param config        Config object to update
-   * @param configType    Type of config to update
-   * @throws IOException  If the config cannot be saved to disk
+   *
+   * @param <T>        Type of config class
+   * @param config     Config object to update
+   * @param configType Type of config to update
+   * @throws IOException If the config cannot be saved to disk
    */
   public static <T extends Config> void updateAndSave(T config, Class<T> configType) throws IOException {
     updateConfig(config, configType);
@@ -123,11 +118,12 @@ public class Configurator {
     return confs.get(configName) != null;
   }
 
-  private static void saveConfig(Config conf, String filename) throws IOException {
-    if (conf != null) {
-      String json = gson.toJson(conf);
+  private static void writeToDisk(Tuple<Config, ConfigStatus> tup, String filename) throws IOException {
+    if (tup.t0 != null) {
+      String json = gson.toJson(tup.t0);
       Files.writeString(Paths.get(confPath + filename + configExt), json);
-      // isDirty = false;
+      tup.t1.clean();
+      confs.put(filename, tup);
     }
   }
 
