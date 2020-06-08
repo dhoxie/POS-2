@@ -21,10 +21,4 @@ public class EmailConfig implements Config {
     public String getPassword() {
         return this.password;
     }
-
-    @Override
-    public String getFilename() {
-        return EmailConfig.class.getSimpleName().toLowerCase();
-    }
-
 }

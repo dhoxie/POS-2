@@ -49,11 +49,4 @@ public class DBConfig implements Config {
     public void setDbBakPort(int dbBakPort) {
         this.dbBakPort = dbBakPort;
     }
-
-    @Override
-    public String getFilename() {
-        return DBConfig.class.getSimpleName().toLowerCase();
-    }
-
-
 }
