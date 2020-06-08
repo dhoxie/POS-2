@@ -12,6 +12,7 @@ tmp/
 .idea/
 .project/
 .DS_Store
+possq/.DS_Store
 
 # Config excludes
 conf/
