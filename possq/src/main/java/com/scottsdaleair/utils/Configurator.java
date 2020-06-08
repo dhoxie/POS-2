@@ -47,7 +47,7 @@ public class Configurator {
     Tuple<Config, ConfigStatus> tup = confs.get(configName);
     if (tup.t1.isDirty()) {
       Config conf = tup.t0;
-      saveConfig(conf);
+      saveConfig(conf, nameFromType(confType));
       tup.t1.clean();
       confs.put(configName, tup);
     }
@@ -62,7 +62,7 @@ public class Configurator {
     for (String key : confs.keySet()) {
       Tuple<Config, ConfigStatus> tup = confs.get(key);
       if (tup.t1.isDirty()) {
-        saveConfig(tup.t0);
+        saveConfig(tup.t0, key);
         tup.t1.clean();
         confs.put(key, tup);
       }
@@ -123,10 +123,10 @@ public class Configurator {
     return confs.get(configName) != null;
   }
 
-  private static void saveConfig(Config conf) throws IOException {
+  private static void saveConfig(Config conf, String filename) throws IOException {
     if (conf != null) {
       String json = gson.toJson(conf);
-      Files.writeString(Paths.get(confPath + conf.getFilename() + configExt), json);
+      Files.writeString(Paths.get(confPath + filename + configExt), json);
       // isDirty = false;
     }
   }
