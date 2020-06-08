@@ -1,6 +1,6 @@
 package com.scottsdaleair.utils.config;
 
-public class EmailConfig implements Config {
+public class EmailConfig extends Config {
 
     private String email;
     private String password;

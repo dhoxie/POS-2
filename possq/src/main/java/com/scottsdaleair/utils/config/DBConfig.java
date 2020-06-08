@@ -1,7 +1,7 @@
 package com.scottsdaleair.utils.config;
 
 
-public class DBConfig implements Config {
+public class DBConfig extends Config {
     private String dbIP;
     private int dbPort;
     private String dbBakIP;
