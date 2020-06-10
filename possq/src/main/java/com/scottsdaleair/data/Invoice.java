@@ -1,12 +1,11 @@
 package com.scottsdaleair.data;
 
-import com.scottsdaleair.controller.DatabaseGetter;
+import com.scottsdaleair.controller.DBController;
 import com.scottsdaleair.utils.DataUtils;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Invoice {
-  private String id;
+public class Invoice extends DatabaseObject {
   private String date;
   private String customerID;
   private String vehicleVin;
@@ -15,10 +14,6 @@ public class Invoice {
   private String[] kits;
   private String pubNotes;
   private String privNotes;
-
-
-  public Invoice() {
-  }
 
   /**
    * This class represents an Inovice.
@@ -35,7 +30,7 @@ public class Invoice {
    */
   public Invoice(String id, String date, String customerID, String vehicleVin,
           String[] parts, String[] services, String[] kits, String pubNotes, String privNotes) {
-    this.id = id;
+    super(id);
     this.date = date;
     this.customerID = customerID;
     this.vehicleVin = vehicleVin;
@@ -44,10 +39,6 @@ public class Invoice {
     this.kits = kits;
     this.pubNotes = pubNotes;
     this.privNotes = privNotes;
-  }
-
-  public String getId() {
-    return this.id;
   }
 
   public String getDate() {
@@ -175,7 +166,7 @@ public class Invoice {
    * @return
    */
   public static Invoice getFromDb(String invoiceId) {
-    return DatabaseGetter.queryDB("key", invoiceId, Invoice.class)[0];
+    return DBController.queryDB("key", invoiceId, Invoice.class)[0];
   }
 
   @Override
@@ -187,7 +178,7 @@ public class Invoice {
       return false;
     }
     Invoice invoice = (Invoice) o;
-    return Objects.equals(id, invoice.id)
+    return Objects.equals(getID(), invoice.getID())
         && Objects.equals(date, invoice.date)
         && Objects.equals(customerID, invoice.customerID)
         && Objects.equals(vehicleVin, invoice.vehicleVin)
@@ -200,13 +191,13 @@ public class Invoice {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, date, customerID, vehicleVin,
+    return Objects.hash(getID(), date, customerID, vehicleVin,
           parts, services, kits, pubNotes, privNotes);
   }
 
   @Override
   public String toString() {
-    return "{" + " id='" + getId()
+    return "{" + " id='" + getID()
       + "'" + ", date='" + getDate()
       + "'" + ", customerID='" + getCustomerID()
       + "'" + ", vehicleVin='" + getVehicleVin()

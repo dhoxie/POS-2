@@ -1,16 +1,12 @@
 package com.scottsdaleair.data;
 
-import com.scottsdaleair.controller.DatabaseGetter;
+import com.scottsdaleair.controller.DBController;
 import java.util.Objects;
 
-public class Part {
-  private String partID; // Part number
+public class Part extends DatabaseObject {
   private String vendor;
   private int onHand;
   private String price;
-
-  public Part() {
-  }
 
   /**
    * Represents a vehicle part.
@@ -20,14 +16,14 @@ public class Part {
    * @param price   The price of this part
    */
   public Part(String partID, String vendor, int onHand, String price) {
-    this.partID = partID;
+    super(partID);
     this.vendor = vendor;
     this.onHand = onHand;
     this.price = price;
   }
 
-  public String getPartID() {
-    return this.partID;
+  public Part() {
+    super("");
   }
 
   public String getVendor() {
@@ -82,7 +78,7 @@ public class Part {
    * @return
    */
   public static Part getFromDb(String partId) {
-    return DatabaseGetter.queryDB("partID", partId, Part.class)[0];
+    return DBController.queryDB("partID", partId, Part.class)[0];
   }
 
   @Override
@@ -94,7 +90,7 @@ public class Part {
       return false;
     }
     Part part = (Part) o;
-    return Objects.equals(partID, part.partID)
+    return Objects.equals(getID(), part.getID())
         && Objects.equals(vendor, part.vendor)
         && onHand == part.onHand
         && Objects.equals(price, part.price);
@@ -102,12 +98,12 @@ public class Part {
 
   @Override
   public int hashCode() {
-    return Objects.hash(partID, vendor, onHand, price);
+    return Objects.hash(getID(), vendor, onHand, price);
   }
 
   @Override
   public String toString() {
-    return "{" + " partID='" + getPartID()
+    return "{" + " partID='" + getID()
         + "'" + ", vendor='" + getVendor()
         + "'" + ", onHand='" + getOnHand() + "'"
         + ", price='" + getPrice() + "'" + "}";
