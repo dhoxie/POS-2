@@ -5,6 +5,8 @@ import com.scottsdaleair.data.Invoice;
 import com.scottsdaleair.email.Email;
 import com.scottsdaleair.email.SendInvoice;
 import com.scottsdaleair.pdfGenerator.PDFInvoice;
+import com.scottsdaleair.pdfGenerator.PDFReport;
+
 import java.awt.Desktop;
 import java.io.File;
 import java.net.URL;
@@ -76,6 +78,7 @@ public class POS2controller {
   // PDF Generation Method
   @FXML
   private void genPDF(ActionEvent event) throws Exception {
+  
     Task<Void> pdfTask = new Task<>() {
       @Override
       public Void call() {
@@ -110,6 +113,9 @@ public class POS2controller {
 
   @FXML
   private void emailPDF(ActionEvent event) throws Exception {
+    new PDFReport().start();
+    System.out.println("adfasdfasdfasfe");
+    /*
     String invoiceNum = txtInvoiceNum.getText();
 
     String email = txtEmailSearch.getText();
@@ -133,7 +139,7 @@ public class POS2controller {
         invoice.getId() + cust.getFname() + cust.getLname() + ".pdf");
     SendInvoice tmp = new SendInvoice(email, theEmail);
     tmp.send();
-
+*/
   }
 
   // Add Customers to table ----- Refactor this later for more versatility. Works
