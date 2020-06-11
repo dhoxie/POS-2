@@ -1,20 +1,16 @@
 package com.scottsdaleair.data;
 
-import com.scottsdaleair.controller.DatabaseGetter;
+import com.scottsdaleair.controller.DBController;
 import com.scottsdaleair.utils.DataUtils;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Kit {
-  private String id;
+public class Kit extends DatabaseObject {
   private String name;
   private String[] parts;
   private String[] services;
   private String description;
   private String price;
-
-  public Kit() {
-  }
 
   /**
    * A kit represents a set of services provided.
@@ -28,16 +24,12 @@ public class Kit {
    */
   public Kit(String id, String name, String[] parts, String[] services,
       String description, String price) {
-    this.id = id;
+    super(id);
     this.name = name;
     this.parts = parts;
     this.services = services;
     this.description = description;
     this.price = price;
-  }
-
-  public String getId() {
-    return this.id;
   }
 
   public String getName() {
@@ -125,7 +117,7 @@ public class Kit {
       return false;
     }
     Kit kit = (Kit) o;
-    return Objects.equals(id, kit.id) && Objects.equals(name, kit.name)
+    return Objects.equals(getID(), kit.getID()) && Objects.equals(name, kit.name)
         && Objects.equals(parts, kit.parts)
         && Objects.equals(services, kit.services) && Objects.equals(description, kit.description)
         && Objects.equals(price, kit.price);
@@ -133,12 +125,12 @@ public class Kit {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, parts, services, description, price);
+    return Objects.hash(getID(), name, parts, services, description, price);
   }
 
   @Override
   public String toString() {
-    return "{" + " id='" + getId() + "'" + ", name='"
+    return "{" + " id='" + getID() + "'" + ", name='"
         + getName() + "'" + ", parts='" + getParts() + "'"
         + ", services='" + getServices() + "'" + ", description='"
         + getDescription() + "'" + ", price='" + getPrice()
@@ -152,7 +144,7 @@ public class Kit {
    * @return
    */
   public static Kit getFromDb(String kitId) {
-    return DatabaseGetter.queryDB("id", kitId, Kit.class)[0];
+    return DBController.queryDB("id", kitId, Kit.class)[0];
   }
 
 }

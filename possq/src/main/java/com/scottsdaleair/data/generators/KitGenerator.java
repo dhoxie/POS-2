@@ -1,7 +1,7 @@
 package com.scottsdaleair.data.generators;
 
+import com.scottsdaleair.controller.DBController;
 import com.scottsdaleair.data.Kit;
-import com.scottsdaleair.utils.DatabaseUtils;
 import java.util.Random;
 
 
@@ -37,7 +37,7 @@ public class KitGenerator {
   public static String[] createTestKits(int kitCount) {
     String[] kits = new String[kitCount];
     for (int x = 0; x < kitCount; x++) {
-      kits[x] = createTestKit().getId();
+      kits[x] = createTestKit().getID();
     }
     return kits;
   }
@@ -47,7 +47,7 @@ public class KitGenerator {
    * @param k The kit to add
    */
   public static void saveService(Kit k) {
-    DatabaseUtils.addObjToCollection("kits", k);
+    DBController.addToDB(k, Kit.class);
 
   }
   
