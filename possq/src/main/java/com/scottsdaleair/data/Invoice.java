@@ -180,7 +180,7 @@ public class Invoice implements DatabaseObject {
       return false;
     }
     Invoice invoice = (Invoice) o;
-    return Objects.equals(getID(), invoice.getID())
+    return Objects.equals(getId(), invoice.getId())
         && Objects.equals(date, invoice.date)
         && Objects.equals(customerID, invoice.customerID)
         && Objects.equals(vehicleVin, invoice.vehicleVin)
@@ -193,13 +193,13 @@ public class Invoice implements DatabaseObject {
 
   @Override
   public int hashCode() {
-    return Objects.hash(getID(), date, customerID, vehicleVin,
+    return Objects.hash(getId(), date, customerID, vehicleVin,
           parts, services, kits, pubNotes, privNotes);
   }
 
   @Override
   public String toString() {
-    return "{" + " id='" + getID()
+    return "{" + " id='" + getId()
       + "'" + ", date='" + getDate()
       + "'" + ", customerID='" + getCustomerID()
       + "'" + ", vehicleVin='" + getVehicleVin()
@@ -212,7 +212,7 @@ public class Invoice implements DatabaseObject {
   }
 
   @Override
-  public String getID() {
+  public String getId() {
     return this.id;
   }
 

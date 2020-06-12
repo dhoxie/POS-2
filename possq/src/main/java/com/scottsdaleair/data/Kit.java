@@ -119,7 +119,7 @@ public class Kit implements DatabaseObject {
       return false;
     }
     Kit kit = (Kit) o;
-    return Objects.equals(getID(), kit.getID()) && Objects.equals(name, kit.name)
+    return Objects.equals(getId(), kit.getId()) && Objects.equals(name, kit.name)
         && Objects.equals(parts, kit.parts)
         && Objects.equals(services, kit.services) && Objects.equals(description, kit.description)
         && Objects.equals(price, kit.price);
@@ -127,12 +127,12 @@ public class Kit implements DatabaseObject {
 
   @Override
   public int hashCode() {
-    return Objects.hash(getID(), name, parts, services, description, price);
+    return Objects.hash(getId(), name, parts, services, description, price);
   }
 
   @Override
   public String toString() {
-    return "{" + " id='" + getID() + "'" + ", name='"
+    return "{" + " id='" + getId() + "'" + ", name='"
         + getName() + "'" + ", parts='" + getParts() + "'"
         + ", services='" + getServices() + "'" + ", description='"
         + getDescription() + "'" + ", price='" + getPrice()
@@ -150,7 +150,7 @@ public class Kit implements DatabaseObject {
   }
 
   @Override
-  public String getID() {
+  public String getId() {
     return this.id;
   }
 

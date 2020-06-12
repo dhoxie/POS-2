@@ -92,7 +92,7 @@ public class Part implements DatabaseObject {
       return false;
     }
     Part part = (Part) o;
-    return Objects.equals(getID(), part.getID())
+    return Objects.equals(getId(), part.getId())
         && Objects.equals(vendor, part.vendor)
         && onHand == part.onHand
         && Objects.equals(price, part.price);
@@ -100,19 +100,19 @@ public class Part implements DatabaseObject {
 
   @Override
   public int hashCode() {
-    return Objects.hash(getID(), vendor, onHand, price);
+    return Objects.hash(getId(), vendor, onHand, price);
   }
 
   @Override
   public String toString() {
-    return "{" + " partID='" + getID()
+    return "{" + " partID='" + getId()
         + "'" + ", vendor='" + getVendor()
         + "'" + ", onHand='" + getOnHand() + "'"
         + ", price='" + getPrice() + "'" + "}";
   }
 
   @Override
-  public String getID() {
+  public String getId() {
     return this.id;
   }
 

@@ -88,7 +88,7 @@ public class Vehicle implements DatabaseObject {
   }
 
   public String getVin() {
-    return this.getID();
+    return this.getId();
   }
 
   public String getComments() {
@@ -121,12 +121,12 @@ public class Vehicle implements DatabaseObject {
     return Objects.equals(make, vehicle.make) && Objects.equals(model, vehicle.model)
         && Objects.equals(year, vehicle.year) && Objects.equals(plate, vehicle.plate)
         && Objects.equals(mileage, vehicle.mileage) && Objects.equals(motor, vehicle.motor)
-        && Objects.equals(getID(), vehicle.getID()) && Objects.equals(comments, vehicle.comments);
+        && Objects.equals(getId(), vehicle.getId()) && Objects.equals(comments, vehicle.comments);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(make, model, year, plate, mileage, motor, getID(), comments);
+    return Objects.hash(make, model, year, plate, mileage, motor, getId(), comments);
   }
 
   @Override
@@ -138,7 +138,7 @@ public class Vehicle implements DatabaseObject {
   }
 
   @Override
-  public String getID() {
+  public String getId() {
     return this.id;
   }
 

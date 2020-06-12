@@ -66,7 +66,7 @@ public class PartTest {
 
   @Test
   public void testToString() {
-    String expected = "{" + " partID='" + part.getID() + "'" + ", vendor='" + part.getVendor()
+    String expected = "{" + " partID='" + part.getId() + "'" + ", vendor='" + part.getVendor()
         + "'" + ", onHand='" + part.getOnHand() + "'" + ", price='" + part.getPrice() + "'" + "}";
     assertEquals(expected, part.toString());
   }

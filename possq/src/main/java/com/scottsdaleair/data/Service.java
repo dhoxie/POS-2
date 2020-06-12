@@ -89,19 +89,19 @@ public class Service implements DatabaseObject {
       return false;
     }
     Service service = (Service) o;
-    return Objects.equals(getID(), service.getID())
+    return Objects.equals(getId(), service.getId())
         && Objects.equals(name, service.name) && Objects.equals(parts, service.parts)
         && Objects.equals(description, service.description) && Objects.equals(price, service.price);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(getID(), name, parts, description, price);
+    return Objects.hash(getId(), name, parts, description, price);
   }
 
   @Override
   public String toString() {
-    return "{" + " id='" + getID() + "'"
+    return "{" + " id='" + getId() + "'"
         + ", name='" + getName() + "'" + ", parts='" + getParts() + "'"
         + ", description='" + getDescription() + "'" + ", price='" + getPrice() + "'" + "}";
   }
@@ -117,7 +117,7 @@ public class Service implements DatabaseObject {
   }
 
   @Override
-  public String getID() {
+  public String getId() {
     return this.id;
   }
 

@@ -56,7 +56,7 @@ public class PDFInvoice {
     // this is of type PDFTest so if someone wants to create this class and
     // create a pdf at the same time it can be done with object chaining
     PdfWriter writer =
-        new PdfWriter(theInvoice.getID() + theCust.getFname() + theCust.getLname() + ".pdf");
+        new PdfWriter(theInvoice.getId() + theCust.getFname() + theCust.getLname() + ".pdf");
     pdf = new PdfDocument(writer);
     theDocument = new Document(pdf);
     // all of the below function calls should return stuff so that the adding to the
@@ -99,7 +99,7 @@ public class PDFInvoice {
     theDocument.setProperty(Property.LEADING, new Leading(Leading.MULTIPLIED, .8f));
     table.setFontSize(8);
     Cell invoiceNumberCell = new Cell(1, 1).setTextAlignment(TextAlignment.LEFT)
-        .add(new Paragraph("Invoice # \n" + theInvoice.getID())).setBorder(Border.NO_BORDER);
+        .add(new Paragraph("Invoice # \n" + theInvoice.getId())).setBorder(Border.NO_BORDER);
     Cell whoWeAreCell =
         new Cell(1, 1).setTextAlignment(TextAlignment.CENTER)
             .add(new Paragraph("NORTHWEST AUTOMOTIVE CENTERS \n "
@@ -342,7 +342,7 @@ public class PDFInvoice {
 
     partialTable.setFontSize(8);
 
-    partialTable.addCell(new Cell(1, 1).add(new Paragraph(toAdd.getID())));
+    partialTable.addCell(new Cell(1, 1).add(new Paragraph(toAdd.getId())));
     partialTable.addCell(new Cell(1, 1).add(new Paragraph(toAdd.getVendor())));
     partialTable.addCell(new Cell(1, 1).add(new Paragraph("inc")));
     partialTable.addCell(new Cell(1, 1).add(new Paragraph(toAdd.getPrice())));

@@ -7,7 +7,7 @@ public interface DatabaseObject {
   //   this.id = id;
   // }
 
-  public String getID();
+  public String getId();
   // {
   //   return this.id;
   // }

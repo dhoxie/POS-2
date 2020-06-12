@@ -37,7 +37,7 @@ public class KitGenerator {
   public static String[] createTestKits(int kitCount) {
     String[] kits = new String[kitCount];
     for (int x = 0; x < kitCount; x++) {
-      kits[x] = createTestKit().getID();
+      kits[x] = createTestKit().getId();
     }
     return kits;
   }

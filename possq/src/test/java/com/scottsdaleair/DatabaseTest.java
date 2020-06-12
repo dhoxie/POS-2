@@ -37,9 +37,9 @@ public class DatabaseTest {
     if (someParts.length < 1) {
       Part prt = new Part("433396766", "Test Makers", 1, "$-1.99");
       DBController.addToDB(prt, Part.class);
-      parts[0] = prt.getID();
+      parts[0] = prt.getId();
     } else {
-      parts[0] = someParts[0].getID();
+      parts[0] = someParts[0].getId();
     }
 
     Service[] someServices = DBController.queryDB("id", "836891868", Service.class);
@@ -48,9 +48,9 @@ public class DatabaseTest {
       Service srv =
           new Service("836891868", "Test Service", parts, "A service to test on", "$-1.99");
       DBController.addToDB(srv, Service.class);
-      services[0] = srv.getID();
+      services[0] = srv.getId();
     } else {
-      services[0] = someServices[0].getID();
+      services[0] = someServices[0].getId();
     }
 
     Kit[] someKits = DBController.queryDB("id", "220839086", Kit.class);
@@ -58,9 +58,9 @@ public class DatabaseTest {
     if (someKits.length < 1) {
       Kit kit = new Kit("220839086", "Test Kit", parts, services, "A kit to test on", "$-1.99");
       DBController.addToDB(kit, Kit.class);
-      kits[0] = kit.getID();
+      kits[0] = kit.getId();
     } else {
-      kits[0] = someKits[0].getID();
+      kits[0] = someKits[0].getId();
     }
 
     Invoice[] someInvoices = DBController.queryDB("id", "497658563", Invoice.class);
@@ -122,7 +122,7 @@ public class DatabaseTest {
   @Test
   public void testQueryInvoices() {
     Invoice[] someInvoices = DBController.queryDB("id", "497658563", Invoice.class);
-    assertTrue(someInvoices.length == 1 && someInvoices[0].getID().equals("497658563"));
+    assertTrue(someInvoices.length == 1 && someInvoices[0].getId().equals("497658563"));
   }
 
   @Test
@@ -134,7 +134,7 @@ public class DatabaseTest {
   @Test
   public void testQueryKits() {
     Kit[] someKits = DBController.queryDB("id", "220839086", Kit.class);
-    assertTrue(someKits.length == 1 && someKits[0].getID().equals("220839086"));
+    assertTrue(someKits.length == 1 && someKits[0].getId().equals("220839086"));
   }
 
   @Test
@@ -147,7 +147,7 @@ public class DatabaseTest {
   @Test
   public void testQueryParts() {
     Part[] someParts = DBController.queryDB("id", "433396766", Part.class);
-    assertTrue(someParts.length == 1 && someParts[0].getID().equals("433396766"));
+    assertTrue(someParts.length == 1 && someParts[0].getId().equals("433396766"));
   }
 
   @Test
@@ -161,7 +161,7 @@ public class DatabaseTest {
   public void testQueryServices() {
     Service[] someServices = DBController.queryDB("id", "836891868", Service.class);
 
-    assertTrue(someServices.length == 1 && someServices[0].getID().equals("836891868"));
+    assertTrue(someServices.length == 1 && someServices[0].getId().equals("836891868"));
   }
 
   @Test

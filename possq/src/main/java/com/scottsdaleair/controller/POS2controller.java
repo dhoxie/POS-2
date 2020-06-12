@@ -97,7 +97,7 @@ public class POS2controller {
           //
           if (invoiceNum != null) {
             new PDFInvoice(invoice).start();
-            final File inv = new File(invoice.getID() + cust.getFname() + cust.getLname() + ".pdf");
+            final File inv = new File(invoice.getId() + cust.getFname() + cust.getLname() + ".pdf");
             if (inv.exists()) {
               if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().open(inv);
@@ -134,7 +134,7 @@ public class POS2controller {
       final Invoice invoice = Invoice.getFromDb(invoiceNum);
       new PDFInvoice(invoice).start();
       final Email theEmail = new Email("This is your invoice from Northwest Automotive Center ",
-          invoice.getID() + cust.getFname() + cust.getLname() + ".pdf");
+          invoice.getId() + cust.getFname() + cust.getLname() + ".pdf");
       final SendInvoice tmp = new SendInvoice(email, theEmail);
       tmp.send();
     }
@@ -217,7 +217,7 @@ public class POS2controller {
   }
 
   private void viewCustomer(final TableRow<Customer> row) throws IOException {
-    final String id = row.getItem().getID();
+    final String id = row.getItem().getId();
     final Customer[] custList = DBController.queryDB("id", id, Customer.class);
     final Customer cust = custList[0];
 

@@ -234,7 +234,7 @@
                                         </TableColumn>
                                         <TableColumn maxWidth="4969.0" minWidth="0.0" prefWidth="187.0" text="VIN">
                                             <cellValueFactory>
-                                                <PropertyValueFactory property="vin" />
+                                                <PropertyValueFactory property="id" />
                                             </cellValueFactory>
                                         </TableColumn>
                                     </columns>

@@ -41,7 +41,7 @@ public class ServiceGenerator {
   public static String[] createTestServices(int serviceCount) {
     String[] services = new String[serviceCount];
     for (int x = 0; x < serviceCount; x++) {
-      services[x] = createTestService().getID();
+      services[x] = createTestService().getId();
     }
     return services;
   }

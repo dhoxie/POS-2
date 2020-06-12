@@ -44,7 +44,7 @@ public class DatabaseFiller {
 
       String[] history = new String[invoiceCount];
       for (int x = 0; x < invoiceCount; x++) {
-        history[x] = invoices[x].getID();
+        history[x] = invoices[x].getId();
       }
 
       String[] vehicleVins = new String[vehicleCount];

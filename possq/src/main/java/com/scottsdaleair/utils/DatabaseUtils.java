@@ -100,7 +100,7 @@ public class DatabaseUtils<T> {
     Gson gson = new Gson();
     String obJson = gson.toJson(obj);
     Document toUpdate = Document.parse(obJson);
-    collection.replaceOne(eq("id", obj.getID()), toUpdate);
+    collection.replaceOne(eq("id", obj.getId()), toUpdate);
   }
 
   private static void updateObjInDB(String dbname, String collectionName, DatabaseObject obj) {

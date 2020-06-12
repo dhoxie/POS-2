@@ -177,7 +177,7 @@ public class Customer implements DatabaseObject {
       return false;
     }
     final Customer customer = (Customer) o;
-    return this.getID() == customer.getID()
+    return this.getId() == customer.getId()
         && Objects.equals(fname, customer.fname)
         && Objects.equals(lname, customer.lname)
         && Objects.equals(email, customer.email)
@@ -187,12 +187,12 @@ public class Customer implements DatabaseObject {
 
   @Override
   public final int hashCode() {
-    return Objects.hash(getID(), fname, lname, email, address, phones);
+    return Objects.hash(getId(), fname, lname, email, address, phones);
   }
 
   @Override
   public final String toString() {
-    return "{" + " id='" + getID()
+    return "{" + " id='" + getId()
         + "'" + ", fname='" + getFname()
         + "'" + ", lname='" + getLname()
         + "'" + ", email='" + getEmail()
@@ -201,7 +201,7 @@ public class Customer implements DatabaseObject {
   }
 
   @Override
-  public String getID() {
+  public String getId() {
     return this.id;
   }
 }
