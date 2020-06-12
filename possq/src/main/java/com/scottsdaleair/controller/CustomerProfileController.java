@@ -61,6 +61,8 @@ public class CustomerProfileController {
     private Button btnPOSNAV;
     @FXML
     private Button btnCustomersNAV;
+    @FXML
+    private Button btnInventoryNAV;
 
 
     public void loadData(Customer cust){
@@ -196,7 +198,10 @@ public class CustomerProfileController {
             stage = (Stage) btnCustomersNAV.getScene().getWindow();
             url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml")
                     .toURI().toURL();
-        } else {
+        } else if (event.getSource() == btnInventoryNAV) {
+            stage = (Stage) btnPOSNAV.getScene().getWindow();
+            url = new File("src/main/java/com/scottsdaleair/view/Inventory_Screen.fxml").toURI().toURL();
+        }else {
             stage = (Stage) btnCustomersNAV.getScene().getWindow();
             url = new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml")
                     .toURI().toURL();

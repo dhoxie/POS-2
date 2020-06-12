@@ -105,6 +105,7 @@ public class Vehicle implements DatabaseObject {
    * @return
    */
   public static Vehicle getFromDb(String vin) {
+    // return DBController.queryDB("id", vin, Vehicle.class)[0];
     return DBController.queryDB("id", vin, Vehicle.class)[0];
   }
 

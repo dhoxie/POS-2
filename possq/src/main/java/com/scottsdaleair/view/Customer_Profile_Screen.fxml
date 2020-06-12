@@ -19,10 +19,10 @@
         <AnchorPane fx:id="paneNav" layoutX="-1.0" minHeight="0.0" minWidth="0.0">
             <Button fx:id="btnPOSNAV" layoutX="1.0" layoutY="226.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Point of Sale" />
             <Button fx:id="btnCustomersNAV" layoutX="1.0" layoutY="285.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Customers" />
-            <Button fx:id="btnInventoryNAV" layoutX="1.0" layoutY="342.0" mnemonicParsing="false" styleClass="navButton" text="Inventory" />
-            <Button fx:id="btnCalendarNAV" layoutX="1.0" layoutY="400.0" mnemonicParsing="false" styleClass="navButton" text="Calendar" />
-            <Button fx:id="btnReportsNAV" layoutX="1.0" layoutY="460.0" mnemonicParsing="false" styleClass="navButton" text="Reports" />
-            <Button fx:id="btnSettingsNAV" layoutX="1.0" layoutY="725.0" mnemonicParsing="false" styleClass="navButton" text="Settings" />
+            <Button fx:id="btnInventoryNAV" layoutX="1.0" layoutY="342.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Inventory" />
+            <Button fx:id="btnCalendarNAV" layoutX="1.0" layoutY="400.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Calendar" />
+            <Button fx:id="btnReportsNAV" layoutX="1.0" layoutY="460.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Reports" />
+            <Button fx:id="btnSettingsNAV" layoutX="1.0" layoutY="725.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Settings" />
             <ImageView fitHeight="79.0" fitWidth="247.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                 <image>
                     <Image url="@./imgs/1.PNG" />
@@ -36,7 +36,7 @@
                 </font>
             </Label>
             <ScrollPane fx:id="scroll" layoutX="34.0" layoutY="92.0" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="682.0" prefWidth="936.0" style="-fx-background-color: white;">
-                <VBox prefWidth="915.0">
+                <VBox prefWidth="915.0" style="-fx-background-color: white;">
                     <children>
                         <AnchorPane prefHeight="70.0" prefWidth="915.0">
                             <children>
@@ -274,7 +274,8 @@
                         </TableView>
                      </children>
                   </AnchorPane>
-                    </children></VBox>
+                    </children>
+                </VBox>
             </ScrollPane>
         </AnchorPane>
     </AnchorPane>
