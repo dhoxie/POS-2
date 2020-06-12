@@ -150,7 +150,7 @@ public class Vehicle {
    * @return
    */
   public static Vehicle getFromDb(String vin) {
-    return DatabaseGetter.queryDB("id", vin, Vehicle.class)[0];
+    return DatabaseGetter.queryDB("vin", vin, Vehicle.class)[0];
   }
 
   @Override
