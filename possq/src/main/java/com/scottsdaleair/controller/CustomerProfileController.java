@@ -210,7 +210,7 @@ public class CustomerProfileController {
 
     private void viewVehicle(TableRow<Vehicle> row) throws IOException {
         String vin = row.getItem().getVin();
-        Vehicle[] vehicleList = DBController.queryDB("vin", vin, Vehicle.class);
+        Vehicle[] vehicleList = DBController.queryDB("id", vin, Vehicle.class);
         Vehicle car = vehicleList[0];
 
         Stage stage = (Stage) btnCustomersNAV.getScene().getWindow();
