@@ -18,6 +18,20 @@ PoS^2 is a point-of-sale system for car garages.
 
 ---
 
+## How to Build & Run
+
+This project uses Maven to keep track of dependencies and for building.
+Make sure you have this installed, as well as JDK 11+ before starting.
+To run the tests and compile a runnable .jar file, run from the possq directory:
+
+`mvn clean package`
+
+Then, to run the compiled jar, run:
+
+`java -jar ./target/possq-1.0-SNAPSHOT-jar-with-dependencies.jar`
+
+---
+
 ## Guidelines for reporting issues
 
 - [Bug Reporting](./.github/ISSUE_TEMPLATE/bug_report.md)
