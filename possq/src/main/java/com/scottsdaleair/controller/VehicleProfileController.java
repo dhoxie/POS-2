@@ -93,13 +93,13 @@ public class VehicleProfileController {
 
 
     private void viewInvoices(TableRow<Invoice> row) {
-        String invoiceNum = row.getItem().getId();
+        String invoiceNum = row.getItem().getID();
         Invoice invoice = Invoice.getFromDb(invoiceNum);
         Customer cust = Customer.getFromDb(invoice.getCustomerID());
         try {
             if (invoiceNum != null) {
                 new PDFInvoice(invoice).start();
-                File inv = new File(invoice.getId() + cust.getFname() + cust.getLname() + ".pdf");
+                File inv = new File(invoice.getID() + cust.getFname() + cust.getLname() + ".pdf");
                 if (inv.exists()) {
                     if (Desktop.isDesktopSupported()) {
                         Desktop.getDesktop().open(inv);

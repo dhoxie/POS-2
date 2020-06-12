@@ -213,8 +213,8 @@ public class POS2controller {
   }
 
   private void viewCustomer(TableRow<Customer> row) throws IOException {
-    String id = row.getItem().getId();
-    Customer[] custList = DatabaseGetter.queryDB("id", id, Customer.class);
+    String id = row.getItem().getID();
+    Customer[] custList = DBController.queryDB("id", id, Customer.class);
     Customer cust = custList[0];
 
     Stage stage = (Stage) btnCustomersNAV.getScene().getWindow();

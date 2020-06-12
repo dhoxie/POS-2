@@ -210,7 +210,7 @@ public class CustomerProfileController {
 
     private void viewVehicle(TableRow<Vehicle> row) throws IOException {
         String vin = row.getItem().getVin();
-        Vehicle[] vehicleList = DatabaseGetter.queryDB("vin", vin, Vehicle.class);
+        Vehicle[] vehicleList = DBController.queryDB("vin", vin, Vehicle.class);
         Vehicle car = vehicleList[0];
 
         Stage stage = (Stage) btnCustomersNAV.getScene().getWindow();
@@ -228,19 +228,19 @@ public class CustomerProfileController {
     }
 
     private Invoice[] getInvoicesOfVehicle(String vin){
-        Invoice[] invoices = DatabaseGetter.queryDB("vehicleVin", vin, Invoice.class);
+        Invoice[] invoices = DBController.queryDB("vehicleVin", vin, Invoice.class);
         return invoices;
     }
 
 
     private void viewInvoices(TableRow<Invoice> row) {
-        String invoiceNum = row.getItem().getId();
+        String invoiceNum = row.getItem().getID();
         Invoice invoice = Invoice.getFromDb(invoiceNum);
         Customer cust = Customer.getFromDb(invoice.getCustomerID());
         try {
             if (invoiceNum != null) {
                 new PDFInvoice(invoice).start();
-                File inv = new File(invoice.getId() + cust.getFname() + cust.getLname() + ".pdf");
+                File inv = new File(invoice.getID() + cust.getFname() + cust.getLname() + ".pdf");
                 if (inv.exists()) {
                     if (Desktop.isDesktopSupported()) {
                         Desktop.getDesktop().open(inv);

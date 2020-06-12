@@ -12,6 +12,8 @@ import com.scottsdaleair.data.Vehicle;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ch.qos.logback.core.db.dialect.DBUtil;
+
 public class DatabaseTest {
   /**
    * Sets up the database for testing.
@@ -99,7 +101,7 @@ public class DatabaseTest {
 
   @Test
   public void testGetCustomerHistory(){
-    Customer[] someCustomers = DatabaseGetter.queryDB("id", "1234567", Customer.class);
+    Customer[] someCustomers = DBController.queryDB("id", "1234567", Customer.class);
     boolean isAccurate = false;
     if(someCustomers != null) {
       String[] history = someCustomers[0].getHistID();
