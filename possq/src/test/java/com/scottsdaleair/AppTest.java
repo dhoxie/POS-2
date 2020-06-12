@@ -40,8 +40,16 @@ public class AppTest extends ApplicationTest {
     release(new MouseButton[] {});
   }
 
+  /**
+   * Queries the current node hierarchy for things matching the given query string.
+   * @param <T>   Type of the nodes
+   * @param query Query to search by
+   * @return
+   */
   public <T extends Node> T find(final String query) {
-    return (T) lookup(query).queryAll().iterator().next();
+    @SuppressWarnings("unchecked")
+    T result = (T) lookup(query).queryAll().iterator().next();
+    return result;
   }
 
 }

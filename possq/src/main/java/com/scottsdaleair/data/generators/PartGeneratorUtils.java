@@ -1,7 +1,7 @@
 package com.scottsdaleair.data.generators;
 
+import com.scottsdaleair.controller.DBController;
 import com.scottsdaleair.data.Part;
-import com.scottsdaleair.utils.DatabaseUtils;
 import java.util.Random;
 
 public class PartGeneratorUtils {
@@ -44,7 +44,7 @@ public class PartGeneratorUtils {
   public static String[] createTestParts(int partCount) {
     String[] parts = new String[partCount];
     for (int x = 0; x < partCount; x++) {
-      parts[x] = createTestPart().getPartID();
+      parts[x] = createTestPart().getID();
     }
     return parts;
   }
@@ -54,7 +54,7 @@ public class PartGeneratorUtils {
    * @param p The part to add
    */
   public static void savePart(Part p) {
-    DatabaseUtils.addObjToCollection("parts", p);
+    DBController.addToDB(p, Part.class);
 
   }
 }
