@@ -1,15 +1,14 @@
 package com.scottsdaleair.data;
 
-public interface DatabaseObject {
-  // private String id;
+public class DatabaseObject {
+  private String id;
 
-  // public DatabaseObject(String id) {
-  //   this.id = id;
-  // }
+  public DatabaseObject(String id) {
+    this.id = id;
+  }
 
-  public String getId();
-  // {
-  //   return this.id;
-  // }
+  public String getId() {
+    return this.id;
+  }
 
 }
