@@ -91,7 +91,7 @@ public class InventoryController {
         tblPartsResults.getColumns().add(deletePart);
         tblPartsResults.getColumns().add(editPart);
 
-        Part[] parts = DatabaseGetter.getAll(Part.class);
+        Part[] parts = DBController.getAll(Part.class);
         if(parts != null) {
             ObservableList<Part> data = FXCollections.observableArrayList();
 
@@ -154,7 +154,7 @@ public class InventoryController {
         tblServicesResults.getColumns().add(deleteService);
         tblServicesResults.getColumns().add(editService);
 
-        Service[] services = DatabaseGetter.getAll(Service.class);
+        Service[] services = DBController.getAll(Service.class);
         if(services != null) {
             ObservableList<Service> data = FXCollections.observableArrayList();
 
@@ -217,7 +217,7 @@ public class InventoryController {
         tblKitsResults.getColumns().add(deleteKit);
         tblKitsResults.getColumns().add(editKit);
 
-        Kit[] kits = DatabaseGetter.getAll(Kit.class);
+        Kit[] kits = DBController.getAll(Kit.class);
         if(kits != null) {
             ObservableList<Kit> data = FXCollections.observableArrayList();
 
