@@ -166,7 +166,7 @@ public class Invoice extends DatabaseObject {
    * @return
    */
   public static Invoice getFromDb(String invoiceId) {
-    return DBController.queryDB("key", invoiceId, Invoice.class)[0];
+    return DBController.queryDB("id", invoiceId, Invoice.class)[0];
   }
 
   @Override

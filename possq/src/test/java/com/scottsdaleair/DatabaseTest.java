@@ -12,6 +12,8 @@ import com.scottsdaleair.data.Vehicle;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import ch.qos.logback.core.db.dialect.DBUtil;
+
 public class DatabaseTest {
   /**
    * Sets up the database for testing.
@@ -21,7 +23,7 @@ public class DatabaseTest {
     Customer[] someCustomers = DBController.queryDB("id", "1234567", Customer.class);
     if (someCustomers.length < 1) {
       Customer cust = new Customer("1234567", "Kayla", "Testificate", "testemail@test.com",
-          "1234 Test St", null, null, null);
+          "1234 Test St", null, new String[]{"497658563"}, null);
       DBController.addToDB(cust, Customer.class);
     }
 
@@ -80,16 +82,36 @@ public class DatabaseTest {
 
   @Test
   public void testQueryCustomers() {
-    Customer[] someCustomers = DBController.queryDB("fName", "Kayla", Customer.class);
+    Customer[] someCustomers = DBController.queryDB("id", "1234567", Customer.class);
 
-    int isAccurate = 0;
-    for (Customer c : someCustomers) {
-      if (c.getFname().equals("Kayla")) {
+    int isAccurate = -1;
+    if(someCustomers != null) {
+      if(someCustomers.length != 0) {
         isAccurate++;
+        for (Customer c : someCustomers) {
+          if (c.getFname().equals("Kayla")) {
+            isAccurate++;
+          }
+        }
       }
     }
 
     assertTrue(isAccurate == someCustomers.length);
+  }
+
+  @Test
+  public void testGetCustomerHistory(){
+    Customer[] someCustomers = DBController.queryDB("id", "1234567", Customer.class);
+    boolean isAccurate = false;
+    if(someCustomers != null) {
+      String[] history = someCustomers[0].getHistID();
+      if (history != null) {
+        if (history[0].equals("497658563")) {
+          isAccurate = true;
+        }
+      }
+    }
+    assertTrue(isAccurate);
   }
 
   @Test

@@ -103,7 +103,7 @@ public class Vehicle extends DatabaseObject {
    * @return
    */
   public static Vehicle getFromDb(String vin) {
-    return DBController.queryDB("vehicles", vin, Vehicle.class)[0];
+    return DBController.queryDB("id", vin, Vehicle.class)[0];
   }
 
   @Override

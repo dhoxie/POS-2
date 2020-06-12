@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scottsdaleair.controller.VehicleProfileController">
+
+    <stylesheets>
+        <URL value="@css/default.css" />
+    </stylesheets>
+
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+        <AnchorPane fx:id="paneNav" layoutX="-1.0" minHeight="0.0" minWidth="0.0">
+            <Button fx:id="btnPOSNAV" layoutX="1.0" layoutY="226.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Point of Sale" />
+            <Button fx:id="btnCustomersNAV" layoutX="1.0" layoutY="285.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Customers" />
+            <Button fx:id="btnInventoryNAV" layoutX="1.0" layoutY="342.0" mnemonicParsing="false" styleClass="navButton" text="Inventory" />
+            <Button fx:id="btnCalendarNAV" layoutX="1.0" layoutY="400.0" mnemonicParsing="false" styleClass="navButton" text="Calendar" />
+            <Button fx:id="btnReportsNAV" layoutX="1.0" layoutY="460.0" mnemonicParsing="false" styleClass="navButton" text="Reports" />
+            <Button fx:id="btnSettingsNAV" layoutX="1.0" layoutY="725.0" mnemonicParsing="false" styleClass="navButton" text="Settings" />
+            <ImageView fitHeight="79.0" fitWidth="247.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@./imgs/1.PNG" />
+                </image>
+            </ImageView>
+        </AnchorPane>
+        <AnchorPane fx:id="paneCustomers" layoutX="266.0" prefHeight="800.0" prefWidth="1015.0" style="-fx-background-color: #F1F0F2;">
+            <Label layoutX="33.0" layoutY="28.0" prefHeight="63.0" prefWidth="354.0" text="Automobile" textAlignment="CENTER" textFill="#1e703a">
+                <font>
+                    <Font name="System Bold" size="31.0" />
+                </font>
+            </Label>
+            <ScrollPane fx:id="scroll" layoutX="34.0" layoutY="92.0" nodeOrientation="LEFT_TO_RIGHT" pickOnBounds="false" prefHeight="682.0" prefWidth="936.0" style="-fx-background-color: white;">
+            <VBox prefHeight="682.0" prefWidth="915.0">
+               <children>
+                  <AnchorPane prefHeight="97.0" prefWidth="915.0">
+                     <children>
+                        <Label fx:id="labelCarName" layoutX="26.0" layoutY="21.0" prefHeight="36.0" prefWidth="580.0" text="carName" textFill="#1e703a">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="26.0" layoutY="74.0" prefHeight="5.0" prefWidth="880.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="StatsPane" prefHeight="254.0" prefWidth="915.0">
+                     <children>
+                            <TextField fx:id="txtLicensePlate" layoutX="37.0" layoutY="40.0" prefHeight="26.0" prefWidth="95.0">
+                                <effect>
+                                    <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                                        <color>
+                                            <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                                        </color>
+                                    </InnerShadow>
+                                </effect>
+                            </TextField>
+                            <TextField fx:id="txtYear" layoutX="152.0" layoutY="40.0" prefHeight="26.0" prefWidth="95.0">
+                                <effect>
+                                    <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                                        <color>
+                                            <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                                        </color>
+                                    </InnerShadow>
+                                </effect>
+                            </TextField>
+                            <Label layoutX="37.0" layoutY="14.0" prefHeight="26.0" prefWidth="95.0" text="License Plate">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                            <Label layoutX="152.0" layoutY="14.0" prefHeight="26.0" prefWidth="95.0" text="Year">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                            <TextField fx:id="txtMileage" layoutX="37.0" layoutY="90.0" prefHeight="26.0" prefWidth="95.0">
+                                <effect>
+                                    <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                                        <color>
+                                            <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                                        </color>
+                                    </InnerShadow>
+                                </effect>
+                            </TextField>
+                            <Label layoutX="37.0" layoutY="64.0" prefHeight="26.0" prefWidth="95.0" text="Mileage">
+                                <font>
+                                    <Font size="14.0" />
+                                </font>
+                            </Label>
+                        <TextField fx:id="txtMake" layoutX="263.0" layoutY="40.0" prefHeight="26.0" prefWidth="95.0">
+                            <effect>
+                                <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                                    <color>
+                                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                                    </color>
+                                </InnerShadow>
+                            </effect>
+                        </TextField>
+                        <Label layoutX="263.0" layoutY="14.0" prefHeight="26.0" prefWidth="95.0" text="Make">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtModel" layoutX="370.0" layoutY="40.0" prefHeight="26.0" prefWidth="95.0">
+                            <effect>
+                                <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                                    <color>
+                                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                                    </color>
+                                </InnerShadow>
+                            </effect>
+                        </TextField>
+                        <Label layoutX="370.0" layoutY="14.0" prefHeight="26.0" prefWidth="95.0" text="Model">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtMotor" layoutX="153.0" layoutY="90.0" prefHeight="26.0" prefWidth="95.0">
+                            <effect>
+                                <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                                    <color>
+                                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                                    </color>
+                                </InnerShadow>
+                            </effect>
+                        </TextField>
+                        <Label layoutX="153.0" layoutY="64.0" prefHeight="26.0" prefWidth="95.0" text="Motor">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="txtVIN" layoutX="263.0" layoutY="90.0" prefHeight="26.0" prefWidth="202.0">
+                            <effect>
+                                <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                                    <color>
+                                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                                    </color>
+                                </InnerShadow>
+                            </effect>
+                        </TextField>
+                        <Label layoutX="263.0" layoutY="64.0" prefHeight="26.0" prefWidth="202.0" text="VIN">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="36.0" layoutY="116.0" prefHeight="26.0" prefWidth="327.0" text="Notes" textFill="#1e703a">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                        </Label>
+                        <TextArea fx:id="txtPrivateNotes" layoutX="380.0" layoutY="142.0" prefHeight="109.0" prefWidth="327.0">
+                            <effect>
+                                <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                                    <color>
+                                        <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                                    </color>
+                                </InnerShadow>
+                            </effect>
+                        </TextArea>
+                        <TextArea fx:id="txtNotes" layoutX="36.0" layoutY="142.0" prefHeight="109.0" prefWidth="327.0">
+                           <effect>
+                              <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                                 <color>
+                                    <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                                 </color>
+                              </InnerShadow>
+                           </effect>
+                        </TextArea>
+                        <Label layoutX="380.0" layoutY="116.0" prefHeight="26.0" prefWidth="327.0" text="Private Notes" textFill="#1e703a">
+                           <font>
+                              <Font size="14.0" />
+                           </font>
+                        </Label>
+                        <Separator layoutX="25.0" layoutY="273.0" prefHeight="5.0" prefWidth="880.0" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane fx:id="HistoryPane" prefHeight="414.0" prefWidth="915.0">
+                     <children>
+                        <Label layoutX="25.0" layoutY="14.0" prefHeight="36.0" prefWidth="580.0" text="History" textFill="#1e703a">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                     <TableView fx:id="tblInvoiceResults" layoutX="25.0" layoutY="67.0" prefHeight="400.0" prefWidth="882.0">
+                         <columns>
+                             <TableColumn prefWidth="153.06658935546875" text="Invoice Number">
+                                 <cellValueFactory>
+                                     <PropertyValueFactory property="id" />
+                                 </cellValueFactory>
+                             </TableColumn>
+                             <TableColumn prefWidth="111.0" text="Date">
+                                 <cellValueFactory>
+                                     <PropertyValueFactory property="date" />
+                                 </cellValueFactory>
+                             </TableColumn>
+                             <TableColumn prefWidth="489.0" text="Notes">
+                                 <cellValueFactory>
+                                     <PropertyValueFactory property="pubNotes" />
+                                 </cellValueFactory>
+                             </TableColumn>
+                             <TableColumn maxWidth="4969.0" minWidth="0.0" prefWidth="128.0" text="Total">
+                                 <cellValueFactory>
+                                     <PropertyValueFactory property="total" />
+                                 </cellValueFactory>
+                             </TableColumn>
+                         </columns>
+                     </TableView>
+                     </children>
+                  </AnchorPane>
+               </children></VBox>
+            </ScrollPane>
+        </AnchorPane>
+    </AnchorPane>
+</VBox>
