@@ -78,7 +78,7 @@ public class Part extends DatabaseObject {
    * @return
    */
   public static Part getFromDb(String partId) {
-    return DBController.queryDB("partID", partId, Part.class)[0];
+    return DBController.queryDB("id", partId, Part.class)[0];
   }
 
   @Override
