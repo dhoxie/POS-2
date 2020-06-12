@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.control.cell.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.scottsdaleair.controller.InventoryController">
+
+    <stylesheets>
+        <URL value="@css/default.css" />
+    </stylesheets>
+
+    <AnchorPane maxHeight="-1.0" maxWidth="-1.0" VBox.vgrow="ALWAYS">
+        <AnchorPane fx:id="paneNav" layoutX="-1.0" minHeight="0.0" minWidth="0.0">
+            <Button fx:id="btnPOSNAV" layoutX="1.0" layoutY="226.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Point of Sale" />
+            <Button fx:id="btnCustomersNAV" layoutX="1.0" layoutY="285.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Customers" />
+            <Button fx:id="btnInventoryNAV" layoutX="1.0" layoutY="342.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Inventory" />
+            <Button fx:id="btnCalendarNAV" layoutX="1.0" layoutY="400.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Calendar" />
+            <Button fx:id="btnReportsNAV" layoutX="1.0" layoutY="460.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Reports" />
+            <Button fx:id="btnSettingsNAV" layoutX="1.0" layoutY="725.0" mnemonicParsing="false" onAction="#changeScene" styleClass="navButton" text="Settings" />
+            <ImageView fitHeight="79.0" fitWidth="247.0" layoutX="10.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+                <image>
+                    <Image url="@./imgs/1.PNG" />
+                </image>
+            </ImageView>
+        </AnchorPane>
+        <AnchorPane fx:id="paneCustomers" layoutX="266.0" prefHeight="800.0" prefWidth="1015.0" style="-fx-background-color: #F1F0F2;">
+            <Label layoutX="33.0" layoutY="28.0" prefHeight="63.0" prefWidth="354.0" text="Inventory" textAlignment="CENTER" textFill="#1e703a">
+                <font>
+                    <Font name="System Bold" size="31.0" />
+                </font>
+            </Label>
+            <AnchorPane layoutX="34.0" layoutY="92.0" prefHeight="682.0" prefWidth="949.0" style="-fx-background-radius: 12; -fx-background-color: white;">
+            <children>
+               <TabPane prefHeight="682.0" prefWidth="949.0" tabClosingPolicy="UNAVAILABLE">
+                 <tabs>
+                   <Tab text="Parts">
+                     <content>
+                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                         <children>
+                         <TextField fx:id="txtSearchParts" layoutX="14.0" layoutY="25.0" prefHeight="26.0" prefWidth="202.0" promptText="Search...">
+                             <effect>
+                                 <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                                     <color>
+                                         <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                                     </color>
+                                 </InnerShadow>
+                             </effect>
+                         </TextField>
+                         <Button fx:id="btnAddPart" layoutX="814.0" layoutY="26.0" mnemonicParsing="false" onAction="#addPart" prefHeight="20.0" prefWidth="123.0" style="-fx-background-color: #1E703A;" text="Add Part" textFill="WHITE">
+                             <font>
+                                 <Font name="System Bold" size="12.0" />
+                             </font>
+                         </Button>
+                         <TableView fx:id="tblPartsResults" layoutX="14.0" layoutY="68.0" prefHeight="574.0" prefWidth="923.0">
+                             <columns>
+                                 <TableColumn prefWidth="116.0" text="Part Number">
+                                     <cellValueFactory>
+                                         <PropertyValueFactory property="partID" />
+                                     </cellValueFactory>
+                                 </TableColumn>
+                                 <TableColumn prefWidth="359.0" text="Description">
+                                     <cellValueFactory>
+                                         <PropertyValueFactory property="" />
+                                     </cellValueFactory>
+                                 </TableColumn>
+                                 <TableColumn prefWidth="100.0" text="Vendor">
+                                     <cellValueFactory>
+                                         <PropertyValueFactory property="vendor" />
+                                     </cellValueFactory>
+                                 </TableColumn>
+                                 <TableColumn prefWidth="86.0" text="On Hand">
+                                     <cellValueFactory>
+                                         <PropertyValueFactory property="onHand" />
+                                     </cellValueFactory>
+                                 </TableColumn>
+                                 <TableColumn prefWidth="94.0" text="Price">
+                                     <cellValueFactory>
+                                         <PropertyValueFactory property="price" />
+                                     </cellValueFactory>
+                                 </TableColumn>
+                             </columns>
+                         </TableView>
+                         </children>
+                         </AnchorPane>
+                     </content>
+                   </Tab>
+                   <Tab text="Services">
+                       <content>
+                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                               <children>
+                                   <TextField fx:id="txtSearchServices" layoutX="14.0" layoutY="25.0" prefHeight="26.0" prefWidth="202.0" promptText="Search...">
+                                       <effect>
+                                           <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                                               <color>
+                                                   <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                                               </color>
+                                           </InnerShadow>
+                                       </effect>
+                                   </TextField>
+                                   <Button fx:id="btnAddService" layoutX="814.0" layoutY="26.0" mnemonicParsing="false" onAction="#addService" prefHeight="20.0" prefWidth="123.0" style="-fx-background-color: #1E703A;" text="Add Service" textFill="WHITE">
+                                       <font>
+                                           <Font name="System Bold" size="12.0" />
+                                       </font>
+                                   </Button>
+                                   <TableView fx:id="tblServicesResults" layoutX="14.0" layoutY="68.0" prefHeight="574.0" prefWidth="923.0">
+                                       <columns>
+                                           <TableColumn prefWidth="103.0" text="Service Number">
+                                               <cellValueFactory>
+                                                   <PropertyValueFactory property="id" />
+                                               </cellValueFactory>
+                                           </TableColumn>
+                                           <TableColumn prefWidth="113.0" text="Name">
+                                               <cellValueFactory>
+                                                   <PropertyValueFactory property="name" />
+                                               </cellValueFactory>
+                                           </TableColumn>
+                                           <TableColumn prefWidth="325.0" text="Description">
+                                               <cellValueFactory>
+                                                   <PropertyValueFactory property="description" />
+                                               </cellValueFactory>
+                                           </TableColumn>
+                                           <TableColumn prefWidth="97.0" text="Category">
+                                               <cellValueFactory>
+                                                   <PropertyValueFactory property="" />
+                                               </cellValueFactory>
+                                           </TableColumn>
+                                           <TableColumn prefWidth="91.0" text="Price">
+                                               <cellValueFactory>
+                                                   <PropertyValueFactory property="price" />
+                                               </cellValueFactory>
+                                           </TableColumn>
+                                       </columns>
+                                   </TableView>
+                               </children>
+                           </AnchorPane>
+                       </content>
+                   </Tab>
+                     <Tab text="Kits">
+                         <content>
+                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                     <TextField fx:id="txtSearchKits" layoutX="14.0" layoutY="25.0" prefHeight="26.0" prefWidth="202.0" promptText="Search...">
+                                         <effect>
+                                             <InnerShadow blurType="ONE_PASS_BOX" height="26.65" offsetX="2.0" offsetY="2.0" radius="13.545" width="29.53">
+                                                 <color>
+                                                     <Color red="0.5034999847412109" green="0.5299999713897705" blue="0.5034999847412109" opacity="0.4939446449279785" />
+                                                 </color>
+                                             </InnerShadow>
+                                         </effect>
+                                     </TextField>
+                                     <Button fx:id="btnAddKit" layoutX="814.0" layoutY="26.0" mnemonicParsing="false" onAction="#addKit" prefHeight="20.0" prefWidth="123.0" style="-fx-background-color: #1E703A;" text="Add Kit" textFill="WHITE">
+                                         <font>
+                                             <Font name="System Bold" size="12.0" />
+                                         </font>
+                                     </Button>
+                                     <TableView fx:id="tblKitsResults" layoutX="14.0" layoutY="68.0" prefHeight="574.0" prefWidth="923.0">
+                                         <columns>
+                                             <TableColumn prefWidth="108.0" text="Kit Code">
+                                                 <cellValueFactory>
+                                                     <PropertyValueFactory property="name" />
+                                                 </cellValueFactory>
+                                             </TableColumn>
+                                             <TableColumn prefWidth="504.0" text="Description">
+                                                 <cellValueFactory>
+                                                     <PropertyValueFactory property="description" />
+                                                 </cellValueFactory>
+                                             </TableColumn>
+                                             <TableColumn prefWidth="113.0" text="Price">
+                                                 <cellValueFactory>
+                                                     <PropertyValueFactory property="price" />
+                                                 </cellValueFactory>
+                                             </TableColumn>
+                                         </columns>
+                                     </TableView>
+                                 </children>
+                             </AnchorPane>
+                         </content>
+                     </Tab>
+                 </tabs>
+               </TabPane>
+            </children>
+            </AnchorPane>
+        </AnchorPane>
+    </AnchorPane>
+</VBox>
