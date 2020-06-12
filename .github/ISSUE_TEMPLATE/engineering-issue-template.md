@@ -1,11 +1,13 @@
 ---
+name: Documentation issue template
+about: A documentation task
+title: ''
+labels: ''
+assignees: ''
 
-name: Engineering issue template
-about: An engineering task
-title: ""
-labels: ""
-assignees: ""
----# Proposed Change
+---
+
+# Proposed Change
 
 # Why is this important?
 
