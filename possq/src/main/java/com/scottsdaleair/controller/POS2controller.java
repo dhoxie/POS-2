@@ -8,7 +8,6 @@ import com.scottsdaleair.pdfGenerator.PDFInvoice;
 import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.HashMap;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,59 +48,56 @@ public class POS2controller {
   @FXML
   private TextField txtEmailSearch;
 
-
   // -------------- M E T H O D S --------------
 
   // Scene Changing
   @FXML
-  private void changeScene(ActionEvent event) throws IOException {
+  private void changeScene(final ActionEvent event) throws IOException {
     Parent root;
     Stage stage;
     FXMLLoader loader;
 
     if (event.getSource() == btnPOSNAV) {
       stage = (Stage) btnPOSNAV.getScene().getWindow();
-      loader = new FXMLLoader(new File("src/main/java/com/scottsdaleair/view/POS_Search_Screen.fxml")
-              .toURI().toURL());
+      loader = new FXMLLoader(new File("src/main/java/com/scottsdaleair/view/POS_Search_Screen.fxml").toURI().toURL());
     } else if (event.getSource() == btnCustomersNAV) {
       stage = (Stage) btnCustomersNAV.getScene().getWindow();
-      loader = new FXMLLoader(new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml")
-              .toURI().toURL());
+      loader = new FXMLLoader(
+          new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI().toURL());
     } else if (event.getSource() == btnInventoryNAV) {
       stage = (Stage) btnPOSNAV.getScene().getWindow();
-      loader = new FXMLLoader(new File("src/main/java/com/scottsdaleair/view/Inventory_Screen.fxml")
-              .toURI().toURL());
-    }else {
+      loader = new FXMLLoader(new File("src/main/java/com/scottsdaleair/view/Inventory_Screen.fxml").toURI().toURL());
+    } else {
       stage = (Stage) btnCustomersNAV.getScene().getWindow();
-      loader = new FXMLLoader(new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml")
-              .toURI().toURL());
+      loader = new FXMLLoader(
+          new File("src/main/java/com/scottsdaleair/view/Customer_Search_Screen.fxml").toURI().toURL());
     }
     root = loader.load();
 
-    if(event.getSource() == btnInventoryNAV) {
-      InventoryController controller = loader.getController();
+    if (event.getSource() == btnInventoryNAV) {
+      final InventoryController controller = loader.getController();
       controller.loadData();
     }
 
-    Scene scene = new Scene(root);
+    final Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
   }
 
   // PDF Generation Method
   @FXML
-  private void genPDF(ActionEvent event) throws Exception {
-    Task<Void> pdfTask = new Task<>() {
+  private void genPDF(final ActionEvent event) throws Exception {
+    final Task<Void> pdfTask = new Task<>() {
       @Override
       public Void call() {
-        String invoiceNum = txtInvoiceNum.getText();
-        Invoice invoice = Invoice.getFromDb(invoiceNum);
-        Customer cust = Customer.getFromDb(invoice.getCustomerID());
+        final String invoiceNum = txtInvoiceNum.getText();
+        final Invoice invoice = Invoice.getFromDb(invoiceNum);
+        final Customer cust = Customer.getFromDb(invoice.getCustomerID());
         try {
           //
           if (invoiceNum != null) {
             new PDFInvoice(invoice).start();
-            File inv = new File(invoice.getID() + cust.getFname() + cust.getLname() + ".pdf");
+            final File inv = new File(invoice.getID() + cust.getFname() + cust.getLname() + ".pdf");
             if (inv.exists()) {
               if (Desktop.isDesktopSupported()) {
                 Desktop.getDesktop().open(inv);
@@ -112,7 +108,7 @@ public class POS2controller {
           } else {
             System.out.println("No Invoice Num");
           }
-        } catch (Throwable e) {
+        } catch (final Throwable e) {
           System.out.println("Caught");
         }
         return null;
@@ -123,41 +119,39 @@ public class POS2controller {
   }
 
   @FXML
-  private void emailPDF(ActionEvent event) throws Exception {
-    String invoiceNum = txtInvoiceNum.getText();
-    String email = txtEmailSearch.getText();
+  private void emailPDF(final ActionEvent event) throws Exception {
+    final String invoiceNum = txtInvoiceNum.getText();
+    final String email = txtEmailSearch.getText();
 
     if (invoiceNum.equals("")) {
       buildPopup((Stage) btnPOSNAV.getScene().getWindow(), "Invoice Field is needed");
-    }
-    else if (email.equals("")) {
+    } else if (email.equals("")) {
       buildPopup((Stage) btnPOSNAV.getScene().getWindow(), "Email Field is needed");
-    }
-    else {
-      Invoice invoice2 = Invoice.getFromDb(invoiceNum);
-      Customer cust = Customer.getFromDb(invoice2.getCustomerID());
+    } else {
+      final Invoice invoice2 = Invoice.getFromDb(invoiceNum);
+      final Customer cust = Customer.getFromDb(invoice2.getCustomerID());
       // not checking for if already created yet...
-      Invoice invoice = Invoice.getFromDb(invoiceNum);
+      final Invoice invoice = Invoice.getFromDb(invoiceNum);
       new PDFInvoice(invoice).start();
-      Email theEmail = new Email("This is your invoice from Northwest Automotive Center ",
-              invoice.getID() + cust.getFname() + cust.getLname() + ".pdf");
-      SendInvoice tmp = new SendInvoice(email, theEmail);
+      final Email theEmail = new Email("This is your invoice from Northwest Automotive Center ",
+          invoice.getID() + cust.getFname() + cust.getLname() + ".pdf");
+      final SendInvoice tmp = new SendInvoice(email, theEmail);
       tmp.send();
     }
   }
 
-  private void buildPopup(Stage stage, String labelText){
-    Popup popup = new Popup();
-    Label label = new Label(labelText);
+  private void buildPopup(final Stage stage, final String labelText) {
+    final Popup popup = new Popup();
+    final Label label = new Label(labelText);
     label.setStyle("-fx-background-color: white;");
-    Button button = new Button("OK");
+    final Button button = new Button("OK");
     label.setMinWidth(100);
     label.setMinHeight(80);
 
-    EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
+    final EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
       @Override
-      public void handle(ActionEvent actionEvent) {
-        if(popup.isShowing()){
+      public void handle(final ActionEvent actionEvent) {
+        if (popup.isShowing()) {
           popup.hide();
         }
       }
@@ -175,7 +169,7 @@ public class POS2controller {
   private void buildData() {
     tblCustomerResults.getItems().clear();
     Customer[] customers;
-    HashMap<String, String> query = new HashMap<>();
+    final HashMap<String, String> query = new HashMap<>();
 
     if (!txtFirstNameSearch.getText().isEmpty()) {
       query.put("fname", txtFirstNameSearch.getText());
@@ -186,21 +180,20 @@ public class POS2controller {
     if (!txtAddressSearch.getText().isEmpty()) {
       query.put("address", txtAddressSearch.getText());
     }
-    
+
     if (query.isEmpty()) {
       customers = DBController.getAll(Customer.class);
     } else {
       customers = DBController.queryDB(query, Customer.class);
     }
 
-
     tblCustomerResults.setRowFactory(tblCustomerResults -> {
-      TableRow<Customer> row = new TableRow<>();
+      final TableRow<Customer> row = new TableRow<>();
       row.setOnMouseClicked(mouseEvent -> {
-        if(mouseEvent.getClickCount() == 2 && (!row.isEmpty())){
+        if (mouseEvent.getClickCount() == 2 && (!row.isEmpty())) {
           try {
             viewCustomer(row);
-          } catch (IOException e) {
+          } catch (final IOException e) {
             new Exception("Ran into IO error in loading Customer Profile Screen");
           }
           System.out.println("Double clicked on item");
@@ -209,10 +202,10 @@ public class POS2controller {
       return row;
     });
 
-    ObservableList<Customer> data = FXCollections.observableArrayList();
+    final ObservableList<Customer> data = FXCollections.observableArrayList();
 
     // Adding data
-    int rows = customers.length;
+    final int rows = customers.length;
     int cur = 0;
     while (cur != rows) {
       data.add(customers[cur]);
@@ -221,21 +214,21 @@ public class POS2controller {
 
     tblCustomerResults.setItems(data);
 
-
   }
 
-  private void viewCustomer(TableRow<Customer> row) throws IOException {
-    String id = row.getItem().getID();
-    Customer[] custList = DBController.queryDB("id", id, Customer.class);
-    Customer cust = custList[0];
+  private void viewCustomer(final TableRow<Customer> row) throws IOException {
+    final String id = row.getItem().getID();
+    final Customer[] custList = DBController.queryDB("id", id, Customer.class);
+    final Customer cust = custList[0];
 
-    Stage stage = (Stage) btnCustomersNAV.getScene().getWindow();
+    final Stage stage = (Stage) btnCustomersNAV.getScene().getWindow();
 
-    FXMLLoader loader = new FXMLLoader(new File("src/main/java/com/scottsdaleair/view/Customer_Profile_Screen.fxml").toURI().toURL());
-    Parent root = loader.load();
-    CustomerProfileController controller = loader.getController();
+    final FXMLLoader loader = new FXMLLoader(
+        new File("src/main/java/com/scottsdaleair/view/Customer_Profile_Screen.fxml").toURI().toURL());
+    final Parent root = loader.load();
+    final CustomerProfileController controller = loader.getController();
     controller.loadData(cust);
-    Scene scene = new Scene(root);
+    final Scene scene = new Scene(root);
     stage.setScene(scene);
     stage.show();
   }
