@@ -3,7 +3,8 @@ package com.scottsdaleair.data;
 import com.scottsdaleair.controller.DBController;
 import java.util.Objects;
 
-public class Part extends DatabaseObject {
+public class Part implements DatabaseObject {
+  private String id;
   private String vendor;
   private int onHand;
   private String price;
@@ -16,14 +17,15 @@ public class Part extends DatabaseObject {
    * @param price   The price of this part
    */
   public Part(String partID, String vendor, int onHand, String price) {
-    super(partID);
+    // super(partID);
+    this.id = partID;
     this.vendor = vendor;
     this.onHand = onHand;
     this.price = price;
   }
 
   public Part() {
-    super("");
+    // super("");
   }
 
   public String getVendor() {
@@ -107,6 +109,11 @@ public class Part extends DatabaseObject {
         + "'" + ", vendor='" + getVendor()
         + "'" + ", onHand='" + getOnHand() + "'"
         + ", price='" + getPrice() + "'" + "}";
+  }
+
+  @Override
+  public String getID() {
+    return this.id;
   }
 
 }

@@ -5,7 +5,8 @@ import com.scottsdaleair.utils.DataUtils;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Service extends DatabaseObject {
+public class Service implements DatabaseObject {
+  private String id;
   private String name;
   private String[] parts;
   private String description;
@@ -21,7 +22,8 @@ public class Service extends DatabaseObject {
    * @param price       The cost of this service
    */
   public Service(String id, String name, String[] parts, String description, String price) {
-    super(id);
+    // super(id);
+    this.id = id;
     this.name = name;
     this.parts = parts;
     this.description = description;
@@ -112,6 +114,11 @@ public class Service extends DatabaseObject {
    */
   public static Service getFromDb(String serviceId) {
     return DBController.queryDB("id", serviceId, Service.class)[0];
+  }
+
+  @Override
+  public String getID() {
+    return this.id;
   }
 
 }

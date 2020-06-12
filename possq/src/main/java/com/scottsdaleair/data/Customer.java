@@ -8,8 +8,8 @@ import java.util.Objects;
 /**
  * This class represents a customer. Private field {@link Customer#id}
  */
-public class Customer extends DatabaseObject {
-
+public class Customer implements DatabaseObject {
+  private String id;
   private String fname;
   private String lname;
   private String email;
@@ -35,7 +35,8 @@ public class Customer extends DatabaseObject {
   public Customer(final String id, final String fname,
       final String lname, final String email, final String address,
       final PhoneNumber[] phones, final String[] history, final String[] vehicleVins) {
-    super(id);
+    // super(id);
+    this.id = id;
     this.fname = fname;
     this.lname = lname;
     this.email = email;
@@ -197,5 +198,10 @@ public class Customer extends DatabaseObject {
         + "'" + ", email='" + getEmail()
         + "'" + ", address='" + getAddress()
         + "'" + ", phone='" + getPhone() + "'" + "}";
+  }
+
+  @Override
+  public String getID() {
+    return this.id;
   }
 }

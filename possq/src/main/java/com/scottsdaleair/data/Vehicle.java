@@ -3,7 +3,8 @@ package com.scottsdaleair.data;
 import com.scottsdaleair.controller.DBController;
 import java.util.Objects;
 
-public class Vehicle extends DatabaseObject {
+public class Vehicle implements DatabaseObject {
+  private String id;
   private String make;
   private String model;
   private String year;
@@ -27,7 +28,8 @@ public class Vehicle extends DatabaseObject {
   public Vehicle(String make, String model, String year,
       String plate, String mileage, String motor, String vin,
       String comments) {
-    super(vin);
+    // super(vin);
+    this.id = vin;
     this.make = make;
     this.model = model;
     this.year = year;
@@ -132,6 +134,11 @@ public class Vehicle extends DatabaseObject {
         + "'" + ", year='" + getYear() + "'" + ", plate='" + getPlate()
         + "'" + ", mileage='" + getMileage() + "'" + ", motor='" + getMotor()
         + "'" + ", vin='" + getVin() + "'" + ", comments='" + getComments() + "'" + "}";
+  }
+
+  @Override
+  public String getID() {
+    return this.id;
   }
 
 }

@@ -5,7 +5,8 @@ import com.scottsdaleair.utils.DataUtils;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Kit extends DatabaseObject {
+public class Kit implements DatabaseObject {
+  private String id;
   private String name;
   private String[] parts;
   private String[] services;
@@ -24,7 +25,8 @@ public class Kit extends DatabaseObject {
    */
   public Kit(String id, String name, String[] parts, String[] services,
       String description, String price) {
-    super(id);
+    // super(id);
+    this.id = id;
     this.name = name;
     this.parts = parts;
     this.services = services;
@@ -145,6 +147,11 @@ public class Kit extends DatabaseObject {
    */
   public static Kit getFromDb(String kitId) {
     return DBController.queryDB("id", kitId, Kit.class)[0];
+  }
+
+  @Override
+  public String getID() {
+    return this.id;
   }
 
 }

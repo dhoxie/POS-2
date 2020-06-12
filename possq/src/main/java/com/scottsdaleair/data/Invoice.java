@@ -5,7 +5,8 @@ import com.scottsdaleair.utils.DataUtils;
 import java.util.Arrays;
 import java.util.Objects;
 
-public class Invoice extends DatabaseObject {
+public class Invoice implements DatabaseObject {
+  private String id;
   private String date;
   private String customerID;
   private String vehicleVin;
@@ -30,7 +31,8 @@ public class Invoice extends DatabaseObject {
    */
   public Invoice(String id, String date, String customerID, String vehicleVin,
           String[] parts, String[] services, String[] kits, String pubNotes, String privNotes) {
-    super(id);
+    // super(id);
+    this.id = id;
     this.date = date;
     this.customerID = customerID;
     this.vehicleVin = vehicleVin;
@@ -207,6 +209,11 @@ public class Invoice extends DatabaseObject {
       + "'" + ", pubNotes='" + getPubNotes()
       + "'" + ", privNotes='" + getPrivNotes()
       + "'" + "}";
+  }
+
+  @Override
+  public String getID() {
+    return this.id;
   }
 
 }
