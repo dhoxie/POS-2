@@ -9,6 +9,9 @@ import com.scottsdaleair.data.Kit;
 import com.scottsdaleair.data.Part;
 import com.scottsdaleair.data.Service;
 import com.scottsdaleair.data.Vehicle;
+import com.scottsdaleair.utils.Configurator;
+import com.scottsdaleair.utils.config.DBConfig;
+import java.io.IOException;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -18,6 +21,12 @@ public class DatabaseTest {
    */
   @BeforeClass
   public static void initDB() {
+    try {
+      Configurator.loadConfig(DBConfig.class);
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
     Customer[] someCustomers = DBController.queryDB("id", "1234567", Customer.class);
     if (someCustomers.length < 1) {
       Customer cust = new Customer("1234567", "Kayla", "Testificate", "testemail@test.com",

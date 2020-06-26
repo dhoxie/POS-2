@@ -11,6 +11,7 @@ import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Collation;
 import com.mongodb.client.model.CollationStrength;
 import com.scottsdaleair.data.DatabaseObject;
+import com.scottsdaleair.utils.config.DBConfig;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,17 +20,18 @@ import org.bson.Document;
 
 public class DatabaseUtils<T> {
 
-  private Class<T> type;
-  private static final String dbAddr = "73.42.132.222";
-  private static final int dbPort = 27017;
-  private static final String dbName = "userdat";
-  private static final String backupDbAddress = "35.247.126.11";
+  private static final String dbAddr = Configurator.getConfig(DBConfig.class).getDbIP();
+  private static final int dbPort = Configurator.getConfig(DBConfig.class).getDbPort();
+  public static final String dbName = "userdat";
+  public static final String backupDbAddress = Configurator.getConfig(DBConfig.class).getDbBakIP();
+  public static final int bakDbPort = Configurator.getConfig(DBConfig.class).getDbBakPort();
   private static MongoClient client;
   private static final Collation collation = Collation.builder().locale("en")
       .collationStrength(CollationStrength.SECONDARY).build();
 
   static {
     try {
+      System.out.println("Connecting to client: " + dbAddr + ":" + dbPort);
       client = new MongoClient(dbAddr, dbPort);
     } catch (Exception e) {
       client = null;
@@ -37,7 +39,8 @@ public class DatabaseUtils<T> {
     if (client == null) {
       try {
         client = null;
-        client = new MongoClient(backupDbAddress, dbPort);
+        client = new MongoClient(backupDbAddress, bakDbPort);
+        System.out.println("Connecting to client: " + backupDbAddress + ":" + dbPort);
       } catch (Exception e) {
         e.printStackTrace();
         throw new RuntimeException("Exception occured in creating singleton instance");
@@ -45,13 +48,15 @@ public class DatabaseUtils<T> {
     }
   }
 
+  private Class<T> type;
+
   public DatabaseUtils(Class<T> type) {
     this.type = type;
   }
 
   /**
    * Adds an object to the specified Mongo collection.
-   * 
+   *
    * @param collection Collection to add object to
    * @param obj        The object to be added
    */
@@ -64,7 +69,7 @@ public class DatabaseUtils<T> {
 
   /**
    * Adds an object to the default database and string-specified collection.
-   * 
+   *
    * @param collectionName The name of the collection
    * @param obj            The object to be added
    */
@@ -74,7 +79,7 @@ public class DatabaseUtils<T> {
 
   /**
    * Adds an object to a string-specified database and collection.
-   * 
+   *
    * @param dbname         The name of the database
    * @param collectionName The name of the collection
    * @param obj            The object to be added
@@ -146,7 +151,7 @@ public class DatabaseUtils<T> {
 
   /**
    * Returns an object array of results.
-   * 
+   *
    * @param collectionName Name of collection to search
    * @param key            Key field to search
    * @param value          Value of key to search
@@ -160,7 +165,7 @@ public class DatabaseUtils<T> {
 
   /**
    * Returns an object array of results.
-   * 
+   *
    * @param collectionName Name of collection to search
    * @param queryMap       Set of key/value pairs to search by.
    * @return Object[] containing search results
@@ -171,7 +176,7 @@ public class DatabaseUtils<T> {
 
   /**
    * Get every object in the given collection of the given type.
-   * 
+   *
    * @param collectionName String name of collection
    * @return Object[] containing search results
    */
